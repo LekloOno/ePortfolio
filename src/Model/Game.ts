@@ -2,7 +2,7 @@ import { Universe } from "./Universe.js";
 import { Vector2 } from "./Vector2.js";
 import { Body } from "./Body.js"
 
-class Game {
+export class Game {
     position: Vector2;
     zoom: number; //Horizontal length/2
     universe: Universe;

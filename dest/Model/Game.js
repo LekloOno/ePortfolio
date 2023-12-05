@@ -1,7 +1,7 @@
 import { Universe } from "./Universe.js";
 import { Vector2 } from "./Vector2.js";
 import { Body } from "./Body.js";
-class Game {
+export class Game {
     constructor(position, zoom) {
         this.colorHelp = false;
         this.position = position;
