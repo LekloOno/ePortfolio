@@ -2,8 +2,6 @@ import { Body } from "./Model/Body.js";
 import { Vector2 } from "./Model/Vector2.js";
 import { Game } from "./Model/Game.js";
 
-import './universe.css'
-
 const brushBar = document.createElement("div");
 brushBar.id = "sandBoxBrush";
 
