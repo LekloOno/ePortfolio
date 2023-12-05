@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@200&display=swap');
+
+.dot {
+    position: absolute;
+    height: 5px;
+    width: 5px;
+    background-color: white;
+    border-radius: 5px;
+}
+
+body {
+    background-color: black;
+}
+
+#universe {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    background-color: black;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
+#sandBoxBrush {
+    position: absolute;
+    padding: 4px 10px;
+    text-align: center;
+    background-color: rgba(30, 30, 44, 0.5);
+    border-radius: 10px;
+    z-index: 1;
+    right: 10px;
+    font-family: 'Lexend', sans-serif;
+    color: white;
+}
+
+#pause {
+    position: absolute;
+    top : 80%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    color: white;
+    font-size: 40px;
+    font-family: 'Lexend', sans-serif;
+}
