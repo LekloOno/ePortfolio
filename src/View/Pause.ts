@@ -14,14 +14,14 @@ export class Pause {
 
         addEventListener("keypress", (event) => {
             if(event.key == " "){
-                if(game.run){
-                    clearInterval(game.intervalId);
+                if(game.isRunning){
+                    game.clearInterval();
                     this._pause.hidden = false;
                 } else {
-                    game.intervalId = setInterval(function(){game.gameLoop();}, game.universe.physicsTimeStep);
+                    game.setInterval();
                     this._pause.hidden = true;
                 }
-                game.run = !game.run;
+                game.switchRunning();
             }
         })
     }

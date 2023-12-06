@@ -7,12 +7,6 @@ const brushBar = new BrushBar(game);
 const pause = new Pause(game);
 document.body.appendChild(brushBar.brushBar);
 document.body.appendChild(pause.pause);
-/*
-______________________
-
-GAME
-______________________
-*/
 function createPageElement(mass, radius, velocity, position) {
     game.createPageElement(mass, radius, velocity, position);
 }
@@ -31,14 +25,14 @@ addEventListener("mousemove", (event) => {
         let delta = dragStartingPos.minus(mousePos);
         delta = delta.divide(new Vector2(window.innerWidth, window.innerHeight)).dot(new Vector2(game.zoom, game.zoom / (window.innerWidth / window.innerHeight)));
         game.position = dragStartingAnchor.add(delta);
-        if (!game.run) {
+        if (!game.isRunning) {
             game.draw();
         }
     }
 });
 game.pageElements.addEventListener("click", (event) => {
     createPageElement(brushBar.mass, brushBar.radius, new Vector2(0.05, 0), game.screenToRealWorld(new Vector2(event.x, event.y)));
-    if (!game.run) {
+    if (!game.isRunning) {
         game.draw();
     }
 });
@@ -47,7 +41,7 @@ game.pageElements.addEventListener("wheel", (event) => {
     let limit = zoomValue + game.zoom < ((10 ** 10));
     if (!isNaN(zoomValue) && limit)
         game.pointedZoom(zoomValue, mousePos);
-    if (!game.run)
+    if (!game.isRunning)
         game.draw();
 });
 var dragging = false;

@@ -20,8 +20,8 @@ export class ColorHelp {
         this._colorHelpLabel.textContent = "Color Help ";
         
         this._colorHelp.addEventListener("change", (event) => {
-            this._game.colorHelp = this._colorHelp.checked;
-            if(!this._game.run) game.draw();
+            this._game.switchColorHelp();
+            if(!this._game.isRunning) game.draw();
         });
     }
 

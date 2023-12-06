@@ -2,49 +2,79 @@ import { Universe } from "./Universe.js";
 import { Vector2 } from "./Vector2.js";
 import { Body } from "./Body.js";
 export class Game {
-    constructor(position, zoom) {
-        this.run = true;
-        this.colorHelp = false;
+    constructor(position, _zoom) {
+        this._running = true;
+        this._colorHelp = false;
         this.position = position;
-        this.zoom = zoom;
-        this.universe = new Universe();
-        this.pageElements = document.createElement("div");
-        this.pageElements.id = "universe";
-        document.body.appendChild(this.pageElements);
-        let b = this;
-        this.intervalId = setInterval(function () { b.gameLoop(); }, this.universe.physicsTimeStep);
+        this._zoom = _zoom;
+        this._universe = new Universe();
+        this._pageElements = document.createElement("div");
+        this._pageElements.id = "_universe";
+        document.body.appendChild(this._pageElements);
+        this._intervalId = this.getIntervalId();
+    }
+    get zoom() {
+        return this._zoom;
+    }
+    get universe() {
+        return this._universe;
+    }
+    get pageElements() {
+        return this._pageElements;
+    }
+    get colorHelp() {
+        return this._colorHelp;
+    }
+    get isRunning() {
+        return this._running;
+    }
+    switchColorHelp() {
+        this._colorHelp = !this._colorHelp;
+    }
+    switchRunning() {
+        this._running = !this._running;
+    }
+    clearInterval() {
+        clearInterval(this._intervalId);
+    }
+    setInterval() {
+        this._intervalId = this.getIntervalId();
+    }
+    getIntervalId() {
+        let thisGame = this;
+        return setInterval(function () { thisGame.gameLoop(); }, this._universe.physicsTimeStep);
     }
     pointedZoom(amount, mousePos) {
-        let nextZoom = this.zoom + amount;
+        let nextZoom = this._zoom + amount;
         let worldPos = this.screenToRealWorld(mousePos);
-        let v = worldPos.minus(worldPos.minus(this.position).kDot(nextZoom).kDivide(this.zoom));
-        this.zoom = nextZoom;
+        let v = worldPos.minus(worldPos.minus(this.position).kDot(nextZoom).kDivide(this._zoom));
+        this._zoom = nextZoom;
         this.position = v;
     }
     screenToRealWorld(pos) {
-        let x = this.position.x - this.zoom / 2 + (pos.x * this.zoom / window.innerWidth);
-        let yZoom = this.zoom / (window.innerWidth / window.innerHeight);
+        let x = this.position.x - this._zoom / 2 + (pos.x * this._zoom / window.innerWidth);
+        let yZoom = this._zoom / (window.innerWidth / window.innerHeight);
         let y = this.position.y - yZoom / 2 + (pos.y * yZoom / window.innerHeight);
         return new Vector2(x, y);
     }
     screenToWorldSize(obj) {
-        let x = obj.x * this.zoom / window.innerWidth;
-        let y = obj.y * this.zoom / window.innerWidth;
+        let x = obj.x * this._zoom / window.innerWidth;
+        let y = obj.y * this._zoom / window.innerWidth;
         return new Vector2(x, y);
     }
     worldToScreenSize(obj) {
-        let x = (obj.x / this.zoom) * window.innerWidth;
-        let y = (obj.y / this.zoom) * window.innerWidth;
+        let x = (obj.x / this._zoom) * window.innerWidth;
+        let y = (obj.y / this._zoom) * window.innerWidth;
         return new Vector2(x, y);
     }
     draw() {
-        this.pageElements.innerHTML = "";
+        this._pageElements.innerHTML = "";
         let i = 1;
-        this.universe.bodies.forEach((body) => {
+        this._universe.bodies.forEach((body) => {
             let aspectRatio = window.innerWidth / window.innerHeight;
             let camToBody = this.position.minus(body.position);
             let pixelSize = this.screenToWorldSize(new Vector2(body.radius, body.radius));
-            if (Math.abs(camToBody.x) - pixelSize.x < this.zoom / 2 && Math.abs(camToBody.y) - pixelSize.y < this.zoom / 2 / aspectRatio) {
+            if (Math.abs(camToBody.x) - pixelSize.x < this._zoom / 2 && Math.abs(camToBody.y) - pixelSize.y < this._zoom / 2 / aspectRatio) {
                 this.drawPageElement(body, i++);
             }
         });
@@ -58,7 +88,7 @@ export class Game {
         p.style.width = radius + "px";
         p.style.borderRadius = radius + "px";
         p.style.transform = "translate(-50%, -50%)";
-        if (this.colorHelp) {
+        if (this._colorHelp) {
             let colorRate = Math.min(((body.mass) / 1000000000000) ** 0.1, 1);
             let colorB = colorRate * 255;
             let colorG = colorRate * 255;
@@ -67,28 +97,21 @@ export class Game {
         let screenPos = this.screenDistance(body.position);
         p.style.left = `${screenPos.x}px`;
         p.style.top = `${screenPos.y}px`;
-        this.pageElements.appendChild(p);
+        this._pageElements.appendChild(p);
     }
     screenDistance(position) {
-        let centerDist = position.minus(this.position).kDot(window.innerWidth).kDivide(this.zoom);
+        let centerDist = position.minus(this.position).kDot(window.innerWidth).kDivide(this._zoom);
         let windowVect = new Vector2(innerWidth / 2, innerHeight / 2);
         return centerDist.add(windowVect);
     }
     createPageElement(mass, radius, velocity, position) {
-        // const p = document.createElement("div");
-        // p.className = "dot";
-        // p.id = this.universe.bodies.length + "";
-        // p.style.left = `${position.x}px`;
-        // p.style.top = `${position.y}px`;
-        // this.pageElements.appendChild(p);
-        this.universe.push(new Body(mass, radius, velocity, position));
-        // document.body.appendChild(p);
+        this._universe.push(new Body(mass, radius, velocity, position));
     }
     createPageElementWithBody(body) {
         this.createPageElement(body.mass, body.radius, body.velocity, body.position);
     }
     gameLoop() {
-        this.universe.updateUniverse();
+        this._universe.updateUniverse();
         this.draw();
     }
 }
