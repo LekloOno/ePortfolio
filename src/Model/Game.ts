@@ -22,7 +22,7 @@ export class Game {
         this._zoom = _zoom;
         this._universe = new Universe();
         this._pageElements = document.createElement("div");
-        this._pageElements.id = "_universe";
+        this._pageElements.id = "universe";
         document.body.appendChild(this._pageElements);
 
         this._intervalId = this.getIntervalId();
