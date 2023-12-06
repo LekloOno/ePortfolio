@@ -2,9 +2,24 @@ import { Body } from "./Model/Body.js";
 import { Vector2 } from "./Model/Vector2.js";
 import { Game } from "./Model/Game.js";
 
+
+
+/*
+______________________
+
+SANDBOX BRUSH
+______________________
+*/
 const brushBar = document.createElement("div");
 brushBar.id = "sandBoxBrush";
 
+
+/*
+______________________
+
+SANDBOX BRUSH - MASS
+______________________
+*/
 const massControl = document.createElement("div");
 massControl.id = "mass";
 massControl.textContent = "Mass ";
@@ -46,6 +61,13 @@ massControl.appendChild(massInput);
 
 
 
+/*
+______________________
+
+SANDBOX BRUSH - RADIUS
+______________________
+*/
+
 const radiusControl = document.createElement("div");
 radiusControl.id = "radius";
 radiusControl.textContent = "Radius ";
@@ -85,6 +107,14 @@ radiusInput.addEventListener("change", (event) => {
 radiusControl.appendChild(radiusSlider);
 radiusControl.appendChild(radiusInput);
 
+
+/*
+______________________
+
+SANDBOX BRUSH - COLOR HELP
+______________________
+*/
+
 const colorHelp = document.createElement("input");
 const colorHelpLabel = document.createElement("label");
 colorHelpLabel.textContent = "Color Help ";
@@ -96,11 +126,15 @@ colorHelp.addEventListener("change", (event) => {
     if(!run) game.draw();
 });
 
+
+//  PAUSE
 const pause = document.createElement("div");
 pause.id = "pause";
 pause.textContent = "Pause";
 pause.hidden = true;
 
+
+// BUILDING BRUSH BAR
 brushBar.append(massControl);
 brushBar.append(radiusControl);
 brushBar.append(colorHelpLabel);
@@ -109,6 +143,19 @@ brushBar.append(colorHelp);
 document.body.appendChild(brushBar);
 document.body.appendChild(pause);
 
+
+
+
+
+
+
+
+/*
+______________________
+
+GAME
+______________________
+*/
 const game: Game = new Game(Vector2.null, 4000);
 
 function createPageElement(mass: number, radius: number, velocity: Vector2, position: Vector2){
