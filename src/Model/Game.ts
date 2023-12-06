@@ -10,16 +10,21 @@ export class Game {
 
 
     private _zoom: number; //Horizontal length/2
+    private _visibleSize: Vector2;
     private _universe: Universe;
     private _pageElements: HTMLDivElement;
     private _colorHelp: boolean;
     
 
-    constructor(position: Vector2, _zoom: number) {
+    constructor(position: Vector2, zoom: number) {
         this._running = true;
         this._colorHelp = false;
         this.position = position;
-        this._zoom = _zoom;
+        
+        this._zoom = 0;
+        this._visibleSize = Vector2.null;
+        this.setZoom(zoom);
+
         this._universe = new Universe();
         this._pageElements = document.createElement("div");
         this._pageElements.id = "universe";
@@ -28,24 +33,33 @@ export class Game {
         this._intervalId = this.getIntervalId();
     }
 
-    get zoom () {
+    get visibleSize(): Vector2 {
+        return this._visibleSize;
+    }
+
+    get zoom() {
         return this._zoom;
     }
 
-    get universe () {
+    get universe() {
         return this._universe;
     }
 
-    get pageElements () {
+    get pageElements() {
         return this._pageElements;
     }
 
-    get colorHelp () {
+    get colorHelp() {
         return this._colorHelp;
     }
 
-    get isRunning () {
+    get isRunning() {
         return this._running;
+    }
+
+    private setZoom(zoom: number) {
+        this._zoom = zoom;
+        this._visibleSize = new Vector2(this._zoom, this._zoom/(innerWidth/innerHeight));
     }
 
     switchColorHelp() {
@@ -75,7 +89,7 @@ export class Game {
 
         let v: Vector2 = worldPos.minus(worldPos.minus(this.position).kDot(nextZoom).kDivide(this._zoom));
         
-        this._zoom = nextZoom;
+        this.setZoom(nextZoom);
         this.position = v;
     }
 

@@ -2,11 +2,14 @@ import { Vector2 } from "./Model/Vector2.js";
 import { Game } from "./Model/Game.js";
 import { BrushBar } from "./View/BrushBar/BrushBar.js";
 import { Pause } from "./View/Pause.js";
+import { Selection } from "./View/Selection.js";
 const game = new Game(Vector2.null, 4000);
 const brushBar = new BrushBar(game);
 const pause = new Pause(game);
+const selection = new Selection(game);
 document.body.appendChild(brushBar.brushBar);
 document.body.appendChild(pause.pause);
+document.body.appendChild(selection.selectionVis);
 function createPageElement(mass, radius, velocity, position) {
     game.createPageElement(mass, radius, velocity, position);
 }
@@ -21,13 +24,15 @@ createPageElement(500000000000, 5, new Vector2(0.2, -0.07), new Vector2(200, 150
 var mousePos = Vector2.null;
 addEventListener("mousemove", (event) => {
     mousePos = new Vector2(event.x, event.y);
-    if (dragging) {
+    if (moving) {
         let delta = dragStartingPos.minus(mousePos);
         delta = delta.divide(new Vector2(window.innerWidth, window.innerHeight)).dot(new Vector2(game.zoom, game.zoom / (window.innerWidth / window.innerHeight)));
-        game.position = dragStartingAnchor.add(delta);
+        game.position = moveStartingAnchor.add(delta);
         if (!game.isRunning) {
             game.draw();
         }
+    }
+    else if (selecting) {
     }
 });
 game.pageElements.addEventListener("click", (event) => {
@@ -44,18 +49,19 @@ game.pageElements.addEventListener("wheel", (event) => {
     if (!game.isRunning)
         game.draw();
 });
-var dragging = false;
+var moving = false;
+var selecting = false;
 var dragStartingPos = Vector2.null;
-var dragStartingAnchor = Vector2.null;
+var moveStartingAnchor = Vector2.null;
 game.pageElements.addEventListener("mousedown", (event) => {
     if (event.button == 1) {
         dragStartingPos = mousePos;
-        dragStartingAnchor = game.position;
-        dragging = true;
+        moveStartingAnchor = game.position;
+        moving = true;
     }
 });
 addEventListener("mouseup", (event) => {
     if (event.button == 1) {
-        dragging = false;
+        moving = false;
     }
 });

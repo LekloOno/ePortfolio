@@ -2,16 +2,21 @@ import { Universe } from "./Universe.js";
 import { Vector2 } from "./Vector2.js";
 import { Body } from "./Body.js";
 export class Game {
-    constructor(position, _zoom) {
+    constructor(position, zoom) {
         this._running = true;
         this._colorHelp = false;
         this.position = position;
-        this._zoom = _zoom;
+        this._zoom = 0;
+        this._visibleSize = Vector2.null;
+        this.setZoom(zoom);
         this._universe = new Universe();
         this._pageElements = document.createElement("div");
         this._pageElements.id = "universe";
         document.body.appendChild(this._pageElements);
         this._intervalId = this.getIntervalId();
+    }
+    get visibleSize() {
+        return this._visibleSize;
     }
     get zoom() {
         return this._zoom;
@@ -27,6 +32,10 @@ export class Game {
     }
     get isRunning() {
         return this._running;
+    }
+    setZoom(zoom) {
+        this._zoom = zoom;
+        this._visibleSize = new Vector2(this._zoom, this._zoom / (innerWidth / innerHeight));
     }
     switchColorHelp() {
         this._colorHelp = !this._colorHelp;
@@ -48,7 +57,7 @@ export class Game {
         let nextZoom = this._zoom + amount;
         let worldPos = this.screenToRealWorld(mousePos);
         let v = worldPos.minus(worldPos.minus(this.position).kDot(nextZoom).kDivide(this._zoom));
-        this._zoom = nextZoom;
+        this.setZoom(nextZoom);
         this.position = v;
     }
     screenToRealWorld(pos) {
