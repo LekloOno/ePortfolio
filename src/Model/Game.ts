@@ -11,6 +11,8 @@ export class Game {
     colorHelp: boolean;
     run: boolean;
 
+    intervalId;
+
     constructor(position: Vector2, zoom: number){
         this.run = true;
         this.colorHelp = false;
@@ -19,8 +21,9 @@ export class Game {
         this.universe = new Universe();
         this.pageElements = document.createElement("div");
         this.pageElements.id = "universe";
-        
         document.body.appendChild(this.pageElements);
+        
+        this.intervalId = setInterval(this.gameLoop, this.universe.physicsTimeStep);
     }
 
     pointedZoom(amount: number, mousePos: Vector2){
