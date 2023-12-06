@@ -1,4 +1,4 @@
-import { Game } from "../../Model/Game";
+import { Game } from "../../Model/Game.js";
 
 export class ColorHelp {
     private _colorHelp: HTMLInputElement;
@@ -9,7 +9,7 @@ export class ColorHelp {
         return this._colorHelp;
     }
 
-    constructor(game: Game){
+    constructor(game: Game){        
         this._game = game;
 
         this._colorHelp = document.createElement("input");
@@ -20,8 +20,8 @@ export class ColorHelp {
         this._colorHelpLabel.textContent = "Color Help ";
         
         this._colorHelp.addEventListener("change", (event) => {
-            game.colorHelp = this._colorHelp.checked;
-            if(!game.run) game.draw();
+            this._game.colorHelp = this._colorHelp.checked;
+            if(!this._game.run) game.draw();
         });
     }
 

@@ -1,7 +1,7 @@
-import { Game } from "../../Model/Game";
-import { ColorHelp } from "./ColorHelp";
-import { MassControl } from "./MassControl";
-import { RadiusControl } from "./RadiusControl";
+import { Game } from "../../Model/Game.js";
+import { ColorHelp } from "./ColorHelp.js";
+import { MassControl } from "./MassControl.js";
+import { RadiusControl } from "./RadiusControl.js";
 
 export class BrushBar {
     brushBar: HTMLDivElement;
@@ -9,7 +9,16 @@ export class BrushBar {
     private _radiusControl: RadiusControl;
     private _colorHelp: ColorHelp;
 
+    get mass() {
+        return this._massControl.mass;
+    }
+
+    get radius() {
+        return this._radiusControl.radius;
+    }
+
     constructor(game: Game){
+
         this.brushBar = document.createElement("div");
         this.brushBar.id = "sandBoxBrush";
 

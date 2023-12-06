@@ -22,8 +22,9 @@ export class Game {
         this.pageElements = document.createElement("div");
         this.pageElements.id = "universe";
         document.body.appendChild(this.pageElements);
-        
-        this.intervalId = setInterval(this.gameLoop, this.universe.physicsTimeStep);
+
+        let b = this;
+        this.intervalId = setInterval(function() {b.gameLoop();}, this.universe.physicsTimeStep);
     }
 
     pointedZoom(amount: number, mousePos: Vector2){
@@ -69,7 +70,7 @@ export class Game {
 
             if(Math.abs(camToBody.x)-pixelSize.x < this.zoom/2 && Math.abs(camToBody.y)-pixelSize.y < this.zoom/2/aspectRatio){
                 this.drawPageElement(body, i++);
-            } else console.log("zizi");
+            }
         })
     }
 

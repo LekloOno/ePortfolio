@@ -30,8 +30,8 @@ export class MassControl {
         this._massSlider.addEventListener("change", (event) => {this.onChange_massSlider();});
         this._massInput.addEventListener("change", (event) => {this.onChange_massInput();});
 
-        this._massControl.appendChild(this._massSlider);
-        this._massControl.appendChild(this._massInput);
+        _massControl.appendChild(this._massSlider);
+        _massControl.appendChild(this._massInput);
 
         return _massControl;
     }

@@ -3,6 +3,7 @@ import { Vector2 } from "./Vector2.js";
 import { Body } from "./Body.js";
 export class Game {
     constructor(position, zoom) {
+        this.run = true;
         this.colorHelp = false;
         this.position = position;
         this.zoom = zoom;
@@ -10,6 +11,8 @@ export class Game {
         this.pageElements = document.createElement("div");
         this.pageElements.id = "universe";
         document.body.appendChild(this.pageElements);
+        let b = this;
+        this.intervalId = setInterval(function () { b.gameLoop(); }, this.universe.physicsTimeStep);
     }
     pointedZoom(amount, mousePos) {
         let nextZoom = this.zoom + amount;
@@ -44,8 +47,6 @@ export class Game {
             if (Math.abs(camToBody.x) - pixelSize.x < this.zoom / 2 && Math.abs(camToBody.y) - pixelSize.y < this.zoom / 2 / aspectRatio) {
                 this.drawPageElement(body, i++);
             }
-            else
-                console.log("zizi");
         });
     }
     drawPageElement(body, id) {

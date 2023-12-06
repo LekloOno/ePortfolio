@@ -1,4 +1,4 @@
-import { Game } from "../Model/Game";
+import { Game } from "../Model/Game.js";
 
 export class Pause {
     private _game: Game;
@@ -18,7 +18,7 @@ export class Pause {
                     clearInterval(game.intervalId);
                     this._pause.hidden = false;
                 } else {
-                    game.intervalId = setInterval(game.gameLoop, game.universe.physicsTimeStep);
+                    game.intervalId = setInterval(function(){game.gameLoop();}, game.universe.physicsTimeStep);
                     this._pause.hidden = true;
                 }
                 game.run = !game.run;
