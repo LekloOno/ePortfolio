@@ -6,7 +6,7 @@ export class MassControl {
     private _massSlider: HTMLInputElement;
     private _massInput: HTMLInputElement;
 
-    constructor(initMass = 100000, _maxMass = 1000000000000){
+    constructor(initMass = 100000, _maxMass = 1000000000000) {
         this._mass = 100000;
         this._maxMass = 1000000000000;
         this._massSlider = this.buildMassSlider();
@@ -18,7 +18,7 @@ export class MassControl {
         return this._massControl;
     }
 
-    get mass(){
+    get mass() {
         return this._mass;
     }
 
@@ -54,14 +54,14 @@ export class MassControl {
         return _massInput;
     }
     
-    onChange_massSlider(){
+    onChange_massSlider() {
         let val = Number(this._massSlider.value)/1000;
         let exp = val**10;
         this._mass = (exp)*this._maxMass;
         this._massInput.value = Math.round(this._mass)+"";
     }
     
-    onChange_massInput(){
+    onChange_massInput() {
         let val = Number(this._massInput.value);
         if(isNaN(val)) return;
 

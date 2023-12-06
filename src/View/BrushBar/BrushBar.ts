@@ -9,19 +9,19 @@ export class BrushBar {
     private _radiusControl: RadiusControl;
     private _colorHelp: ColorHelp;
 
-    get brushBar(){
+    get brushBar() {
         return this._brushBar;
     }
 
-    get mass(){
+    get mass() {
         return this._massControl.mass;
     }
 
-    get radius(){
+    get radius() {
         return this._radiusControl.radius;
     }
 
-    constructor(game: Game){
+    constructor(game: Game) {
 
         this._brushBar = document.createElement("div");
         this._brushBar.id = "sandBoxBrush";
@@ -32,7 +32,7 @@ export class BrushBar {
         this.buildBrushBar();
     }
 
-    buildBrushBar(){
+    buildBrushBar() {
         this._brushBar.append(this._massControl.massControl);
         this._brushBar.append(this._radiusControl.radiusControl);
         this._brushBar.append(this._colorHelp.colorHelp);

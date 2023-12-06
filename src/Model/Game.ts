@@ -15,7 +15,7 @@ export class Game {
     private _colorHelp: boolean;
     
 
-    constructor(position: Vector2, _zoom: number){
+    constructor(position: Vector2, _zoom: number) {
         this._running = true;
         this._colorHelp = false;
         this.position = position;
@@ -98,7 +98,7 @@ export class Game {
         return new Vector2(x, y);
     }
 
-    draw(){
+    draw() {
         this._pageElements.innerHTML = "";
 
         let i = 1;
@@ -107,7 +107,7 @@ export class Game {
             let camToBody: Vector2 = this.position.minus(body.position);
             let pixelSize: Vector2 = this.screenToWorldSize(new Vector2(body.radius, body.radius));
 
-            if(Math.abs(camToBody.x)-pixelSize.x < this._zoom/2 && Math.abs(camToBody.y)-pixelSize.y < this._zoom/2/aspectRatio){
+            if(Math.abs(camToBody.x)-pixelSize.x < this._zoom/2 && Math.abs(camToBody.y)-pixelSize.y < this._zoom/2/aspectRatio) {
                 this.drawPageElement(body, i++);
             }
         })
@@ -124,7 +124,7 @@ export class Game {
         p.style.borderRadius = radius+"px";
         p.style.transform = "translate(-50%, -50%)";
 
-        if(this._colorHelp){
+        if(this._colorHelp) {
             let colorRate = Math.min(((body.mass)/1000000000000)**0.1, 1);
             let colorB = colorRate * 255;
             let colorG = colorRate*255;
@@ -146,7 +146,7 @@ export class Game {
         return centerDist.add(windowVect);
     }
 
-    createPageElement(mass: number, radius: number, velocity: Vector2, position: Vector2){
+    createPageElement(mass: number, radius: number, velocity: Vector2, position: Vector2) {
         this.createPageElementWithBody(new Body(mass, radius, velocity, position));
     }
 

@@ -5,7 +5,7 @@ export class Pause {
     private _pause;
     
 
-    constructor(game: Game){
+    constructor(game: Game) {
         this._game = game;
         this._pause = document.createElement("div");
         this._pause.id = "pause";
@@ -13,8 +13,8 @@ export class Pause {
         this._pause.hidden = true;
 
         addEventListener("keypress", (event) => {
-            if(event.key == " "){
-                if(this._game.isRunning){
+            if(event.key == " ") {
+                if(this._game.isRunning) {
                     this._game.clearInterval();
                     this._pause.hidden = false;
                 } else {

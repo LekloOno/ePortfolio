@@ -12,11 +12,11 @@ const pause = new Pause(game);
 document.body.appendChild(brushBar.brushBar);
 document.body.appendChild(pause.pause);
 
-function createPageElement(mass: number, radius: number, velocity: Vector2, position: Vector2){
+function createPageElement(mass: number, radius: number, velocity: Vector2, position: Vector2) {
     game.createPageElement(mass, radius, velocity, position);
 }
 
-function createPageElementWithBody(body: Body){
+function createPageElementWithBody(body: Body) {
     game.createPageElementWithBody(body);
 }
 
@@ -27,13 +27,14 @@ createPageElement(500000000000, 5, new Vector2(0.2, -0.07), new Vector2(200,1500
 //const lastTime = new Date().getTime();
 
 var mousePos: Vector2 = Vector2.null;
-addEventListener("mousemove", (event)=>{
+addEventListener("mousemove", (event) => {
     mousePos = new Vector2(event.x, event.y);
-    if(dragging){
+    if(dragging) {
         let delta = dragStartingPos.minus(mousePos);
         delta = delta.divide(new Vector2(window.innerWidth, window.innerHeight)).dot(new Vector2(game.zoom, game.zoom/(window.innerWidth/window.innerHeight)));
         game.position = dragStartingAnchor.add(delta);
-        if(!game.isRunning){
+
+        if(!game.isRunning) {
             game.draw();
         }
     }
@@ -69,7 +70,3 @@ game.pageElements.addEventListener("mouseup", (event) => {
         dragging = false;
     }
 });
-
-function gameLoop(){
-    game.gameLoop();
-}

@@ -9,7 +9,7 @@ export class ColorHelp {
         return this._colorHelp;
     }
 
-    constructor(game: Game){        
+    constructor(game: Game) {        
         this._game = game;
 
         this._colorHelp = document.createElement("input");

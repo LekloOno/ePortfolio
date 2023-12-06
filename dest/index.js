@@ -59,6 +59,3 @@ game.pageElements.addEventListener("mouseup", (event) => {
         dragging = false;
     }
 });
-function gameLoop() {
-    game.gameLoop();
-}

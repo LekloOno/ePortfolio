@@ -33,7 +33,7 @@ export class Vector2 {
         this._magnitude = this.squaredMagnitude() ** 0.5;
     }
 
-    get magnitude(){
+    get magnitude() {
         return this._magnitude;
     }
     

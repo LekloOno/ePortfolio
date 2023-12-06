@@ -38,7 +38,7 @@ export class Body {
         return this._position.direction(other._position);
     }
 
-    updateVelocity(universe: Universe){
+    updateVelocity(universe: Universe) {
         universe.bodies.forEach((body: Body) => {
 
             if(this.squaredDistance(body) != 0) {
@@ -48,7 +48,7 @@ export class Body {
         });
     }
 
-    updatePosition(universe: Universe){
+    updatePosition(universe: Universe) {
         this._position = this._position.add(this._velocity.kDot(universe.physicsTimeStep));
     }
 }

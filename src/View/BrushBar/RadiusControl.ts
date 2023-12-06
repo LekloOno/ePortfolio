@@ -6,7 +6,7 @@ export class RadiusControl {
     private _radiusSlider: HTMLInputElement;
     private _radiusInput: HTMLInputElement; 
     
-    constructor(radius = 10, maxRadius = 50){
+    constructor(radius = 10, maxRadius = 50) {
         this._radius = radius;
         this._maxRadius = maxRadius;
 
@@ -56,14 +56,14 @@ export class RadiusControl {
         return radiusInput;
     }
 
-    onChange_radiusSlider(){
+    onChange_radiusSlider() {
         let val = Number(this._radiusSlider.value)/1000;
         let exp = val;
         this._radius = (exp)*this._maxRadius;
         this._radiusInput.value = Math.round(this._radius)+"";
     }
 
-    onChange_radiusInput(){
+    onChange_radiusInput() {
         let val = Number(this._radiusInput.value);
         if(isNaN(val)) return;
 

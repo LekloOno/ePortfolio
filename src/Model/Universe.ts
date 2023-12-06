@@ -8,34 +8,34 @@ export class Universe {
 
     private _bodies: Body[];
 
-    constructor(gravConst = -0.000000000068, physStep = 10){
+    constructor(gravConst = -0.000000000068, physStep = 10) {
         this._gravitationalConstant = gravConst;
         this._physicsTimeStep = physStep;
         this._bodies = [];
     }
 
-    get gravitationalConstant(){
+    get gravitationalConstant() {
         return this._gravitationalConstant;
     }
 
-    get physicsTimeStep(){
+    get physicsTimeStep() {
         return this._physicsTimeStep;
     }
 
-    get bodies(){
+    get bodies() {
         return this._bodies;
     }
 
-    push(body: Body){
+    push(body: Body) {
         this.bodies.push(body);
     }
 
-    updateUniverse(){
-        this.bodies.forEach((value: Body) =>{
+    updateUniverse() {
+        this.bodies.forEach((value: Body) => {
             value.updateVelocity(this);
         });
 
-        this.bodies.forEach((value: Body) =>{
+        this.bodies.forEach((value: Body) => {
             value.updatePosition(this);
         });
     }
