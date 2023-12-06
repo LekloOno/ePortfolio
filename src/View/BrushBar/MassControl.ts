@@ -18,6 +18,10 @@ export class MassControl {
         return this._massControl;
     }
 
+    get mass(){
+        return this._mass;
+    }
+
     buildMassControl(): HTMLDivElement {
         let _massControl = document.createElement("div");
         _massControl.id = "_mass";

@@ -20,6 +20,10 @@ export class RadiusControl {
         return this._radiusControl;
     }
 
+    get radius() {
+        return this._radius;
+    }
+
     buildRadiusControl(): HTMLDivElement {
         let radiusControl = document.createElement("div");
         radiusControl.id = "radius";
