@@ -9,8 +9,10 @@ export class Game {
     pageElements: HTMLDivElement;
 
     colorHelp: boolean;
+    run: boolean;
 
     constructor(position: Vector2, zoom: number){
+        this.run = true;
         this.colorHelp = false;
         this.position = position;
         this.zoom = zoom;
