@@ -5,6 +5,10 @@ export class ColorHelp {
     private _colorHelpLabel: HTMLLabelElement;
     private _game: Game;
 
+    get colorHelp() {
+        return this._colorHelp;
+    }
+
     constructor(game: Game){
         this._game = game;
 
