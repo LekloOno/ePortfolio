@@ -1,28 +1,37 @@
 export class Body {
     constructor(mass, radius, initVelocity, initPosition) {
-        this.mass = mass;
-        this.radius = radius;
-        this.velocity = initVelocity;
-        this.position = initPosition;
+        this._mass = mass;
+        this._radius = radius;
+        this._velocity = initVelocity;
+        this._position = initPosition;
+    }
+    get position() {
+        return this._position;
+    }
+    get mass() {
+        return this._mass;
+    }
+    get radius() {
+        return this._radius;
     }
     squaredDistance(other) {
-        return this.position.squaredDistance(other.position);
+        return this._position.squaredDistance(other._position);
     }
     distance(other) {
-        return this.position.distance(other.position);
+        return this._position.distance(other._position);
     }
     direction(other) {
-        return this.position.direction(other.position);
+        return this._position.direction(other._position);
     }
     updateVelocity(universe) {
         universe.bodies.forEach((body) => {
             if (this.squaredDistance(body) != 0) {
-                const force = this.direction(body).kDot(universe.gravitationalConstant * this.mass * body.mass).kDivide(this.squaredDistance(body));
-                this.velocity = this.velocity.add((force.kDivide(this.mass)).kDot(universe.physicsTimeStep));
+                const force = this.direction(body).kDot(universe.gravitationalConstant * this._mass * body._mass).kDivide(this.squaredDistance(body));
+                this._velocity = this._velocity.add((force.kDivide(this._mass)).kDot(universe.physicsTimeStep));
             }
         });
     }
     updatePosition(universe) {
-        this.position = this.position.add(this.velocity.kDot(universe.physicsTimeStep));
+        this._position = this._position.add(this._velocity.kDot(universe.physicsTimeStep));
     }
 }

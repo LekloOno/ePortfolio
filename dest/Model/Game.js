@@ -105,10 +105,10 @@ export class Game {
         return centerDist.add(windowVect);
     }
     createPageElement(mass, radius, velocity, position) {
-        this._universe.push(new Body(mass, radius, velocity, position));
+        this.createPageElementWithBody(new Body(mass, radius, velocity, position));
     }
     createPageElementWithBody(body) {
-        this.createPageElement(body.mass, body.radius, body.velocity, body.position);
+        this._universe.push(body);
     }
     gameLoop() {
         this._universe.updateUniverse();

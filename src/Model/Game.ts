@@ -147,11 +147,11 @@ export class Game {
     }
 
     createPageElement(mass: number, radius: number, velocity: Vector2, position: Vector2){
-        this._universe.push(new Body(mass, radius, velocity, position));
+        this.createPageElementWithBody(new Body(mass, radius, velocity, position));
     }
 
     createPageElementWithBody(body: Body) {
-        this.createPageElement(body.mass, body.radius, body.velocity, body.position);
+        this._universe.push(body);
     }
 
     gameLoop() {
