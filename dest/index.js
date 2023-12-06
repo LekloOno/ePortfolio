@@ -47,14 +47,14 @@ game.pageElements.addEventListener("wheel", (event) => {
 var dragging = false;
 var dragStartingPos = Vector2.null;
 var dragStartingAnchor = Vector2.null;
-addEventListener("mousedown", (event) => {
+game.pageElements.addEventListener("mousedown", (event) => {
     if (event.button == 1) {
         dragStartingPos = mousePos;
         dragStartingAnchor = game.position;
         dragging = true;
     }
 });
-game.pageElements.addEventListener("mouseup", (event) => {
+addEventListener("mouseup", (event) => {
     if (event.button == 1) {
         dragging = false;
     }
