@@ -80,7 +80,7 @@ export class Game {
         let worldPos = this.screenToRealWorld(mousePos);
         if (!this._following) {
             this._zoom = nextZoom;
-            this.position = worldPos.minus(worldPos.minus(this.position).kDot(nextZoom).kDivide(this._targetZoom));
+            this.position = worldPos.minus(worldPos.minus(this.position).kProd(nextZoom).kDivide(this._targetZoom));
             this._visibleSize = new Vector2(this._targetZoom, this._targetZoom / (innerWidth / innerHeight));
         }
         this.setZoom(nextZoom);
@@ -137,7 +137,7 @@ export class Game {
         this._pageElements.appendChild(p);
     }
     screenDistance(position) {
-        let centerDist = position.minus(this.position).kDot(window.innerWidth).kDivide(this._zoom);
+        let centerDist = position.minus(this.position).kProd(window.innerWidth).kDivide(this._zoom);
         let windowVect = new Vector2(innerWidth / 2, innerHeight / 2);
         return centerDist.add(windowVect);
     }

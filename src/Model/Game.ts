@@ -124,7 +124,7 @@ export class Game {
 
         if(!this._following){
             this._zoom = nextZoom;
-            this.position = worldPos.minus(worldPos.minus(this.position).kDot(nextZoom).kDivide(this._targetZoom));
+            this.position = worldPos.minus(worldPos.minus(this.position).kProd(nextZoom).kDivide(this._targetZoom));
             this._visibleSize = new Vector2(this._targetZoom, this._targetZoom/(innerWidth/innerHeight));
         }
         
@@ -195,7 +195,7 @@ export class Game {
     }
 
     screenDistance(position: Vector2): Vector2 {
-        let centerDist: Vector2 = position.minus(this.position).kDot(window.innerWidth).kDivide(this._zoom);
+        let centerDist: Vector2 = position.minus(this.position).kProd(window.innerWidth).kDivide(this._zoom);
         let windowVect: Vector2 = new Vector2(innerWidth/2, innerHeight/2);
 
         return centerDist.add(windowVect);

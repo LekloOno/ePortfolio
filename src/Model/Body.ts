@@ -44,13 +44,13 @@ export class Body {
         universe.bodies.forEach((body: Body) => {
 
             if(this.squaredDistance(body) != 0) {
-                const force: Vector2 = this.direction(body).kDot(universe.gravitationalConstant * this._mass * body._mass).kDivide(this.squaredDistance(body));
-                this._velocity = this._velocity.add((force.kDivide(this._mass)).kDot(universe.physicsTimeStep));
+                const force: Vector2 = this.direction(body).kProd(universe.gravitationalConstant * this._mass * body._mass).kDivide(this.squaredDistance(body));
+                this._velocity = this._velocity.add((force.kDivide(this._mass)).kProd(universe.physicsTimeStep));
             }
         });
     }
 
     updatePosition(universe: Universe) {
-        this._position = this._position.add(this._velocity.kDot(universe.physicsTimeStep));
+        this._position = this._position.add(this._velocity.kProd(universe.physicsTimeStep));
     }
 }

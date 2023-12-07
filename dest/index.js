@@ -28,7 +28,7 @@ addEventListener("mousemove", (event) => {
     mousePos = new Vector2(event.x, event.y);
     if (moving) {
         let delta = dragStartingPos.minus(mousePos);
-        delta = delta.divide(new Vector2(window.innerWidth, window.innerHeight)).dot(new Vector2(game.zoom, game.zoom / (window.innerWidth / window.innerHeight)));
+        delta = delta.divide(new Vector2(window.innerWidth, window.innerHeight)).prod(new Vector2(game.zoom, game.zoom / (window.innerWidth / window.innerHeight)));
         game.position = moveStartingAnchor.add(delta);
     }
     else if (selecting) {

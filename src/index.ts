@@ -3,7 +3,6 @@ import { Vector2 } from "./Model/Vector2.js";
 import { Game } from "./Model/Game.js";
 import { BrushBar } from "./View/BrushBar/BrushBar.js";
 import { Pause } from "./View/Pause.js";
-import { Selection } from "./View/Selection.js";
 import { VelocityInit } from "./View/VelocityInit.js";
 
 const game: Game = new Game(Vector2.null, 4000);
@@ -36,7 +35,7 @@ addEventListener("mousemove", (event) => {
     mousePos = new Vector2(event.x, event.y);
     if(moving) {
         let delta = dragStartingPos.minus(mousePos);
-        delta = delta.divide(new Vector2(window.innerWidth, window.innerHeight)).dot(new Vector2(game.zoom, game.zoom/(window.innerWidth/window.innerHeight)));
+        delta = delta.divide(new Vector2(window.innerWidth, window.innerHeight)).prod(new Vector2(game.zoom, game.zoom/(window.innerWidth/window.innerHeight)));
         game.position = moveStartingAnchor.add(delta);
     } else if(selecting) {
 
