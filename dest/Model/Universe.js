@@ -14,14 +14,14 @@ export class Universe {
         return this._bodies;
     }
     push(body) {
-        this.bodies.push(body);
+        this._bodies.push(body);
     }
     updateUniverse() {
-        this.bodies.forEach((value) => {
-            value.updateVelocity(this);
+        this._bodies.forEach((body) => {
+            body.updateVelocity(this);
         });
-        this.bodies.forEach((value) => {
-            value.updatePosition(this);
+        this._bodies.forEach((body) => {
+            body.updatePosition(this);
         });
     }
 }

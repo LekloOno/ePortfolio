@@ -27,16 +27,16 @@ export class Universe {
     }
 
     push(body: Body) {
-        this.bodies.push(body);
+        this._bodies.push(body);
     }
 
     updateUniverse() {
-        this.bodies.forEach((value: Body) => {
-            value.updateVelocity(this);
+        this._bodies.forEach((body: Body) => {
+            body.updateVelocity(this);
         });
 
-        this.bodies.forEach((value: Body) => {
-            value.updatePosition(this);
+        this._bodies.forEach((body: Body) => {
+            body.updatePosition(this);
         });
     }
 }
