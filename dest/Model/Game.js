@@ -1,6 +1,7 @@
 import { Universe } from "./Universe.js";
 import { Vector2 } from "./Vector2.js";
 import { Body } from "./Body.js";
+import { Selection } from "../View/Selection.js";
 export class Game {
     constructor(position, zoom) {
         this._running = true;
@@ -14,6 +15,7 @@ export class Game {
         this._pageElements.id = "universe";
         document.body.appendChild(this._pageElements);
         this._intervalId = this.getIntervalId();
+        this._selection = new Selection(this);
     }
     get visibleSize() {
         return this._visibleSize;
@@ -29,6 +31,9 @@ export class Game {
     }
     get colorHelp() {
         return this._colorHelp;
+    }
+    get selection() {
+        return this._selection;
     }
     get isRunning() {
         return this._running;
@@ -89,9 +94,9 @@ export class Game {
         });
     }
     drawPageElement(body, id) {
+        var _a;
         let p = document.createElement("div");
         p.className = "dot";
-        p.id = id + "";
         let radius = Math.max(1, this.worldToScreenSize(new Vector2(body.radius, body.radius)).x);
         p.style.height = radius + "px";
         p.style.width = radius + "px";
@@ -102,6 +107,9 @@ export class Game {
             let colorB = colorRate * 255;
             let colorG = colorRate * 255;
             p.style.backgroundColor = `rgb(255, ${colorG}, ${colorB})`;
+        }
+        if ((_a = this._selection.selection) === null || _a === void 0 ? void 0 : _a.includes(body)) {
+            p.id = "selected";
         }
         let screenPos = this.screenDistance(body.position);
         p.style.left = `${screenPos.x}px`;
@@ -118,6 +126,9 @@ export class Game {
     }
     createPageElementWithBody(body) {
         this._universe.push(body);
+    }
+    getBodiesInRange(a, b) {
+        return this._universe.getBodiesInRange(this.screenToRealWorld(a), this.screenToRealWorld(b));
     }
     gameLoop() {
         this._universe.updateUniverse();

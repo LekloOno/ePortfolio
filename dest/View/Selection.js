@@ -7,6 +7,7 @@ export class Selection {
         this._selectionVis.hidden = true;
         this._active = false;
         this._dragStartingPos = Vector2.null;
+        this._selection = [];
         this._game.pageElements.addEventListener("mousedown", (event) => {
             if (!event.ctrlKey && event.button == 0) {
                 this._dragStartingPos = new Vector2(event.x, event.y);
@@ -15,7 +16,7 @@ export class Selection {
         });
         addEventListener("mouseup", (event) => {
             if (event.button == 0 && this._active) {
-                this.deactivate();
+                this.deactivate(new Vector2(event.x, event.y));
             }
         });
         addEventListener("mousemove", (event) => {
@@ -42,6 +43,9 @@ export class Selection {
     get selectionVis() {
         return this._selectionVis;
     }
+    get selection() {
+        return this._selection;
+    }
     activate() {
         this._active = true;
         this._selectionVis.hidden = false;
@@ -50,8 +54,10 @@ export class Selection {
         this._selectionVis.style.left = this._dragStartingPos.x + "px";
         this._selectionVis.style.top = this._dragStartingPos.y + "px";
     }
-    deactivate() {
+    deactivate(mousePos) {
         this._active = false;
         this._selectionVis.hidden = true;
+        this._selection = this._game.getBodiesInRange(mousePos, this._dragStartingPos);
+        this._game.draw();
     }
 }

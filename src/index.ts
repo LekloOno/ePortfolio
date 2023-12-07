@@ -8,7 +8,7 @@ import { Selection } from "./View/Selection.js";
 const game: Game = new Game(Vector2.null, 4000);
 const brushBar = new BrushBar(game);
 const pause = new Pause(game);
-const selection = new Selection(game);
+const selection = game.selection;
 
 document.body.appendChild(brushBar.brushBar);
 document.body.appendChild(pause.pause);
