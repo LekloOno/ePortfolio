@@ -184,6 +184,10 @@ export class Game {
         return this._universe.getBodiesInRange(this.screenToRealWorld(a), this.screenToRealWorld(b));
     }
 
+    deleteBody(body: Body) {
+        return this._universe.deleteBody(body);
+    }
+
     gameLoop() {
         this._universe.updateUniverse();
         this.draw();

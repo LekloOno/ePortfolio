@@ -36,6 +36,10 @@ export class Universe {
         });
         return bodiesInRange;
     }
+    deleteBody(body) {
+        let idx = this._bodies.indexOf(body);
+        return this._bodies.splice(idx, 1);
+    }
 }
 Universe.distanceMultiplier = 1000000000;
 Universe.massMultiplier = 10000000000;

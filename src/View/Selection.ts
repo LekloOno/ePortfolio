@@ -55,6 +55,19 @@ export class Selection {
                 this._selectionVis.style.top = yPos + "px";
             }
         });
+
+        addEventListener("keydown", (event) => {
+            if(this._selection.length != 0){
+                if(event.key == "Delete") {
+                    this._selection.forEach((body: Body) => {
+                        this._game.deleteBody(body);
+                    });
+
+                    this._selection = [];
+                    this._game.draw();
+                }
+            }
+        });
     }
 
     get selectionVis() {

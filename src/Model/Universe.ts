@@ -55,4 +55,9 @@ export class Universe {
 
         return bodiesInRange;
     }
+
+    deleteBody(body: Body) {
+        let idx = this._bodies.indexOf(body);
+        return this._bodies.splice(idx, 1);
+    }
 }
