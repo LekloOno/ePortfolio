@@ -19,5 +19,8 @@
   "homepage": "https://github.com/LekloOno/NewtonsLaw.TS#readme",
   "devDependencies": {
     "typescript": "^5.3.2"
+  },
+  "dependencies": {
+    "http-server": "^14.1.1"
   }
 }

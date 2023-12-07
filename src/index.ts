@@ -5,7 +5,6 @@ import { BrushBar } from "./View/BrushBar/BrushBar.js";
 import { Pause } from "./View/Pause.js";
 import { Selection } from "./View/Selection.js";
 
-
 const game: Game = new Game(Vector2.null, 4000);
 const brushBar = new BrushBar(game);
 const pause = new Pause(game);
@@ -46,9 +45,11 @@ addEventListener("mousemove", (event) => {
 })
 
 game.pageElements.addEventListener("click", (event) => {
-    createPageElement(brushBar.mass, brushBar.radius, new Vector2(0.05, 0), game.screenToRealWorld(new Vector2(event.x, event.y)));
-    if(!game.isRunning){
-        game.draw();
+    if(dragStartingPos.distance(mousePos) < 15){
+        createPageElement(brushBar.mass, brushBar.radius, new Vector2(0.05, 0), game.screenToRealWorld(new Vector2(event.x, event.y)));
+        if(!game.isRunning){
+            game.draw();
+        }
     }
 });
 
@@ -66,8 +67,8 @@ var dragStartingPos: Vector2 = Vector2.null;
 var moveStartingAnchor: Vector2 = Vector2.null;
 
 game.pageElements.addEventListener("mousedown", (event) => {
+    dragStartingPos = mousePos;
     if(event.button == 1){
-        dragStartingPos = mousePos;
         moveStartingAnchor = game.position;
         moving = true;
     }

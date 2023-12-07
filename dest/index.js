@@ -36,9 +36,11 @@ addEventListener("mousemove", (event) => {
     }
 });
 game.pageElements.addEventListener("click", (event) => {
-    createPageElement(brushBar.mass, brushBar.radius, new Vector2(0.05, 0), game.screenToRealWorld(new Vector2(event.x, event.y)));
-    if (!game.isRunning) {
-        game.draw();
+    if (dragStartingPos.distance(mousePos) < 15) {
+        createPageElement(brushBar.mass, brushBar.radius, new Vector2(0.05, 0), game.screenToRealWorld(new Vector2(event.x, event.y)));
+        if (!game.isRunning) {
+            game.draw();
+        }
     }
 });
 game.pageElements.addEventListener("wheel", (event) => {
@@ -54,8 +56,8 @@ var selecting = false;
 var dragStartingPos = Vector2.null;
 var moveStartingAnchor = Vector2.null;
 game.pageElements.addEventListener("mousedown", (event) => {
+    dragStartingPos = mousePos;
     if (event.button == 1) {
-        dragStartingPos = mousePos;
         moveStartingAnchor = game.position;
         moving = true;
     }
