@@ -4,6 +4,10 @@ export class Vector2 {
     private _magnitude: number;
 
     static null: Vector2 = new Vector2(0, 0);
+    static right: Vector2 = new Vector2(1, 0);
+    static up: Vector2 = new Vector2(0, 1);
+    static left: Vector2 = new Vector2(-1, 0);
+    static down: Vector2 = new Vector2(0, -1);
 
     constructor(x: number, y: number) {
         this._x = x;
