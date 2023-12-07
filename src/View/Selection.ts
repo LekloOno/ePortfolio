@@ -99,6 +99,5 @@ export class Selection {
         this._selectionVis.hidden = true;
         
         this._selection = this._game.getBodiesInRange(mousePos, this._dragStartingPos);
-        this._game.draw();
     }
 }

@@ -7,7 +7,6 @@ export class Pause {
         this._pause.hidden = true;
         addEventListener("keypress", (event) => {
             if (event.key == " ") {
-                console.log("alo");
                 if (this._game.isRunning) {
                     this._pause.hidden = false;
                 }

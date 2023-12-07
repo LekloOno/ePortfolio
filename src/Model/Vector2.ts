@@ -57,7 +57,7 @@ export class Vector2 {
         return this.add(other.negative());
     }
 
-    dot(other: Vector2) : Vector2 {
+    prod(other: Vector2) : Vector2 {
         return new Vector2(this._x * other._x, this._y * other._y);
     }
 
@@ -65,12 +65,12 @@ export class Vector2 {
         return new Vector2(this._x / other._x, this._y / other._y);
     }
 
-    kDot(k: number) : Vector2 {
+    kProd(k: number) : Vector2 {
         return new Vector2(this._x * k, this._y * k);
     }
 
     kDivide(k: number) : Vector2 {
-        return this.kDot(1/k);
+        return this.kProd(1/k);
     }
 
     squaredDistance(other: Vector2) : number {
@@ -83,5 +83,9 @@ export class Vector2 {
 
     direction(other: Vector2) : Vector2 {
         return this.minus(other).normalized();
+    }
+
+    dotProduct(other: Vector2){
+        return this._x * other._x + this._y * other._y;
     }
 }

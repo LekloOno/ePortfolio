@@ -39,17 +39,17 @@ export class Vector2 {
     minus(other) {
         return this.add(other.negative());
     }
-    dot(other) {
+    prod(other) {
         return new Vector2(this._x * other._x, this._y * other._y);
     }
     divide(other) {
         return new Vector2(this._x / other._x, this._y / other._y);
     }
-    kDot(k) {
+    kProd(k) {
         return new Vector2(this._x * k, this._y * k);
     }
     kDivide(k) {
-        return this.kDot(1 / k);
+        return this.kProd(1 / k);
     }
     squaredDistance(other) {
         return this.minus(other).squaredMagnitude();
@@ -59,6 +59,9 @@ export class Vector2 {
     }
     direction(other) {
         return this.minus(other).normalized();
+    }
+    dotProduct(other) {
+        return this._x * other._x + this._y * other._y;
     }
 }
 Vector2.null = new Vector2(0, 0);

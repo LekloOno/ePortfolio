@@ -4,15 +4,18 @@ import { Game } from "./Model/Game.js";
 import { BrushBar } from "./View/BrushBar/BrushBar.js";
 import { Pause } from "./View/Pause.js";
 import { Selection } from "./View/Selection.js";
+import { VelocityInit } from "./View/VelocityInit.js";
 
 const game: Game = new Game(Vector2.null, 4000);
 const brushBar = new BrushBar(game);
 const pause = new Pause(game);
 const selection = game.selection;
+const velocityInit = new VelocityInit(game);
 
 document.body.appendChild(brushBar.brushBar);
 document.body.appendChild(pause.pause);
 document.body.appendChild(selection.selectionVis);
+document.body.appendChild(velocityInit.velocityVis);
 
 function createPageElement(mass: number, radius: number, velocity: Vector2, position: Vector2) {
     game.createPageElement(mass, radius, velocity, position);
