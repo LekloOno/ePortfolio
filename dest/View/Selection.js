@@ -37,6 +37,7 @@ export class Selection {
                 this._selectionVis.style.height = height + "px";
                 this._selectionVis.style.left = xPos + "px";
                 this._selectionVis.style.top = yPos + "px";
+                this._selection = this._game.getBodiesInRange(new Vector2(event.x, event.y), this._dragStartingPos);
             }
         });
         addEventListener("keydown", (event) => {
