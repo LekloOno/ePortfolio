@@ -24,7 +24,6 @@ export class ColorHelp {
         
         this._colorHelpInput.addEventListener("change", (event) => {
             this._game.switchColorHelp();
-            if(!this._game.isRunning) game.draw();
         });
 
         this._colorHelp.appendChild(this._colorHelpInput);

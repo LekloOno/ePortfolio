@@ -7,15 +7,14 @@ export class Pause {
         this._pause.hidden = true;
         addEventListener("keypress", (event) => {
             if (event.key == " ") {
+                console.log("alo");
                 if (this._game.isRunning) {
-                    this._game.clearInterval();
                     this._pause.hidden = false;
                 }
                 else {
-                    this._game.setInterval();
                     this._pause.hidden = true;
                 }
-                game.switchRunning();
+                this._game.switchRunning();
             }
         });
     }

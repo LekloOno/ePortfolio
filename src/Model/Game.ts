@@ -10,7 +10,10 @@ export class Game {
     private _intervalId;
 
 
-    private _zoom: number; //Horizontal length/2
+    private _targetZoom: number; //Horizontal length/2
+    private _zoom: number;
+    private _zoomLerpSpeed: number;
+    
     private _visibleSize: Vector2;
     private _universe: Universe;
     private _pageElements: HTMLDivElement;
@@ -26,7 +29,10 @@ export class Game {
         this._colorHelp = false;
         this.position = position;
         
+        this._targetZoom = 0;
         this._zoom = 0;
+        this._zoomLerpSpeed = 0.05;
+
         this._visibleSize = Vector2.null;
         this.setZoom(zoom);
         
@@ -46,8 +52,8 @@ export class Game {
         return this._visibleSize;
     }
 
-    get zoom() {
-        return this._zoom;
+    get targetZoom() {
+        return this._targetZoom;
     }
 
     get universe() {
@@ -70,9 +76,12 @@ export class Game {
         return this._running;
     }
 
+    get zoom() {
+        return this._zoom;
+    }
+
     private setZoom(zoom: number) {
-        this._zoom = zoom;
-        this._visibleSize = new Vector2(this._zoom, this._zoom/(innerWidth/innerHeight));
+        this._targetZoom = zoom;
     }
 
     switchColorHelp() {
@@ -110,13 +119,16 @@ export class Game {
     }
 
     pointedZoom(amount: number, mousePos: Vector2) {
-        let nextZoom: number = this._zoom + amount;
+        let nextZoom: number = this._targetZoom + amount;
         let worldPos: Vector2 = this.screenToRealWorld(mousePos);
 
-        let v: Vector2 = worldPos.minus(worldPos.minus(this.position).kDot(nextZoom).kDivide(this._zoom));
+        if(!this._following){
+            this._zoom = nextZoom;
+            this.position = worldPos.minus(worldPos.minus(this.position).kDot(nextZoom).kDivide(this._targetZoom));
+            this._visibleSize = new Vector2(this._targetZoom, this._targetZoom/(innerWidth/innerHeight));
+        }
         
         this.setZoom(nextZoom);
-        this.position = v;
     }
 
     screenToRealWorld(pos: Vector2): Vector2 {
@@ -206,10 +218,14 @@ export class Game {
     }
 
     gameLoop() {
-        this._universe.updateUniverse();
-        this.draw();
+        if(this._running) this._universe.updateUniverse();
+        
+        
         if(this._following){
+            this._zoom = this._zoomLerpSpeed * this._targetZoom + (1-this._zoomLerpSpeed) * this._zoom;
+            this._visibleSize = new Vector2(this._zoom, this._zoom/(innerWidth/innerHeight));
             this.position = this._followed.position;
         }
+        this.draw();
     }
 }

@@ -27,9 +27,6 @@ addEventListener("mousemove", (event) => {
         let delta = dragStartingPos.minus(mousePos);
         delta = delta.divide(new Vector2(window.innerWidth, window.innerHeight)).dot(new Vector2(game.zoom, game.zoom / (window.innerWidth / window.innerHeight)));
         game.position = moveStartingAnchor.add(delta);
-        if (!game.isRunning) {
-            game.draw();
-        }
     }
     else if (selecting) {
     }
@@ -37,18 +34,13 @@ addEventListener("mousemove", (event) => {
 game.pageElements.addEventListener("click", (event) => {
     if (dragStartingPos.distance(mousePos) < 15) {
         createPageElement(brushBar.mass, brushBar.radius, new Vector2(0.05, 0), game.screenToRealWorld(new Vector2(event.x, event.y)));
-        if (!game.isRunning) {
-            game.draw();
-        }
     }
 });
 game.pageElements.addEventListener("wheel", (event) => {
-    let zoomValue = (event.deltaY * (game.zoom ** 1.2)) / 12000;
-    let limit = zoomValue + game.zoom < ((10 ** 10));
+    let zoomValue = (event.deltaY * (game.targetZoom ** 1.2)) / 12000;
+    let limit = zoomValue + game.targetZoom < ((10 ** 10));
     if (!isNaN(zoomValue) && limit)
         game.pointedZoom(zoomValue, mousePos);
-    if (!game.isRunning)
-        game.draw();
 });
 var moving = false;
 var selecting = false;

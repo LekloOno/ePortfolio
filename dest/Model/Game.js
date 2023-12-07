@@ -7,7 +7,9 @@ export class Game {
         this._running = true;
         this._colorHelp = false;
         this.position = position;
+        this._targetZoom = 0;
         this._zoom = 0;
+        this._zoomLerpSpeed = 0.05;
         this._visibleSize = Vector2.null;
         this.setZoom(zoom);
         this._universe = new Universe();
@@ -22,8 +24,8 @@ export class Game {
     get visibleSize() {
         return this._visibleSize;
     }
-    get zoom() {
-        return this._zoom;
+    get targetZoom() {
+        return this._targetZoom;
     }
     get universe() {
         return this._universe;
@@ -40,9 +42,11 @@ export class Game {
     get isRunning() {
         return this._running;
     }
+    get zoom() {
+        return this._zoom;
+    }
     setZoom(zoom) {
-        this._zoom = zoom;
-        this._visibleSize = new Vector2(this._zoom, this._zoom / (innerWidth / innerHeight));
+        this._targetZoom = zoom;
     }
     switchColorHelp() {
         this._colorHelp = !this._colorHelp;
@@ -72,11 +76,14 @@ export class Game {
         return setInterval(function () { thisGame.gameLoop(); }, this._universe.physicsTimeStep);
     }
     pointedZoom(amount, mousePos) {
-        let nextZoom = this._zoom + amount;
+        let nextZoom = this._targetZoom + amount;
         let worldPos = this.screenToRealWorld(mousePos);
-        let v = worldPos.minus(worldPos.minus(this.position).kDot(nextZoom).kDivide(this._zoom));
+        if (!this._following) {
+            this._zoom = nextZoom;
+            this.position = worldPos.minus(worldPos.minus(this.position).kDot(nextZoom).kDivide(this._targetZoom));
+            this._visibleSize = new Vector2(this._targetZoom, this._targetZoom / (innerWidth / innerHeight));
+        }
         this.setZoom(nextZoom);
-        this.position = v;
     }
     screenToRealWorld(pos) {
         let x = this.position.x - this._zoom / 2 + (pos.x * this._zoom / window.innerWidth);
@@ -147,10 +154,13 @@ export class Game {
         return this._universe.deleteBody(body);
     }
     gameLoop() {
-        this._universe.updateUniverse();
-        this.draw();
+        if (this._running)
+            this._universe.updateUniverse();
         if (this._following) {
+            this._zoom = this._zoomLerpSpeed * this._targetZoom + (1 - this._zoomLerpSpeed) * this._zoom;
+            this._visibleSize = new Vector2(this._zoom, this._zoom / (innerWidth / innerHeight));
             this.position = this._followed.position;
         }
+        this.draw();
     }
 }
