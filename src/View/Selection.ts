@@ -41,10 +41,10 @@ export class Selection {
                 let yDistance = Math.abs(event.y - this._dragStartingPos.y);
 
                 let height = Math.min(yDistance, innerHeight-yPos-1);
-                if(yPos == 0) height = Math.min(height, Math.abs(yPos-this._dragStartingPos.y));
+                if(yPos == 0 && this._dragStartingPos.y != 0) height = Math.min(height, Math.abs(yPos-this._dragStartingPos.y));
                 
                 let width = Math.min(xDistance, innerWidth-xPos-1);
-                if(xPos == 0) width = Math.min(width, Math.abs(xPos-this._dragStartingPos.x));
+                if(xPos == 0 && this._dragStartingPos.x != 0) width = Math.min(width, Math.abs(xPos-this._dragStartingPos.x));
 
                 this._selectionVis.style.width = width + "px";
                 this._selectionVis.style.height = height + "px";
