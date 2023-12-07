@@ -110,7 +110,6 @@ export class Game {
         var _a;
         let p = document.createElement("div");
         p.className = "dot";
-        p.id = id + "";
         let radius = Math.max(1, this.worldToScreenSize(new Vector2(body.radius, body.radius)).x);
         p.style.height = radius + "px";
         p.style.width = radius + "px";
@@ -123,7 +122,7 @@ export class Game {
             p.style.backgroundColor = `rgb(255, ${colorG}, ${colorB})`;
         }
         if ((_a = this._selection.selection) === null || _a === void 0 ? void 0 : _a.includes(body)) {
-            p.style.backgroundColor = `rgba(50, 200, 200, 1)`;
+            p.id = "selected";
         }
         let screenPos = this.screenDistance(body.position);
         p.style.left = `${screenPos.x}px`;

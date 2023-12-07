@@ -156,7 +156,6 @@ export class Game {
     drawPageElement(body: Body, id: number) {
         let p = document.createElement("div");
         p.className = "dot";
-        p.id = id + "";
 
         let radius: number = Math.max(1, this.worldToScreenSize(new Vector2(body.radius, body.radius)).x);
         p.style.height = radius+"px";
@@ -172,7 +171,7 @@ export class Game {
         }
 
         if(this._selection.selection?.includes(body)) {
-            p.style.backgroundColor = `rgba(50, 200, 200, 1)`;
+            p.id = "selected";
         }
 
         let screenPos: Vector2 = this.screenDistance(body.position);
