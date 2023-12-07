@@ -57,14 +57,18 @@ export class Selection {
         });
 
         addEventListener("keydown", (event) => {
-            if(this._selection.length != 0){
-                if(event.key == "Delete") {
-                    this._selection.forEach((body: Body) => {
-                        this._game.deleteBody(body);
-                    });
+            if(this._selection.length != 0 && event.key == "Delete") {
+                this._selection.forEach((body: Body) => {
+                    this._game.deleteBody(body);
+                });
 
-                    this._selection = [];
-                    this._game.draw();
+                this._selection = [];
+                this._game.draw();
+            } else if(event.key == "f") {
+                if(this._selection.length === 1){
+                    this._game.follow(this._selection[0]);
+                } else {
+                    this._game.stopFollowing();
                 }
             }
         });

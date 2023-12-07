@@ -40,13 +40,19 @@ export class Selection {
             }
         });
         addEventListener("keydown", (event) => {
-            if (this._selection.length != 0) {
-                if (event.key == "Delete") {
-                    this._selection.forEach((body) => {
-                        this._game.deleteBody(body);
-                    });
-                    this._selection = [];
-                    this._game.draw();
+            if (this._selection.length != 0 && event.key == "Delete") {
+                this._selection.forEach((body) => {
+                    this._game.deleteBody(body);
+                });
+                this._selection = [];
+                this._game.draw();
+            }
+            else if (event.key == "f") {
+                if (this._selection.length === 1) {
+                    this._game.follow(this._selection[0]);
+                }
+                else {
+                    this._game.stopFollowing();
                 }
             }
         });

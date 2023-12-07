@@ -16,6 +16,8 @@ export class Game {
         document.body.appendChild(this._pageElements);
         this._intervalId = this.getIntervalId();
         this._selection = new Selection(this);
+        this._following = false;
+        this._followed = Body.null;
     }
     get visibleSize() {
         return this._visibleSize;
@@ -47,6 +49,17 @@ export class Game {
     }
     switchRunning() {
         this._running = !this._running;
+    }
+    follow(body) {
+        if (this._following && this._followed == body) {
+            this.stopFollowing();
+            return;
+        }
+        this._followed = body;
+        this._following = true;
+    }
+    stopFollowing() {
+        this._following = false;
     }
     clearInterval() {
         clearInterval(this._intervalId);
@@ -137,5 +150,8 @@ export class Game {
     gameLoop() {
         this._universe.updateUniverse();
         this.draw();
+        if (this._following) {
+            this.position = this._followed.position;
+        }
     }
 }

@@ -1,3 +1,4 @@
+import { Vector2 } from "./Vector2.js";
 export class Body {
     constructor(mass, radius, initVelocity, initPosition) {
         this._mass = mass;
@@ -35,3 +36,4 @@ export class Body {
         this._position = this._position.add(this._velocity.kDot(universe.physicsTimeStep));
     }
 }
+Body.null = new Body(0, 0, Vector2.null, Vector2.null);

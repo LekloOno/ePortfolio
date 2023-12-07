@@ -16,6 +16,9 @@ export class Game {
     private _pageElements: HTMLDivElement;
     private _colorHelp: boolean;
     private _selection: Selection;
+
+    private _following: boolean;
+    private _followed: Body;
     
 
     constructor(position: Vector2, zoom: number) {
@@ -35,6 +38,8 @@ export class Game {
         this._intervalId = this.getIntervalId();
 
         this._selection = new Selection(this);
+        this._following = false;
+        this._followed = Body.null;
     }
 
     get visibleSize(): Vector2 {
@@ -76,6 +81,19 @@ export class Game {
 
     switchRunning() {
         this._running = !this._running;
+    }
+
+    follow(body: Body) {
+        if(this._following && this._followed == body){
+            this.stopFollowing();
+            return;
+        }
+        this._followed = body;
+        this._following = true;
+    }
+
+    stopFollowing() {
+        this._following = false;
     }
 
     clearInterval() {
@@ -191,5 +209,8 @@ export class Game {
     gameLoop() {
         this._universe.updateUniverse();
         this.draw();
+        if(this._following){
+            this.position = this._followed.position;
+        }
     }
 }

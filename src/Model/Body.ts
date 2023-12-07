@@ -1,11 +1,13 @@
 import { Universe } from "./Universe";
-import { Vector2 } from "./Vector2";
+import { Vector2 } from "./Vector2.js";
 
 export class Body {
     private _position: Vector2;
     private _velocity: Vector2;
     private _mass: number;
     private _radius: number;
+
+    static null: Body = new Body(0, 0, Vector2.null, Vector2.null);
 
     constructor(mass:number, radius:number, initVelocity: Vector2, initPosition: Vector2) {
         this._mass = mass;
