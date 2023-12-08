@@ -18,11 +18,15 @@ function createPageElement(mass, radius, velocity, position) {
 function createPageElementWithBody(body) {
     game.createPageElementWithBody(body);
 }
-createPageElement(10000000000, 5, new Vector2(0.08, 0.01), new Vector2(500, 300));
-createPageElement(1000000, 5, new Vector2(0.12, 0), new Vector2(400, 200));
-createPageElement(800000000000, 5, new Vector2(-0.06, 0.2), new Vector2(1000, 0));
-createPageElement(500000000000, 5, new Vector2(0.2, -0.07), new Vector2(200, 1500));
-//const lastTime = new Date().getTime();
+createPageElement(1000000000000, 100, Vector2.null, Vector2.null);
+createPageElement(3000000000, 10, new Vector2(0.6, 0), new Vector2(0, 200));
+createPageElement(6000000, 3, new Vector2(0.72, 0), new Vector2(0, 185));
+createPageElement(10000000, 6, new Vector2(0.2, 0), new Vector2(0, 400));
+createPageElement(8000000000, 15, new Vector2(-0.4, 0), new Vector2(0, -400));
+createPageElement(10000000, 6, new Vector2(-0.27, 0), new Vector2(0, -430));
+createPageElement(60000000, 8, new Vector2(-0.28, 0), new Vector2(0, -447));
+createPageElement(50000000000, 25, new Vector2(-0.28, 0), new Vector2(0, 800));
+createPageElement(30000000, 7, new Vector2(0, 0.25), new Vector2(1200, 0));
 var mousePos = Vector2.null;
 addEventListener("mousemove", (event) => {
     mousePos = new Vector2(event.x, event.y);
