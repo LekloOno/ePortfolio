@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@200&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@200;800&display=swap');
 
 .dot {
     position: absolute;
@@ -64,4 +64,14 @@ body {
     transform-origin: top left;
     background-color: rgba(150, 255, 255, 0.5);
     z-index: 2;
+}
+
+#shortcutsHelp {
+    font-size: 0.9em;
+}
+
+#shortcutsHelp b {
+    color: rgba(150, 255, 255, 0.5);
+    font-family: 'Lexend', bold;
+    font-weight: 800;
 }
