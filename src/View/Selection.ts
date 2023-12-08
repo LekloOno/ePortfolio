@@ -9,12 +9,20 @@ export class Selection {
 
     private _dragStartingPos: Vector2;
     private _selection: Body[];
+
+    private _followingMessage: HTMLDivElement;
     
     constructor(game: Game){
         this._game = game;
         this._selectionVis = document.createElement("div");
         this._selectionVis.id = "selection";
         this._selectionVis.hidden = true;
+
+        this._followingMessage = document.createElement("div");
+        this._followingMessage.id = "following";
+        this._followingMessage.innerHTML = "Following an object, press <b>F</b> to stop";
+        this._followingMessage.hidden = false;
+
         this._active = false;
         this._dragStartingPos = Vector2.null;
         this._selection = [];
@@ -72,8 +80,13 @@ export class Selection {
                 } else {
                     this._game.stopFollowing();
                 }
+                this._followingMessage.hidden = !this._game.isFollowing;
             }
         });
+    }
+
+    get followingMessage() {
+        return this._followingMessage;
     }
 
     get selectionVis() {

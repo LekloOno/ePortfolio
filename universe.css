@@ -75,3 +75,14 @@ body {
     font-family: 'Lexend', bold;
     font-weight: 800;
 }
+
+#following {
+    position: absolute;
+    top : 86%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    color: white;
+    font-size: 15px;
+    font-family: 'Lexend', sans-serif;
+}

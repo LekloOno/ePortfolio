@@ -12,6 +12,7 @@ const velocityInit = new VelocityInit(game, brushBar);
 document.body.appendChild(brushBar.brushBar);
 document.body.appendChild(pause.pause);
 document.body.appendChild(selection.selectionVis);
+document.body.appendChild(selection.followingMessage);
 document.body.appendChild(velocityInit.velocityVis);
 function createPageElement(mass, radius, velocity, position) {
     game.createPageElement(mass, radius, velocity, position);
