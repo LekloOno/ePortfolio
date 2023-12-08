@@ -49,9 +49,12 @@ export class VelocityInit {
         this._active = false;
         this._velocityVis.hidden = true;
         let vel = this._vel.kProd(-this._game.zoom);
-        if (this._game.isFollowing)
+        vel = vel.kDivide(1000000);
+        if (this._game.isFollowing) {
+            console.log("vel.x = " + vel.x + " vel.y = " + vel.y);
+            console.log("followed.x = " + this._game.followedVel().x + " followed.y = " + this._game.followedVel().y);
             vel = vel.add(this._game.followedVel());
-        console.log("oui");
-        this._game.createPageElement(this._brushBar.mass, this._brushBar.radius, vel.kDivide(1000000), this._game.screenToRealWorld(this._dragStartingPos));
+        }
+        this._game.createPageElement(this._brushBar.mass, this._brushBar.radius, vel, this._game.screenToRealWorld(this._dragStartingPos));
     }
 }

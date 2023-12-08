@@ -42,7 +42,7 @@ export class VelocityInit {
                 let dotProd = Vector2.right.dotProduct(this._vel);
                 let angle = Math.acos(dotProd/(this._vel.magnitude));
                 angle *= Math.sign(this._vel.y);
-                
+
                 this._velocityVis.style.width = this._vel.magnitude+"px";
                 this._velocityVis.style.transform = 'rotate('+angle+'rad)';
                 this._velocityVis.style.transform += 'translate(-100%,-100%)';
@@ -70,9 +70,13 @@ export class VelocityInit {
         this._velocityVis.hidden = true;
         
         let vel = this._vel.kProd(-this._game.zoom);
+        vel = vel.kDivide(1000000);
         if(this._game.isFollowing)
+        {
+            console.log("vel.x = " + vel.x + " vel.y = " + vel.y);
+            console.log("followed.x = " + this._game.followedVel().x + " followed.y = " + this._game.followedVel().y);
             vel = vel.add(this._game.followedVel());
-        console.log("oui");
-        this._game.createPageElement(this._brushBar.mass, this._brushBar.radius, vel.kDivide(1000000), this._game.screenToRealWorld(this._dragStartingPos));
+        }
+        this._game.createPageElement(this._brushBar.mass, this._brushBar.radius, vel, this._game.screenToRealWorld(this._dragStartingPos));
     }
 }
