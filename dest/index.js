@@ -1,3 +1,4 @@
+import { Body } from "./Model/Body.js";
 import { Vector2 } from "./Model/Vector2.js";
 import { Game } from "./Model/Game.js";
 import { BrushBar } from "./View/BrushBar/BrushBar.js";
@@ -18,7 +19,9 @@ function createPageElement(mass, radius, velocity, position) {
 function createPageElementWithBody(body) {
     game.createPageElementWithBody(body);
 }
-createPageElement(1000000000000, 100, Vector2.null, Vector2.null);
+const sun = new Body(1000000000000, 100, Vector2.null, Vector2.null);
+createPageElementWithBody(sun);
+game.follow(sun);
 createPageElement(3000000000, 10, new Vector2(0.6, 0), new Vector2(0, 200));
 createPageElement(6000000, 3, new Vector2(0.72, 0), new Vector2(0, 185));
 createPageElement(10000000, 6, new Vector2(0.2, 0), new Vector2(0, 400));
