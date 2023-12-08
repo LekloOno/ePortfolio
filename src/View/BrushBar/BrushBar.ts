@@ -60,7 +60,7 @@ export class BrushBar {
         velHelp.innerHTML = "Hold <b>Ctrl</b> while holding <b>Left Click</b> to create a body with an initial velocity";
         deleteHelp.innerHTML = "Press <b>Delete</b> to delete the selection";
         followHelp.innerHTML = "Press <b>F</b> to follow the selected body (only one selection)";
-        pauseHelp.innerHTML = "Press <b>P</b> to pause the simulation";
+        pauseHelp.innerHTML = "Press <b>Space</b> to pause the simulation";
         
         this._shortcutsHelp.appendChild(createHelp);
         this._shortcutsHelp.appendChild(velHelp);
