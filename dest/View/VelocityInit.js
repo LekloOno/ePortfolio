@@ -51,8 +51,6 @@ export class VelocityInit {
         let vel = this._vel.kProd(-this._game.zoom);
         vel = vel.kDivide(1000000);
         if (this._game.isFollowing) {
-            console.log("vel.x = " + vel.x + " vel.y = " + vel.y);
-            console.log("followed.x = " + this._game.followedVel().x + " followed.y = " + this._game.followedVel().y);
             vel = vel.add(this._game.followedVel());
         }
         this._game.createPageElement(this._brushBar.mass, this._brushBar.radius, vel, this._game.screenToRealWorld(this._dragStartingPos));

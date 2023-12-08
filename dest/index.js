@@ -30,7 +30,10 @@ createPageElement(8000000000, 15, new Vector2(-0.4, 0), new Vector2(0, -400));
 createPageElement(10000000, 6, new Vector2(-0.27, 0), new Vector2(0, -430));
 createPageElement(60000000, 8, new Vector2(-0.28, 0), new Vector2(0, -447));
 createPageElement(50000000000, 25, new Vector2(-0.28, 0), new Vector2(0, 800));
+createPageElement(6000000, 3, new Vector2(-0.12, 0), new Vector2(0, 880));
+createPageElement(6000000, 3, new Vector2(0.05, 0), new Vector2(0, 830));
 createPageElement(30000000, 7, new Vector2(0, 0.25), new Vector2(1200, 0));
+createPageElement(40000000, 8, new Vector2(-0.26, -0.032), new Vector2(1000, 650));
 var mousePos = Vector2.null;
 addEventListener("mousemove", (event) => {
     mousePos = new Vector2(event.x, event.y);
