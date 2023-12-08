@@ -7,11 +7,10 @@ export class Game {
         this._running = true;
         this._colorHelp = false;
         this.position = position;
-        this._targetZoom = 0;
-        this._zoom = 0;
+        this._targetZoom = zoom;
+        this._zoom = zoom;
         this._zoomLerpSpeed = 0.05;
         this._visibleSize = Vector2.null;
-        this.setZoom(zoom);
         this._universe = new Universe();
         this._pageElements = document.createElement("div");
         this._pageElements.id = "universe";
