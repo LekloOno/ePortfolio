@@ -62,6 +62,6 @@ body {
 #velocityInit {
     position: absolute;
     transform-origin: top left;
-    background-color: aliceblue;
+    background-color: rgba(150, 255, 255, 0.5);
     z-index: 2;
 }

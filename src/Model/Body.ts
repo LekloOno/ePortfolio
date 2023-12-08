@@ -28,6 +28,10 @@ export class Body {
         return this._radius;
     }
 
+    get velocity() {
+        return this._velocity;
+    }
+
     squaredDistance(other: Body) : number {
         return this._position.squaredDistance(other._position);
     }

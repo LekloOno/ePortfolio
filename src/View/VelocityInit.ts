@@ -1,16 +1,21 @@
 import { Game } from "../Model/Game.js";
 import { Vector2 } from "../Model/Vector2.js";
+import { BrushBar } from "./BrushBar/BrushBar.js";
 
 export class VelocityInit {
     private _game: Game;
+    private _brushBar: BrushBar;
     private _dragStartingPos: Vector2;
 
     private _active: boolean;
     private _velocityVis: HTMLDivElement;
+    private _vel: Vector2;
 
-    constructor(game: Game){
+    constructor(game: Game, brushBar: BrushBar){
         this._game = game;
+        this._brushBar = brushBar;
         this._dragStartingPos = Vector2.null;
+        this._vel = Vector2.null;
 
         this._velocityVis = document.createElement("div");
         this._velocityVis.id = "velocityInit";
@@ -26,23 +31,21 @@ export class VelocityInit {
 
         this._game.pageElements.addEventListener("mouseup", (event) => {
             if(this._active && event.button == 0) {
-                this.deactivate(new Vector2(event.x, event.y));
+                this.deactivate();
             }
         });
 
         this._game.pageElements.addEventListener("mousemove", (event) => {
             if(this._active) {
                 let mousePos = new Vector2(event.x, event.y);
-                let dir = this._dragStartingPos.minus(mousePos);
-                let dotProd = Vector2.right.dotProduct(dir);
-                let angle = Math.acos(dotProd/(dir.magnitude));
-                angle *= Math.sign(dir.y);
-                this._velocityVis.style.width = dir.magnitude+"px";
+                this._vel = this._dragStartingPos.minus(mousePos);
+                let dotProd = Vector2.right.dotProduct(this._vel);
+                let angle = Math.acos(dotProd/(this._vel.magnitude));
+                angle *= Math.sign(this._vel.y);
+                
+                this._velocityVis.style.width = this._vel.magnitude+"px";
                 this._velocityVis.style.transform = 'rotate('+angle+'rad)';
                 this._velocityVis.style.transform += 'translate(-100%,-100%)';
-
-                console.log(Vector2.up.dotProduct(dir));
-                let trans = Vector2.up.dotProduct(dir);
             }
         });
     }
@@ -54,15 +57,22 @@ export class VelocityInit {
     activate(){
         this._active = true;
         this._velocityVis.hidden = false;
+        this._vel = Vector2.null;
 
         this._velocityVis.style.width = "5px";
-        this._velocityVis.style.height = "5px";
+        this._velocityVis.style.height = "1px";
         this._velocityVis.style.left = this._dragStartingPos.x + "px";
         this._velocityVis.style.top = this._dragStartingPos.y + "px";
     }
 
-    deactivate(mousePos: Vector2){
+    deactivate(){
         this._active = false;
         this._velocityVis.hidden = true;
+        
+        let vel = this._vel.kProd(-this._game.zoom);
+        if(this._game.isFollowing)
+            vel = vel.add(this._game.followedVel());
+        console.log("oui");
+        this._game.createPageElement(this._brushBar.mass, this._brushBar.radius, vel.kDivide(1000000), this._game.screenToRealWorld(this._dragStartingPos));
     }
 }

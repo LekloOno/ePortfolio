@@ -44,6 +44,12 @@ export class Game {
     get zoom() {
         return this._zoom;
     }
+    followedVel() {
+        return this._followed.velocity;
+    }
+    get isFollowing() {
+        return this._following;
+    }
     setZoom(zoom) {
         this._targetZoom = zoom;
     }

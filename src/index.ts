@@ -9,7 +9,7 @@ const game: Game = new Game(Vector2.null, 4000);
 const brushBar = new BrushBar(game);
 const pause = new Pause(game);
 const selection = game.selection;
-const velocityInit = new VelocityInit(game);
+const velocityInit = new VelocityInit(game, brushBar);
 
 document.body.appendChild(brushBar.brushBar);
 document.body.appendChild(pause.pause);
@@ -43,8 +43,8 @@ addEventListener("mousemove", (event) => {
 })
 
 game.pageElements.addEventListener("click", (event) => {
-    if(dragStartingPos.distance(mousePos) < 15){
-        createPageElement(brushBar.mass, brushBar.radius, new Vector2(0.05, 0), game.screenToRealWorld(new Vector2(event.x, event.y)));
+    if(!event.ctrlKey && dragStartingPos.distance(mousePos) < 15){
+        createPageElement(brushBar.mass, brushBar.radius, Vector2.null, game.screenToRealWorld(new Vector2(event.x, event.y)));
     }
 });
 

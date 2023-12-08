@@ -79,6 +79,14 @@ export class Game {
         return this._zoom;
     }
 
+    followedVel(): Vector2 {
+        return this._followed.velocity;
+    }
+
+    get isFollowing(): boolean {
+        return this._following;
+    }
+
     private setZoom(zoom: number) {
         this._targetZoom = zoom;
     }

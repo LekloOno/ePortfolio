@@ -15,6 +15,9 @@ export class Body {
     get radius() {
         return this._radius;
     }
+    get velocity() {
+        return this._velocity;
+    }
     squaredDistance(other) {
         return this._position.squaredDistance(other._position);
     }
