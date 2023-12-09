@@ -33,13 +33,15 @@ export class BrushBar {
         let selectHelp = document.createElement("p");
         let deleteHelp = document.createElement("p");
         let followHelp = document.createElement("p");
+        let zoomHelp = document.createElement("p");
         let moveHelp = document.createElement("p");
         let pauseHelp = document.createElement("p");
         createHelp.innerHTML = "<br>Press <b>Left Click</b> to create a celestial body";
         selectHelp.innerHTML = "Hold <b>Left Click</b> to select bodies";
-        velHelp.innerHTML = "Hold <b>Ctrl</b> while holding <b>Left Click</b> to create a body with an initial velocity";
+        velHelp.innerHTML = "Hold <b>Ctrl</b> while holding <b>Left Click</b> in any direction<br>to create a body with an initial velocity";
         deleteHelp.innerHTML = "Press <b>Delete</b> to delete the selection";
         followHelp.innerHTML = "Press <b>F</b> to follow the selected body (only one selection)";
+        zoomHelp.innerHTML = "Use <b>Scroll Wheel</b> to zoom in and out";
         moveHelp.innerHTML = "Drag click <b>Scroll Wheel</b> to move around";
         pauseHelp.innerHTML = "Press <b>Space</b> to pause the simulation";
         this._shortcutsHelp.appendChild(createHelp);
@@ -47,6 +49,7 @@ export class BrushBar {
         this._shortcutsHelp.appendChild(selectHelp);
         this._shortcutsHelp.appendChild(deleteHelp);
         this._shortcutsHelp.appendChild(followHelp);
+        this._shortcutsHelp.appendChild(zoomHelp);
         this._shortcutsHelp.appendChild(moveHelp);
         this._shortcutsHelp.appendChild(pauseHelp);
         this._brushBar.appendChild(this._shortcutsHelp);
