@@ -8,7 +8,7 @@ const game = new Game(Vector2.null, 4000);
 const brushBar = new BrushBar(game);
 const pause = new Pause(game);
 const selection = game.selection;
-const velocityInit = new VelocityInit(game, brushBar);
+const velocityInit = new VelocityInit(game);
 document.body.appendChild(brushBar.brushBar);
 document.body.appendChild(pause.pause);
 document.body.appendChild(selection.selectionVis);
@@ -20,20 +20,21 @@ function createPageElement(mass, radius, velocity, position) {
 function createPageElementWithBody(body) {
     game.createPageElementWithBody(body);
 }
-const sun = new Body(1000000000000, 100, Vector2.null, Vector2.null);
+const sunVel = new Vector2(0.8, 0.4);
+const sun = new Body(1000000000000, 100, sunVel, Vector2.null);
 createPageElementWithBody(sun);
 game.follow(sun);
-createPageElement(3000000000, 10, new Vector2(0.6, 0), new Vector2(0, 200));
-createPageElement(6000000, 3, new Vector2(0.72, 0), new Vector2(0, 185));
-createPageElement(10000000, 6, new Vector2(0.2, 0), new Vector2(0, 400));
-createPageElement(8000000000, 15, new Vector2(-0.4, 0), new Vector2(0, -400));
-createPageElement(10000000, 6, new Vector2(-0.27, 0), new Vector2(0, -430));
-createPageElement(60000000, 8, new Vector2(-0.28, 0), new Vector2(0, -447));
-createPageElement(50000000000, 25, new Vector2(-0.28, 0), new Vector2(0, 800));
-createPageElement(6000000, 3, new Vector2(-0.12, 0), new Vector2(0, 880));
-createPageElement(6000000, 3, new Vector2(0.05, 0), new Vector2(0, 830));
-createPageElement(30000000, 7, new Vector2(0, 0.25), new Vector2(1200, 0));
-createPageElement(40000000, 8, new Vector2(-0.26, -0.032), new Vector2(1000, 650));
+createPageElement(3000000000, 10, new Vector2(0.6, 0).add(sunVel), new Vector2(0, 200));
+createPageElement(6000000, 3, new Vector2(0.72, 0).add(sunVel), new Vector2(0, 185));
+createPageElement(10000000, 6, new Vector2(0.2, 0).add(sunVel), new Vector2(0, 400));
+createPageElement(8000000000, 15, new Vector2(-0.4, 0).add(sunVel), new Vector2(0, -400));
+createPageElement(10000000, 6, new Vector2(-0.27, 0).add(sunVel), new Vector2(0, -430));
+createPageElement(60000000, 8, new Vector2(-0.28, 0).add(sunVel), new Vector2(0, -447));
+createPageElement(50000000000, 25, new Vector2(-0.28, 0).add(sunVel), new Vector2(0, 800));
+createPageElement(6000000, 3, new Vector2(-0.12, 0).add(sunVel), new Vector2(0, 880));
+createPageElement(6000000, 3, new Vector2(0.05, 0).add(sunVel), new Vector2(0, 830));
+createPageElement(30000000, 7, new Vector2(0, 0.25).add(sunVel), new Vector2(1200, 0));
+createPageElement(40000000, 8, new Vector2(-0.26, -0.032).add(sunVel), new Vector2(1000, 650));
 var mousePos = Vector2.null;
 addEventListener("mousemove", (event) => {
     mousePos = new Vector2(event.x, event.y);
