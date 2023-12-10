@@ -146,11 +146,25 @@ export class Game {
         let windowVect = new Vector2(innerWidth / 2, innerHeight / 2);
         return centerDist.add(windowVect);
     }
+    createPageElementAround(body, mass, radius, velocity, position) {
+        this.createPageElement(mass, radius, velocity.add(body.velocity), position.add(body.position));
+    }
+    createPageElementWithBodyAround(body, newBody) {
+        this.createPageElementAround(body, newBody.mass, newBody.radius, newBody.velocity, newBody.position);
+    }
     createPageElement(mass, radius, velocity, position) {
         this.createPageElementWithBody(new Body(mass, radius, velocity, position));
     }
     createPageElementWithBody(body) {
         this._universe.push(body);
+    }
+    createPageElementWithBodies(bodies) {
+        this._universe.pushAll(bodies);
+    }
+    createPageElementWithBodiesAround(body, bodies) {
+        bodies.forEach((newBody) => {
+            this.createPageElementWithBodyAround(body, newBody);
+        });
     }
     getBodiesInRange(a, b) {
         return this._universe.getBodiesInRange(this.screenToRealWorld(a), this.screenToRealWorld(b));

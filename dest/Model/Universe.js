@@ -17,6 +17,11 @@ export class Universe {
     push(body) {
         this._bodies.push(body);
     }
+    pushAll(newBodies) {
+        newBodies.forEach((body) => {
+            this._bodies.push(body);
+        });
+    }
     updateUniverse() {
         this._bodies.forEach((body) => {
             body.updateVelocity(this);

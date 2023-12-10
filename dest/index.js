@@ -8,7 +8,7 @@ const game = new Game(Vector2.null, 4000);
 const brushBar = new BrushBar(game);
 const pause = new Pause(game);
 const selection = game.selection;
-const velocityInit = new VelocityInit(game);
+const velocityInit = new VelocityInit(game, brushBar);
 document.body.appendChild(brushBar.brushBar);
 document.body.appendChild(pause.pause);
 document.body.appendChild(selection.selectionVis);
@@ -20,21 +20,37 @@ function createPageElement(mass, radius, velocity, position) {
 function createPageElementWithBody(body) {
     game.createPageElementWithBody(body);
 }
+function createPageElementAround(body, mass, radius, velocity, position) {
+    game.createPageElementAround(body, mass, radius, velocity, position);
+}
+function createPageElementWithBodiesAround(body, bodies) {
+    game.createPageElementWithBodiesAround(body, bodies);
+}
+function createStarSystem(center, starVel) {
+    let star = new Body(1000000000000, 100, starVel, center);
+    createPageElementWithBody(star);
+    let bodies = [];
+    bodies.push(new Body(3000000000, 10, new Vector2(0.6, 0), new Vector2(0, 200)));
+    bodies.push(new Body(6000000, 3, new Vector2(0.72, 0), new Vector2(0, 185)));
+    bodies.push(new Body(10000000, 6, new Vector2(0.2, 0), new Vector2(0, 400)));
+    bodies.push(new Body(8000000000, 15, new Vector2(-0.4, 0), new Vector2(0, -400)));
+    bodies.push(new Body(10000000, 6, new Vector2(-0.27, 0), new Vector2(0, -430)));
+    bodies.push(new Body(60000000, 8, new Vector2(-0.28, 0), new Vector2(0, -447)));
+    bodies.push(new Body(50000000000, 25, new Vector2(-0.28, 0), new Vector2(0, 800)));
+    bodies.push(new Body(6000000, 3, new Vector2(-0.12, 0), new Vector2(0, 880)));
+    bodies.push(new Body(6000000, 3, new Vector2(0.05, 0), new Vector2(0, 830)));
+    bodies.push(new Body(30000000, 7, new Vector2(0, 0.25), new Vector2(1200, 0)));
+    bodies.push(new Body(40000000, 8, new Vector2(-0.26, -0.032), new Vector2(1000, 650)));
+    createPageElementWithBodiesAround(star, bodies);
+    return star;
+}
 const sunVel = new Vector2(0.8, 0.4);
-const sun = new Body(1000000000000, 100, sunVel, Vector2.null);
-createPageElementWithBody(sun);
+const sun = createStarSystem(Vector2.null, sunVel);
 game.follow(sun);
-createPageElement(3000000000, 10, new Vector2(0.6, 0).add(sunVel), new Vector2(0, 200));
-createPageElement(6000000, 3, new Vector2(0.72, 0).add(sunVel), new Vector2(0, 185));
-createPageElement(10000000, 6, new Vector2(0.2, 0).add(sunVel), new Vector2(0, 400));
-createPageElement(8000000000, 15, new Vector2(-0.4, 0).add(sunVel), new Vector2(0, -400));
-createPageElement(10000000, 6, new Vector2(-0.27, 0).add(sunVel), new Vector2(0, -430));
-createPageElement(60000000, 8, new Vector2(-0.28, 0).add(sunVel), new Vector2(0, -447));
-createPageElement(50000000000, 25, new Vector2(-0.28, 0).add(sunVel), new Vector2(0, 800));
-createPageElement(6000000, 3, new Vector2(-0.12, 0).add(sunVel), new Vector2(0, 880));
-createPageElement(6000000, 3, new Vector2(0.05, 0).add(sunVel), new Vector2(0, 830));
-createPageElement(30000000, 7, new Vector2(0, 0.25).add(sunVel), new Vector2(1200, 0));
-createPageElement(40000000, 8, new Vector2(-0.26, -0.032).add(sunVel), new Vector2(1000, 650));
+const otherStarVel = new Vector2(0, -0.3);
+const otherStarPos = new Vector2(70000, 60700);
+createStarSystem(otherStarPos, otherStarVel);
+createPageElement(100000000000000000, 10000, new Vector2(2.4, -2.4), new Vector2(-220000, 330000));
 var mousePos = Vector2.null;
 addEventListener("mousemove", (event) => {
     mousePos = new Vector2(event.x, event.y);
