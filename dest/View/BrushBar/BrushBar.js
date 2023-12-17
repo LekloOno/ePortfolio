@@ -1,7 +1,8 @@
+import { ActivationModule } from "../../Model/ActivationModule.js";
 import { ColorHelp } from "./ColorHelp.js";
 import { MassControl } from "./MassControl.js";
 import { RadiusControl } from "./RadiusControl.js";
-export class BrushBar {
+export class BrushBar extends ActivationModule {
     get brushBar() {
         return this._brushBar;
     }
@@ -12,6 +13,7 @@ export class BrushBar {
         return this._radiusControl.radius;
     }
     constructor(game) {
+        super();
         this._shortcutsHelp = document.createElement("div");
         this._shortcutsHelp.id = "shortcutsHelp";
         this._shortcutsHelp.hidden = true;
@@ -19,10 +21,15 @@ export class BrushBar {
         this._shortcutMore.textContent = "Show Help";
         this._brushBar = document.createElement("div");
         this._brushBar.id = "sandBoxBrush";
+        this._brushBar.hidden = true;
         this._massControl = new MassControl();
         this._radiusControl = new RadiusControl();
         this._colorHelp = new ColorHelp(game);
         this.buildBrushBar();
+    }
+    activate() {
+        this.activated = !this.activated;
+        this._brushBar.hidden = !this.activated;
     }
     buildBrushBar() {
         this._brushBar.append(this._massControl.massControl);
@@ -55,6 +62,8 @@ export class BrushBar {
         this._brushBar.appendChild(this._shortcutsHelp);
         this._brushBar.appendChild(this._shortcutMore);
         this._shortcutMore.addEventListener('click', () => {
+            if (!this.activated)
+                return;
             if (this._shortcutsHelp.hidden) {
                 this._shortcutMore.textContent = 'Hide Help';
             }

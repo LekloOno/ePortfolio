@@ -1,8 +1,9 @@
 import { Game } from "../Model/Game.js";
 import { Vector2 } from "../Model/Vector2.js";
 import { Body } from "../Model/Body.js";
+import { ActivationModule } from "../Model/ActivationModule.js";
 
-export class Selection {
+export class Selection extends ActivationModule {
     private _game: Game;
     private _selectionVis: HTMLDivElement;
     private _active: boolean;
@@ -13,6 +14,7 @@ export class Selection {
     private _followingMessage: HTMLDivElement;
     
     constructor(game: Game){
+        super();
         this._game = game;
         this._selectionVis = document.createElement("div");
         this._selectionVis.id = "selection";
@@ -21,26 +23,29 @@ export class Selection {
         this._followingMessage = document.createElement("div");
         this._followingMessage.id = "following";
         this._followingMessage.innerHTML = "Following an object, press <b>F</b> to stop";
-        this._followingMessage.hidden = false;
+        this._followingMessage.hidden = true;
 
         this._active = false;
         this._dragStartingPos = Vector2.null;
         this._selection = [];
 
         this._game.pageElements.addEventListener("mousedown", (event) => {
+            if(!this.activated) return;
             if(!event.ctrlKey && event.button == 0){
                 this._dragStartingPos = new Vector2(event.x, event.y);
-                this.activate();
+                this.enable();
             }
         });
 
         addEventListener("mouseup", (event) => {
+            if(!this.activated) return;
             if(event.button == 0 && this._active){
-                this.deactivate(new Vector2(event.x, event.y));
+                this.disable(new Vector2(event.x, event.y));
             }
         });
 
         addEventListener("mousemove", (event) => {
+            if(!this.activated) return;
             if(this._active){
                 let xPos = Math.min(event.x, this._dragStartingPos.x);
                 let yPos = Math.min(event.y, this._dragStartingPos.y);
@@ -67,6 +72,7 @@ export class Selection {
         });
 
         addEventListener("keydown", (event) => {
+            if(!this.activated) return;
             if(this._selection.length != 0 && event.key == "Delete") {
                 this._selection.forEach((body: Body) => {
                     this._game.deleteBody(body);
@@ -97,7 +103,7 @@ export class Selection {
         return this._selection;
     }
 
-    activate(){
+    enable(){
         this._active = true;
         this._selectionVis.hidden = false;
 
@@ -107,10 +113,17 @@ export class Selection {
         this._selectionVis.style.top = this._dragStartingPos.y + "px";
     }
 
-    deactivate(mousePos: Vector2){
+    disable(mousePos: Vector2){
         this._active = false;
         this._selectionVis.hidden = true;
         
         this._selection = this._game.getBodiesInRange(mousePos, this._dragStartingPos);
+    }
+
+    activate(): void {
+        this.activated = !this.activated;
+        this._followingMessage.hidden = !this._game.isFollowing || !this.activated;
+        this._selectionVis.hidden = !this.activated || !this._active;
+        this._active = this.activated && this._active;
     }
 }

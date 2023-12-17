@@ -2,8 +2,11 @@ import { Universe } from "./Universe.js";
 import { Vector2 } from "./Vector2.js";
 import { Body } from "./Body.js";
 import { Selection } from "../View/Selection.js";
-export class Game {
+import { ActivationModule } from "./ActivationModule.js";
+export class Game extends ActivationModule {
     constructor(position, zoom) {
+        super();
+        this.app = document.createElement("div");
         this._running = true;
         this._colorHelp = false;
         this.position = position;
@@ -14,11 +17,13 @@ export class Game {
         this._universe = new Universe();
         this._pageElements = document.createElement("div");
         this._pageElements.id = "universe";
-        document.body.appendChild(this._pageElements);
         this._intervalId = this.getIntervalId();
         this._selection = new Selection(this);
         this._following = false;
         this._followed = Body.null;
+    }
+    activate() {
+        this.activated = !this.activated;
     }
     get visibleSize() {
         return this._visibleSize;
@@ -181,5 +186,9 @@ export class Game {
             this.position = this._followed.position;
         }
         this.draw();
+    }
+    initPageElement() {
+        var _a;
+        (_a = this.app) === null || _a === void 0 ? void 0 : _a.appendChild(this._pageElements);
     }
 }

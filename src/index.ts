@@ -11,11 +11,31 @@ const pause = new Pause(game);
 const selection = game.selection;
 const velocityInit = new VelocityInit(game, brushBar);
 
-document.body.appendChild(brushBar.brushBar);
-document.body.appendChild(pause.pause);
-document.body.appendChild(selection.selectionVis);
-document.body.appendChild(selection.followingMessage);
-document.body.appendChild(velocityInit.velocityVis);
+var sandBoxActivated: boolean = false;
+
+addEventListener("load", (event) => {
+    const app = document.getElementById("app");
+    if(app != null) game.app = app;
+    game.initPageElement();
+    
+    app?.appendChild(brushBar.brushBar);
+    app?.appendChild(pause.pause);
+    app?.appendChild(selection.selectionVis);
+    app?.appendChild(selection.followingMessage);
+    app?.appendChild(velocityInit.velocityVis);
+    
+    
+    const sunVel = new Vector2(0.8, 0.4);
+    const sun: Body = createStarSystem(Vector2.null, sunVel);
+    game.follow(sun);
+    
+    const otherStarVel = new Vector2(0, -0.3);
+    const otherStarPos = new Vector2(70000, 60700);
+    createStarSystem(otherStarPos, otherStarVel);
+    
+    createPageElement(100000000000000000, 10000, new Vector2(2.4, -2.4), new Vector2(-220000, 330000));
+    
+});
 
 function createPageElement(mass: number, radius: number, velocity: Vector2, position: Vector2) {
     game.createPageElement(mass, radius, velocity, position);
@@ -54,17 +74,6 @@ function createStarSystem(center: Vector2, starVel: Vector2): Body {
 
     return star;
 }
-
-const sunVel = new Vector2(0.8, 0.4);
-const sun: Body = createStarSystem(Vector2.null, sunVel);
-game.follow(sun);
-
-const otherStarVel = new Vector2(0, -0.3);
-const otherStarPos = new Vector2(70000, 60700);
-createStarSystem(otherStarPos, otherStarVel);
-
-createPageElement(100000000000000000, 10000, new Vector2(2.4, -2.4), new Vector2(-220000, 330000));
-
 var mousePos: Vector2 = Vector2.null;
 addEventListener("mousemove", (event) => {
     mousePos = new Vector2(event.x, event.y);
@@ -73,17 +82,19 @@ addEventListener("mousemove", (event) => {
         delta = delta.divide(new Vector2(window.innerWidth, window.innerHeight)).prod(new Vector2(game.zoom, game.zoom/(window.innerWidth/window.innerHeight)));
         game.position = moveStartingAnchor.add(delta);
     } else if(selecting) {
-
+        
     }
 })
 
 game.pageElements.addEventListener("click", (event) => {
+    if(!sandBoxActivated) return;
     if(!event.ctrlKey && dragStartingPos.distance(mousePos) < 15){
         createPageElement(brushBar.mass, brushBar.radius, Vector2.null, game.screenToRealWorld(new Vector2(event.x, event.y)));
     }
 });
 
 game.pageElements.addEventListener("wheel", (event) => {
+    if(!sandBoxActivated) return;
     let zoomValue = (event.deltaY*(game.targetZoom**1.2))/12000;
     let limit = zoomValue+game.targetZoom < ((10**10));
     if(!isNaN(zoomValue) && limit) game.pointedZoom(zoomValue, mousePos);
@@ -96,6 +107,7 @@ var dragStartingPos: Vector2 = Vector2.null;
 var moveStartingAnchor: Vector2 = Vector2.null;
 
 game.pageElements.addEventListener("mousedown", (event) => {
+    if(!sandBoxActivated) return;
     dragStartingPos = mousePos;
     if(event.button == 1){
         moveStartingAnchor = game.position;
@@ -104,7 +116,18 @@ game.pageElements.addEventListener("mousedown", (event) => {
 });
 
 addEventListener("mouseup", (event) => {
+    if(!sandBoxActivated) return;
     if(event.button == 1){
         moving = false;
     }
 });
+
+addEventListener("keypress", (event) => {
+    if(event.key == "m") {
+       sandBoxActivated = !sandBoxActivated;
+       pause.activate();
+       selection.activate();
+       velocityInit.activate();
+       brushBar.activate();
+    }
+})

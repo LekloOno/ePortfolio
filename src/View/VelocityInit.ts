@@ -1,8 +1,9 @@
+import { ActivationModule } from "../Model/ActivationModule.js";
 import { Game } from "../Model/Game.js";
 import { Vector2 } from "../Model/Vector2.js";
 import { BrushBar } from "./BrushBar/BrushBar.js";
 
-export class VelocityInit {
+export class VelocityInit extends ActivationModule {
     private _game: Game;
     private _brushBar: BrushBar;
     private _dragStartingPos: Vector2;
@@ -12,6 +13,7 @@ export class VelocityInit {
     private _vel: Vector2;
 
     constructor(game: Game, brushBar: BrushBar){
+        super();
         this._game = game;
         this._brushBar = brushBar;
         this._dragStartingPos = Vector2.null;
@@ -23,19 +25,22 @@ export class VelocityInit {
         this._active = false;
 
         this._game.pageElements.addEventListener("mousedown", (event) => {
+            if(!this.activated) return;
             if(event.ctrlKey && event.button == 0){
                 this._dragStartingPos = new Vector2(event.x, event.y);
-                this.activate();
+                this.enable();
             }
         });
 
         this._game.pageElements.addEventListener("mouseup", (event) => {
+            if(!this.activated) return;
             if(this._active && event.button == 0) {
-                this.deactivate();
+                this.disable();
             }
         });
 
         this._game.pageElements.addEventListener("mousemove", (event) => {
+            if(!this.activated) return;
             if(this._active) {
                 let mousePos = new Vector2(event.x, event.y);
                 this._vel = this._dragStartingPos.minus(mousePos);
@@ -54,7 +59,7 @@ export class VelocityInit {
         return this._velocityVis;
     }
 
-    activate(){
+    enable(){
         this._active = true;
         this._velocityVis.hidden = false;
         this._vel = Vector2.null;
@@ -65,7 +70,7 @@ export class VelocityInit {
         this._velocityVis.style.top = this._dragStartingPos.y + "px";
     }
 
-    deactivate(){
+    disable(){
         this._active = false;
         this._velocityVis.hidden = true;
         
@@ -76,5 +81,11 @@ export class VelocityInit {
             vel = vel.add(this._game.followedVel());
         }
         this._game.createPageElement(this._brushBar.mass, this._brushBar.radius, vel, this._game.screenToRealWorld(this._dragStartingPos));
+    }
+
+    activate(): void {
+        this.activated = !this.activated;
+        this._velocityVis.hidden = !this.activated || !this._active;
+        this._active = this.activated;
     }
 }

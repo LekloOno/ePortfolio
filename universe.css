@@ -1,5 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@200;800&display=swap');
 
+.app {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+
 .dot {
     position: absolute;
     height: 5px;

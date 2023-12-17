@@ -1,6 +1,8 @@
 import { Vector2 } from "../Model/Vector2.js";
-export class Selection {
+import { ActivationModule } from "../Model/ActivationModule.js";
+export class Selection extends ActivationModule {
     constructor(game) {
+        super();
         this._game = game;
         this._selectionVis = document.createElement("div");
         this._selectionVis.id = "selection";
@@ -8,22 +10,28 @@ export class Selection {
         this._followingMessage = document.createElement("div");
         this._followingMessage.id = "following";
         this._followingMessage.innerHTML = "Following an object, press <b>F</b> to stop";
-        this._followingMessage.hidden = false;
+        this._followingMessage.hidden = true;
         this._active = false;
         this._dragStartingPos = Vector2.null;
         this._selection = [];
         this._game.pageElements.addEventListener("mousedown", (event) => {
+            if (!this.activated)
+                return;
             if (!event.ctrlKey && event.button == 0) {
                 this._dragStartingPos = new Vector2(event.x, event.y);
-                this.activate();
+                this.enable();
             }
         });
         addEventListener("mouseup", (event) => {
+            if (!this.activated)
+                return;
             if (event.button == 0 && this._active) {
-                this.deactivate(new Vector2(event.x, event.y));
+                this.disable(new Vector2(event.x, event.y));
             }
         });
         addEventListener("mousemove", (event) => {
+            if (!this.activated)
+                return;
             if (this._active) {
                 let xPos = Math.min(event.x, this._dragStartingPos.x);
                 let yPos = Math.min(event.y, this._dragStartingPos.y);
@@ -45,6 +53,8 @@ export class Selection {
             }
         });
         addEventListener("keydown", (event) => {
+            if (!this.activated)
+                return;
             if (this._selection.length != 0 && event.key == "Delete") {
                 this._selection.forEach((body) => {
                     this._game.deleteBody(body);
@@ -72,7 +82,7 @@ export class Selection {
     get selection() {
         return this._selection;
     }
-    activate() {
+    enable() {
         this._active = true;
         this._selectionVis.hidden = false;
         this._selectionVis.style.width = "0px";
@@ -80,9 +90,15 @@ export class Selection {
         this._selectionVis.style.left = this._dragStartingPos.x + "px";
         this._selectionVis.style.top = this._dragStartingPos.y + "px";
     }
-    deactivate(mousePos) {
+    disable(mousePos) {
         this._active = false;
         this._selectionVis.hidden = true;
         this._selection = this._game.getBodiesInRange(mousePos, this._dragStartingPos);
+    }
+    activate() {
+        this.activated = !this.activated;
+        this._followingMessage.hidden = !this._game.isFollowing || !this.activated;
+        this._selectionVis.hidden = !this.activated || !this._active;
+        this._active = this.activated && this._active;
     }
 }
