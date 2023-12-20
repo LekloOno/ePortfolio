@@ -19,6 +19,8 @@ export class Game extends ActivationModule {
     private _visibleSize: Vector2;
     private _universe: Universe;
     private _pageElements: HTMLDivElement;
+    private _positionHolderX: HTMLDivElement;
+    private _positionHolderY: HTMLDivElement;
     private _colorHelp: boolean;
     private _selection: Selection;
 
@@ -42,6 +44,15 @@ export class Game extends ActivationModule {
         this._universe = new Universe();
         this._pageElements = document.createElement("div");
         this._pageElements.id = "universe";
+
+        this._positionHolderX = document.createElement("div");
+        this._positionHolderX.hidden = true;
+        this._positionHolderX.id = "positionX";
+
+        this._positionHolderY = document.createElement("div");
+        this._positionHolderY.hidden = true;
+        this._positionHolderY.id = "positionY";
+
         
         this._intervalId = this.getIntervalId();
 
@@ -259,9 +270,14 @@ export class Game extends ActivationModule {
             this.position = this._followed.position;
         }
         this.draw();
+
+        this._positionHolderX.textContent = this.position.x+"";
+        this._positionHolderY.textContent = this.position.y+"";
     }
 
     initPageElement(){
         this.app?.appendChild(this._pageElements);
+        this.app?.appendChild(this._positionHolderX);
+        this.app?.appendChild(this._positionHolderY);
     }
 }

@@ -1,13 +1,12 @@
 nav {
     position: absolute;
-    width: 100%;
+    width: 99%;
     z-index: 3;
     color: white;
     font-size: large;
 }
 
 .oui ol {
-    width: 100%;
     display: flex;
     justify-content: space-around;
     list-style-type: none;

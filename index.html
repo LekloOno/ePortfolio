@@ -1,15 +1,139 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta Content-type: charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="https://i1.sndcdn.com/artworks-6zP1fGdAJMq4kjX1-8PutKA-t500x500.jpg" />
-    <link rel="stylesheet" href="universe.css">
+<head>
+  <meta charset="utf-8">
+  <link rel="icon" type="image/svg+xml" href="https://i1.sndcdn.com/artworks-6zP1fGdAJMq4kjX1-8PutKA-t500x500.jpg" />
+  <title>Minimal shader</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="stylesheet" href="universe.css">
     <link rel="stylesheet" href="portfolio.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>NewtonsLaw.TS</title>
-    <base href=".">
-  </head>
-  <body onselectstart="return false">
+    <script src="https://xemantic.github.io/shader-web-background/dist/shader-web-background.min.js"></script>
+  <script type="x-shader/x-fragment" id="image">
+
+    precision highp float;
+        
+    uniform float iTime;
+    uniform vec2 iResolution;
+    uniform vec2 iPos;
+
+    vec2 pos;
+    
+    float lerp(in float a, in float b, in float i){return (1.-i)*a+i*b;}
+    void mainImage( out vec4 fragColor, in vec2 fragCoord );
+
+    vec2 fade(vec2 t) {return t*t*t*(t*(t*6.0-15.0)+10.0);}
+    vec4 permute(vec4 x){return mod(((x*34.0)+1.0)*x, 289.0);}
+
+    
+    
+    float cnoise21(vec2 P){
+        vec4 Pi = floor(P.xyxy) + vec4(0.0, 0.0, 1.0, 1.0);
+        vec4 Pf = fract(P.xyxy) - vec4(0.0, 0.0, 1.0, 1.0);
+      Pi = mod(Pi, 289.0); // To avoid truncation effects in permutation
+      vec4 ix = Pi.xzxz;
+      vec4 iy = Pi.yyww;
+      vec4 fx = Pf.xzxz;
+      vec4 fy = Pf.yyww;
+      vec4 i = permute(permute(ix) + iy);
+      vec4 gx = 2.0 * fract(i * 0.0243902439) - 1.0; // 1/41 = 0.024...
+      vec4 gy = abs(gx) - 0.5;
+      vec4 tx = floor(gx + 0.5);
+      gx = gx - tx;
+      vec2 g00 = vec2(gx.x,gy.x);
+      vec2 g10 = vec2(gx.y,gy.y);
+      vec2 g01 = vec2(gx.z,gy.z);
+      vec2 g11 = vec2(gx.w,gy.w);
+      vec4 norm = 1.79284291400159 - 0.85373472095314 * vec4(dot(g00, g00), dot(g01, g01), dot(g10, g10), dot(g11, g11));
+      g00 *= norm.x;
+      g01 *= norm.y;
+      g10 *= norm.z;
+      g11 *= norm.w;
+      float n00 = dot(g00, vec2(fx.x, fy.x));
+      float n10 = dot(g10, vec2(fx.y, fy.y));
+      float n01 = dot(g01, vec2(fx.z, fy.z));
+      float n11 = dot(g11, vec2(fx.w, fy.w));
+      vec2 fade_xy = fade(Pf.xy);
+      vec2 n_x = mix(vec2(n00, n01), vec2(n10, n11), fade_xy.x);
+      float n_xy = mix(n_x.x, n_x.y, fade_xy.y);
+      return 2.3 * n_xy;
+    }
+    
+    float random(vec2 p) {
+        vec2 k1 = vec2(
+            23.14069263277926, // e^pi (Gelfond's constant)
+            2.665144142690225 // 2^sqrt(2) (Gelfond-Schneider constant)
+      );
+      return fract(
+        cos(dot(p, k1)) * 12345.6789
+      );
+    }
+    
+    // Created by Stephane Cuillerdier - @Aiekick/2016
+// License Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License.
+// Tuned via XShade (http://www.funparadigm.com/xshade/)
+
+/* 
+	Based on shane shader : https://www.shadertoy.com/view/ll2SRy
+*/
+
+mat3 getRotZMat(float a){return mat3(cos(a),-sin(a),0.,sin(a),cos(a),0.,0.,0.,1.);}
+
+float dstepf = 0.0;
+
+float map(vec3 p)
+{
+	p.x += sin(p.z*1.8);
+    p.y += cos(p.z*.2) * sin(p.x*.8);
+	p *= getRotZMat(p.z*0.8+sin(p.x)+cos(p.y));
+    p.xy = mod(p.xy, 0.3) - 0.15;
+	dstepf += 0.003;
+	return length(p.xy);
+}
+
+    void mainImage( out vec4 fragColor, in vec2 fragCoord )
+    {
+      vec2 uv = (fragCoord - iResolution.xy*.5 )/iResolution.y;
+      vec3 rd = normalize(vec3(uv, (1.-dot(uv, uv)*.5)*.5)); 
+      vec3 ro = vec3(0, 0, pos.x*1.26), col = vec3(0), sp;
+
+      float bubble = sin(uv.x+pos.x+iTime*0.1) + sin((pos.x)) + sin(uv.y+pos.y+uv.x);
+      
+      float scaledTime = iTime/10.;
+      float thing = uv.x*sin(scaledTime) + uv.y*sin(scaledTime) + uv.y*cos(scaledTime);
+      thing = sin(thing*10.);
+      thing += cos(uv.x+10.);
+
+      float thing2 = sin(cnoise21(uv.xy + pos + vec2(0.1, 0.06)*iTime));
+
+      float thing3 = cnoise21(uv.xy + vec2(0.1, 0.06)*iTime);
+
+      thing2 *= 5.;
+      thing3 *= 5.;
+
+      vec3 col1 = vec3(0.02, 0.68, 0.9);
+      vec3 col2 = vec3(0.08, 0.9, 0.64);
+
+      thing2;
+
+      fragColor = vec4(col1*thing3 + col1*thing2 + col2*cos(thing2), 1.0 );
+
+      vec2 uvrandom = uv;
+      fragColor.rgb += random(uvrandom) * 0.2;
+    }
+
+    
+    void main() {
+      pos = iPos/1000.;
+      mainImage(gl_FragColor, gl_FragCoord.xy);
+      gl_FragColor *= 0.1;
+    }
+  </script>
+  <script src="test.js"></script>
+
+
+</head>
+<body onselectstart="return false">
     <nav class="oui portfolio">
       <ol>
         <li class="oui">Présentation</li>
