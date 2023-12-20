@@ -104,9 +104,9 @@ float map(vec3 p)
       thing = sin(thing*10.);
       thing += cos(uv.x+10.);
 
-      float thing2 = sin(cnoise21(uv.xy + pos + vec2(0.1, 0.06)*iTime));
+      float thing2 = sin(cnoise21(uv.xy + 0.9*pos + vec2(0.1*sin(scaledTime), cos(scaledTime)*0.06)));
 
-      float thing3 = cnoise21(uv.xy + vec2(0.1, 0.06)*iTime);
+      float thing3 = cnoise21(uv.xy + 0.3*pos + vec2(0.14, 0.049)*iTime);
 
       thing2 *= 5.;
       thing3 *= 5.;
