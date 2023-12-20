@@ -1,24 +1,25 @@
 nav {
     position: absolute;
-    top: 0px;
-    left: 0px;
+    width: 100%;
     z-index: 3;
     color: white;
-    display: inline-block;
+    font-size: large;
 }
 
 .oui ol {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
     list-style-type: none;
     padding-left: 0;
   }
   
   .oui {
-    display: inline-block;
   }
   
   .oui a::after {
     display: inline-block;
-    color: #000;
+    color: white;
     content: '>';
     font-size: 80%;
     font-weight: bold;
