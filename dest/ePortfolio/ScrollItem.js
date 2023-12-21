@@ -42,4 +42,25 @@ export class ScrollItem {
             this._element.style.opacity = opacity + "";
         }
     }
+    setFakeOpacity() {
+        if (this._shown && this._fade) {
+            let opacity = innerHeight - (this._scrollHide + 1500) + this._scrollHide;
+            opacity = Math.min(Math.max(0, opacity), innerHeight);
+            opacity /= innerHeight;
+            let parsed = parseFloat(this._element.style.opacity);
+            if (isNaN(parsed))
+                opacity = 0;
+            else
+                opacity = MathM.lerp(parsed, opacity, 0.1);
+            this._element.style.opacity = opacity + "";
+        }
+    }
+    update(scroll, targetScrollY) {
+        this.show(scroll);
+        this.setPos(targetScrollY);
+        this.setOpacity(scroll);
+    }
+    fakeUpdate() {
+        this.setFakeOpacity();
+    }
 }

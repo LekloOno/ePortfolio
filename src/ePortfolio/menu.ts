@@ -24,6 +24,7 @@ const contStart = 18000;
 
 const scrollStarts:number [] = [1600, 2100, 2500, 3500, 4000, 5300, 5800, 6500, 7600, 7800, 8400, 8600, 8800, 9000];
 
+var selected :string;
 
 var higlightItems: HiglightItem[] = [];
 
@@ -35,22 +36,27 @@ Array.prototype.forEach.call(document.getElementsByClassName("highlight"), (elem
 
 presNav?.addEventListener("click", (event) => {
     targetScrollY = presStart+2000;
+    selected = "pres";
 });
 
 formNav?.addEventListener("click", (event) => {
     targetScrollY = formStart;
+    selected = "form";
 });
 
 compNav?.addEventListener("click", (event) => {
     targetScrollY = compStart;
+    selected = "comp";
 });
 
 projNav?.addEventListener("click", (event) => {
     targetScrollY = projStart;
+    selected = "proj";
 });
 
 contNav?.addEventListener("click", (event) => {
     targetScrollY = contStart;
+    selected = "cont";
 });
 
 var presBgLeftSize = 0;
@@ -107,12 +113,20 @@ addEventListener("wheel", (event) => {
 function updateScroll(){
     scrollY = MathM.lerp(scrollY, targetScrollY, 0.06);
 
+    if(targetScrollY >= presStart) selected = "pres";
+    if(targetScrollY >= formStart) selected = "form";
+    if(targetScrollY >= compStart) selected = "comp";
+    if(targetScrollY >= projStart) selected = "proj";
+    if(targetScrollY >= contStart) selected = "cont";
+
     updateNav();
 
     Array.prototype.forEach.call(scrollItems, (element) => {
-        element.show(scrollY);
-        element.setPos(targetScrollY);
-        element.setOpacity(scrollY);
+        if(element.htmlElement.classList.contains(selected) || element.htmlElement.id == "intro"){
+            element.update(scrollY, targetScrollY);
+        } else {
+            element.fakeUpdate();
+        }
     });
 
     if(intro != null){
