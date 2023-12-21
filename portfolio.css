@@ -91,7 +91,12 @@ p {
   overflow: hidden;
   position: absolute;
   width: 50%;
-  margin-left: 20%;
+  margin-left: 15%;
+  padding-left: 14px;
+  background-image: linear-gradient(white, white), linear-gradient(white, white);
+  background-size: 2px 50%, 10% 2px;
+  background-repeat: no-repeat, no-repeat;
+  background-position: left 85%, left 92%;
 }
 
 * {

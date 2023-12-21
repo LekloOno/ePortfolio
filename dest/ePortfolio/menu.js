@@ -9,6 +9,16 @@ const formNav = document.getElementById("formNav");
 const compNav = document.getElementById("compNav");
 const projNav = document.getElementById("projNav");
 const contNav = document.getElementById("contNav");
+const presStart = 1000;
+const formStart = 3500;
+const compStart = 5000;
+const projStart = 6500;
+const contStart = 7500;
+var presBgLeftSize = 0;
+var presBgBotSize = 0;
+function lerp(a, b, f) {
+    return a + f * (b - a);
+}
 addEventListener("keypress", (event) => {
     if (event.key == "m") {
         Array.prototype.forEach.call(elements, (element) => {
@@ -40,24 +50,29 @@ addEventListener("wheel", (event) => {
     targetScrollY = Math.max(0, targetScrollY);
 });
 function updateScroll() {
-    scrollY = scrollY + 0.06 * (targetScrollY - scrollY);
+    scrollY = lerp(scrollY, targetScrollY, 0.06);
     updateNav();
     Array.prototype.forEach.call(scrollItems, (element) => {
         element.show(scrollY);
         element.setPos(targetScrollY);
         element.setOpacity(scrollY);
-        if (element.id == "intro") {
-            element.htmlElement.style.backgroundSize = "10% " + (scrollY * 0.05 + 40) + "%";
-            element.htmlElement.style.backgroundPositionY = (100 - (scrollY * 0.05)) + "%";
-        }
     });
+    if (intro != null) {
+        intro.style.backgroundSize = "10% " + (scrollY * 0.05 + 40) + "%";
+        intro.style.backgroundPositionY = (100 - (scrollY * 0.05)) + "%";
+    }
+    if (pres != null) {
+        presBgLeftSize = lerp(presBgLeftSize, Math.min(Math.max(((targetScrollY - 1500) * 0.05), 0), 45), 0.06);
+        presBgBotSize = lerp(presBgBotSize, Math.min(Math.max(((scrollY - 2600) * 0.007), 0), 4), 0.06);
+        pres.style.backgroundSize = "2px " + presBgLeftSize + "%" + ", " + presBgBotSize + "% 2px";
+    }
 }
 function updateNav() {
-    navStyle(presNav, 1000, 2500);
-    navStyle(formNav, 2500, 3500);
-    navStyle(compNav, 3500, 4500);
-    navStyle(projNav, 4500, 5500);
-    navStyle(contNav, 5500, 6500);
+    navStyle(presNav, presStart, formStart);
+    navStyle(formNav, formStart, compStart);
+    navStyle(compNav, compStart, projStart);
+    navStyle(projNav, projStart, contStart);
+    navStyle(contNav, contStart, 100000);
 }
 function navStyle(navElement, start, end) {
     if (navElement != null) {
