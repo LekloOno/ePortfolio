@@ -16,6 +16,7 @@
     uniform float iTime;
     uniform vec2 iResolution;
     uniform vec2 iPos;
+    uniform vec2 iMouse;
 
     vec2 pos;
     
@@ -93,6 +94,7 @@ float map(vec3 p)
 
     void mainImage( out vec4 fragColor, in vec2 fragCoord )
     {
+      vec2 rMouse = iMouse/iResolution;
       vec2 uv = (fragCoord - iResolution.xy*.5 )/iResolution.y;
       vec3 rd = normalize(vec3(uv, (1.-dot(uv, uv)*.5)*.5)); 
       vec3 ro = vec3(0, 0, pos.x*1.26), col = vec3(0), sp;
@@ -104,9 +106,10 @@ float map(vec3 p)
       thing = sin(thing*10.);
       thing += cos(uv.x+10.);
 
-      float thing2 = sin(cnoise21(uv.xy + 0.9*pos + vec2(0.1*sin(scaledTime), cos(scaledTime)*0.06)));
+      rMouse *= 0.8;
+      float thing2 = sin(cnoise21(uv.xy + 0.9*pos - rMouse + vec2(0.1*sin(scaledTime), cos(scaledTime)*0.06)));
 
-      float thing3 = cnoise21(uv.xy + 0.3*pos + vec2(0.14, 0.049)*iTime);
+      float thing3 = cnoise21(uv.xy + 0.3*pos + rMouse + vec2(0.14, 0.049)*iTime);
 
       thing2 *= 5.;
       thing3 *= 5.;
