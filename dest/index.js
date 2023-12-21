@@ -77,8 +77,7 @@ game.pageElements.addEventListener("click", (event) => {
     }
 });
 game.pageElements.addEventListener("wheel", (event) => {
-    if (!sandBoxActivated)
-        return;
+    //if(!sandBoxActivated) return;
     let zoomValue = (event.deltaY * (game.targetZoom ** 1.2)) / 12000;
     let limit = zoomValue + game.targetZoom < ((10 ** 10));
     if (!isNaN(zoomValue) && limit)

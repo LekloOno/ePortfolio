@@ -1,26 +1,81 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@200;800&display=swap');
+
 nav {
+    font-family: 'Lexend', sans-serif;
     position: absolute;
-    width: 99%;
+    top: 0px;
+    left: 0px;
+    width: 100%;
     z-index: 3;
     color: white;
     font-size: large;
+    backdrop-filter: blur(50px);
+    background-color: rgba(23, 27, 31, 0.18);
+    box-shadow: 5px 5px 5px rgba(23, 27, 31, 0.18);
 }
 
-.oui ol {
+.mainNav ol {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
     list-style-type: none;
     padding-left: 0;
   }
   
-  .oui {
-  }
-  
-  .oui a::after {
-    display: inline-block;
-    color: white;
-    content: '>';
-    font-size: 80%;
-    font-weight: bold;
-    padding: 0 3px;
-  }
+.mainNav li {
+  padding: 6px 4px;
+  display: inline-block;
+  margin: 0px 20px;
+  background-image: linear-gradient(white, white);
+  background-size: 15px 1px;
+  background-repeat: no-repeat, no-repeat;
+  background-position: right bottom;
+
+  font-size: 20px;
+  color: rgb(255, 255, 255);
+  text-decoration: none;
+  transition: all .3s ease-out;
+}
+
+.mainNav li:hover
+{
+    font-weight: normal;
+    color: rgb(255, 255, 255);
+    background-size: 22px 1px;
+}
+
+.mainNav a::after {
+  display: inline-block;
+  color: white;
+  content: '>';
+  font-size: 80%;
+  font-weight: bold;
+  padding: 0 3px;
+}
+
+#intro {
+  position: absolute;
+  top: 40%;
+  left: 10%;
+  font-weight: 100;
+  font-size: 40px;
+  color: white;
+  padding-left: 28px;
+  background-image: linear-gradient(white, white);
+  background-size: 2px 50%;
+  background-repeat: no-repeat, no-repeat;
+  background-position: left 65%;
+}
+
+#intro * {
+  margin-bottom: 0px;
+  margin-top: 0px;
+}
+
+#intro h1 {
+  font-weight: normal;
+  font-family: 'Lexend', sans-serif;
+}
+
+#intro p {
+  font-style: italic;
+}
