@@ -13,9 +13,16 @@ const projNav = document.getElementById("projNav");
 const contNav = document.getElementById("contNav");
 const presStart = 1000;
 const formStart = 10900;
-const compStart = 13000;
+const compStart = 14000;
 const projStart = 16000;
 const contStart = 18000;
+const realPresStart = presStart + 2000;
+const realFormStart = formStart + 1080;
+const realCompStart = compStart + 1000;
+const realProjStart = projStart + 1000;
+const realContStart = contStart + 1000;
+var autoScroll = false;
+var autoScrollTarget = "none";
 const scrollStarts = [1600, 2100, 2500, 3100, 3600, 4900, 5400, 6100, 7200, 7400, 8000, 8200, 8400, 8600];
 var selected = "intro";
 var higlightItems = [];
@@ -25,23 +32,44 @@ Array.prototype.forEach.call(document.getElementsByClassName("highlight"), (elem
     i++;
 });
 presNav === null || presNav === void 0 ? void 0 : presNav.addEventListener("click", (event) => {
+    if (selected == "intro") {
+        autoScroll = true;
+        autoScrollTarget = "pres";
+        return;
+    }
     targetScrollY = presStart + 2000;
     selected = "pres";
 });
 formNav === null || formNav === void 0 ? void 0 : formNav.addEventListener("click", (event) => {
-    targetScrollY = formStart;
+    autoScroll = false;
+    if (targetScrollY < realFormStart)
+        castWheelEvent(realFormStart - targetScrollY);
+    else
+        targetScrollY = realFormStart;
     selected = "form";
 });
 compNav === null || compNav === void 0 ? void 0 : compNav.addEventListener("click", (event) => {
-    targetScrollY = compStart;
+    autoScroll = false;
+    if (targetScrollY < realCompStart)
+        castWheelEvent(realCompStart - targetScrollY);
+    else
+        targetScrollY = realCompStart;
     selected = "comp";
 });
 projNav === null || projNav === void 0 ? void 0 : projNav.addEventListener("click", (event) => {
-    targetScrollY = projStart;
+    autoScroll = false;
+    if (targetScrollY < realProjStart)
+        castWheelEvent(realProjStart - targetScrollY);
+    else
+        targetScrollY = realProjStart;
     selected = "proj";
 });
 contNav === null || contNav === void 0 ? void 0 : contNav.addEventListener("click", (event) => {
-    targetScrollY = contStart;
+    autoScroll = false;
+    if (targetScrollY < realContStart)
+        castWheelEvent(realContStart - targetScrollY);
+    else
+        targetScrollY = realContStart;
     selected = "cont";
 });
 var presBgLeftSize = 0;
@@ -55,16 +83,25 @@ addEventListener("keypress", (event) => {
         sandboxMode = !sandboxMode;
     }
 });
+addEventListener("keypress", (event) => {
+    if (event.key == "s") {
+        autoScroll = !autoScroll;
+    }
+});
 const intro = document.getElementById("intro");
 const pres = document.getElementById("pres1");
 const pres2 = document.getElementById("pres2");
 const pres3 = document.getElementById("pres3");
 let scrollItems = [];
-const presScrolls = [1000, 4500, 7200];
-const presFades = [4100, 6800, 10000];
+const presScrolls = [1000, 4500, 7200,
+    11500, 11950, 12400];
+const presFades = [4100, 6800, 10000,
+    11800, 12250, 12700];
+const presAnchor = [innerHeight * 0.58, innerHeight * 0.58, innerHeight * 0.58,
+    innerHeight * 0.95, innerHeight * 0.95, innerHeight * 0.95];
 i = 0;
 Array.prototype.forEach.call(document.getElementsByClassName("scrollItem"), (element) => {
-    let newScrollItem = new ScrollItem(element, presScrolls[i], innerHeight * 0.58, -200, true, presFades[i]);
+    let newScrollItem = new ScrollItem(element, presScrolls[i], presAnchor[i], -200, true, presFades[i]);
     newScrollItem.show(scrollY);
     scrollItems.push(newScrollItem);
     i++;
@@ -76,14 +113,24 @@ if (intro != null) {
     introScroll.show(scrollY);
     scrollItems.push(introScroll);
 }
-addEventListener("wheel", (event) => {
+addEventListener('wheel', (event) => {
     if (sandboxMode)
         return;
-    targetScrollY += (event.deltaY) * 0.4;
+    var speed = event.deltaY;
+    if (targetScrollY > formStart)
+        speed *= 0.3;
+    targetScrollY += speed;
     targetScrollY = Math.max(0, targetScrollY);
 });
 function updateScroll() {
-    console.log(targetScrollY);
+    if (autoScroll) {
+        if ((autoScrollTarget == selected && autoScrollTarget == "pres" && scrollY > (presStart + 2800)) || targetScrollY > formStart + 1040) {
+            autoScroll = false;
+            autoScrollTarget = "none";
+            return;
+        }
+        castWheelEvent(6);
+    }
     scrollY = MathM.lerp(scrollY, targetScrollY, 0.06);
     if (targetScrollY < presStart)
         selected = "intro";
@@ -97,6 +144,7 @@ function updateScroll() {
         selected = "proj";
     if (targetScrollY >= contStart)
         selected = "cont";
+    console.log(selected);
     updateNav();
     Array.prototype.forEach.call(scrollItems, (element) => {
         if (element.htmlElement.classList.contains(selected)) {
@@ -140,4 +188,17 @@ function navStyle(navElement, start, end) {
     }
 }
 const id = setInterval(updateScroll, 10);
+function castWheelEvent(speed) {
+    const wheelEvent = new WheelEvent('wheel', {
+        deltaX: 0, // Horizontal scroll amount
+        deltaY: speed, // Vertical scroll amount
+        deltaZ: 0, // Deprecated, set to 0
+        deltaMode: WheelEvent.DOM_DELTA_PIXEL, // Use pixels for delta values
+        bubbles: true, // Allow event to bubble
+        cancelable: true, // Allow event to be canceled
+        composed: true, // Allow event to cross the shadow DOM boundary
+    });
+    // Pass event to element
+    document.body.dispatchEvent(wheelEvent);
+}
 //Presentation Fo200rmations compétences expériences projets contacts
