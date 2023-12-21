@@ -1,4 +1,6 @@
 import { ScrollItem } from "./ScrollItem.js";
+import { MathM } from "../MathM.js";
+import { HiglightItem } from "./HighlightItem.js";
 
 const elements = document.getElementsByClassName("portfolio");
 var sandboxMode = false;
@@ -15,13 +17,24 @@ const contNav = document.getElementById("contNav");
 
 
 const presStart = 1000;
-const formStart = 3500;
-const compStart = 5000;
-const projStart = 6500;
-const contStart = 7500;
+const formStart = 10800;
+const compStart = 15000;
+const projStart = 12000;
+const contStart = 14000;
+
+const scrollStarts:number [] = [1600, 2100, 2500, 3500, 4000, 5300, 5800, 6500, 7600, 7800, 8400, 8600, 8800, 9000];
+
+
+var higlightItems: HiglightItem[] = [];
+
+var i = 0;
+Array.prototype.forEach.call(document.getElementsByClassName("highlight"), (element) => {
+    higlightItems.push(new HiglightItem(element, scrollStarts[i], 0.6, 0.06));
+    i++;
+});
 
 presNav?.addEventListener("click", (event) => {
-    targetScrollY = presStart+600;
+    targetScrollY = presStart+2000;
 });
 
 formNav?.addEventListener("click", (event) => {
@@ -43,9 +56,7 @@ contNav?.addEventListener("click", (event) => {
 var presBgLeftSize = 0;
 var presBgBotSize = 0;
 
-function lerp(a: number, b: number, f: number){
-    return a + f*(b-a);
-}
+var conceptionBGSize = 0; 
 
 addEventListener("keypress", (event) => {
     if(event.key == "m") {
@@ -57,24 +68,32 @@ addEventListener("keypress", (event) => {
 })
 
 const intro = document.getElementById("intro");
-const pres = document.getElementById("pres");
+
+
+const pres = document.getElementById("pres1");
+const pres2 = document.getElementById("pres2");
+const pres3 = document.getElementById("pres3");
 
 let scrollItems: ScrollItem[] = [];
+
+const presScrolls: number[] = [1000, 4800, 7300];
+const presFades: number[] = [4500, 7000, 10000];
+i = 0;
+Array.prototype.forEach.call(document.getElementsByClassName("scrollItem"), (element) => {
+    console.log(i);
+    let newScrollItem = new ScrollItem(element, presScrolls[i], innerHeight*0.58, -200, true, presFades[i]);
+    newScrollItem.show(scrollY);
+    scrollItems.push(newScrollItem);
+    i++;
+})
 
 let introScroll: ScrollItem;
 let presScroll: ScrollItem;
 
 if(intro != null){
-    introScroll = new ScrollItem(intro, 0, 0, innerHeight*0.4, true);
+    introScroll = new ScrollItem(intro, 0, 0, innerHeight*0.3578, true, 0);
     introScroll.show(scrollY);
     scrollItems.push(introScroll);
-}
-
-if(pres != null){
-    presScroll = new ScrollItem(pres, 1000, innerHeight*0.58, -200, false);
-    pres.hidden= true;
-    presScroll.show(scrollY);
-    scrollItems.push(presScroll);
 }
 
 addEventListener("wheel", (event) => {
@@ -86,7 +105,7 @@ addEventListener("wheel", (event) => {
 })
 
 function updateScroll(){
-    scrollY = lerp(scrollY, targetScrollY, 0.06);
+    scrollY = MathM.lerp(scrollY, targetScrollY, 0.06);
 
     updateNav();
 
@@ -102,10 +121,14 @@ function updateScroll(){
     }
 
     if(pres != null){
-        presBgLeftSize = lerp(presBgLeftSize, Math.min(Math.max(((targetScrollY-1500)*0.05),0), 45), 0.06);
-        presBgBotSize = lerp(presBgBotSize, Math.min(Math.max(((scrollY-2600)*0.007),0), 4), 0.06);
+        presBgLeftSize = MathM.lerp(presBgLeftSize, Math.min(Math.max(((targetScrollY-1500)*0.05),0), 45), 0.06);
+        presBgBotSize = MathM.lerp(presBgBotSize, Math.min(Math.max(((scrollY-2600)*0.007),0), 4), 0.06);
         pres.style.backgroundSize =  "2px " + presBgLeftSize + "%" + ", " + presBgBotSize + "% 2px";
     }
+
+    Array.prototype.forEach.call(higlightItems, (item) => {
+        item.update(targetScrollY);
+    });
 }
 
 function updateNav(){
@@ -127,8 +150,10 @@ function navStyle(navElement: HTMLElement | null, start: number, end: number){
             navElement.removeAttribute('style');
         }
     }
+
+    
 }
 
 const id = setInterval(updateScroll, 10);
 
-//Presentation Formations compétences expériences projets contacts
+//Presentation Fo200rmations compétences expériences projets contacts

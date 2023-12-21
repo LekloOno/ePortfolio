@@ -4,7 +4,7 @@ import { Game } from "./Model/Game.js";
 import { BrushBar } from "./View/BrushBar/BrushBar.js";
 import { Pause } from "./View/Pause.js";
 import { VelocityInit } from "./View/VelocityInit.js";
-const game = new Game(Vector2.null, 4000);
+const game = new Game(Vector2.null, 700);
 const brushBar = new BrushBar(game);
 const pause = new Pause(game);
 const selection = game.selection;
@@ -20,13 +20,16 @@ addEventListener("load", (event) => {
     app === null || app === void 0 ? void 0 : app.appendChild(selection.selectionVis);
     app === null || app === void 0 ? void 0 : app.appendChild(selection.followingMessage);
     app === null || app === void 0 ? void 0 : app.appendChild(velocityInit.velocityVis);
-    const sunVel = new Vector2(0.8, 0.4);
+    //const sunVel = new Vector2(0.8, 0.4);
+    const sunVel = new Vector2(0, 0);
     const sun = createStarSystem(Vector2.null, sunVel);
     game.follow(sun);
-    const otherStarVel = new Vector2(0, -0.3);
+    //const otherStarVel = new Vector2(0, -0.3);
+    const otherStarVel = new Vector2(-0.8, -0.7);
     const otherStarPos = new Vector2(70000, 60700);
     createStarSystem(otherStarPos, otherStarVel);
-    createPageElement(100000000000000000, 10000, new Vector2(2.4, -2.4), new Vector2(-220000, 330000));
+    //createPageElement(100000000000000000, 10000, new Vector2(2.4, -2.4), new Vector2(-220000, 330000));
+    createPageElement(100000000000000000, 10000, new Vector2(1.6, -2.0), new Vector2(-220000, 330000));
 });
 function createPageElement(mass, radius, velocity, position) {
     game.createPageElement(mass, radius, velocity, position);
@@ -76,9 +79,10 @@ game.pageElements.addEventListener("click", (event) => {
         createPageElement(brushBar.mass, brushBar.radius, Vector2.null, game.screenToRealWorld(new Vector2(event.x, event.y)));
     }
 });
-game.pageElements.addEventListener("wheel", (event) => {
-    //if(!sandBoxActivated) return;
+document.body.addEventListener("wheel", (event) => {
     let zoomValue = (event.deltaY * (game.targetZoom ** 1.2)) / 12000;
+    if (!sandBoxActivated)
+        zoomValue /= 3;
     let limit = zoomValue + game.targetZoom < ((10 ** 10));
     if (!isNaN(zoomValue) && limit)
         game.pointedZoom(zoomValue, mousePos);
