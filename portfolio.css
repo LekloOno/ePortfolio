@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@200;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@200;300;400;500;600;700;800&display=swap');
 
 nav {
     font-family: 'Lexend', sans-serif;
@@ -8,21 +8,18 @@ nav {
     width: 100%;
     z-index: 3;
     color: white;
-    font-size: large;
-    backdrop-filter: blur(50px);
-    background-color: rgba(23, 27, 31, 0.18);
-    box-shadow: 5px 5px 5px rgba(23, 27, 31, 0.18);
+    
 }
 
 .mainNav ol {
     display: flex;
     justify-content: space-evenly;
     list-style-type: none;
-    padding-left: 0;
+    padding: 2vh 0px;
   }
   
 .mainNav li {
-  padding: 6px 4px;
+  padding: 7px 0px;
   display: inline-block;
   margin: 0px 20px;
   background-image: linear-gradient(white, white);
@@ -30,7 +27,8 @@ nav {
   background-repeat: no-repeat, no-repeat;
   background-position: right bottom;
 
-  font-size: 20px;
+  font-size: 15px;
+  font-weight: 300;
   color: rgb(255, 255, 255);
   text-decoration: none;
   transition: all .3s ease-out;
@@ -38,8 +36,9 @@ nav {
 
 .mainNav li:hover
 {
-    font-weight: normal;
-    color: rgb(255, 255, 255);
+    font-weight: 300;
+    color: rgb(165, 165, 165);
+    background-image: linear-gradient(rgb(165, 165, 165), rgb(165, 165, 165));
     background-size: 22px 1px;
 }
 
