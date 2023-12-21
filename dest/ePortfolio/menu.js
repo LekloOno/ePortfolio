@@ -16,8 +16,8 @@ const formStart = 10900;
 const compStart = 13000;
 const projStart = 16000;
 const contStart = 18000;
-const scrollStarts = [1600, 2100, 2500, 3500, 4000, 5300, 5800, 6500, 7600, 7800, 8400, 8600, 8800, 9000];
-var selected;
+const scrollStarts = [1600, 2100, 2500, 3100, 3600, 4900, 5400, 6100, 7200, 7400, 8000, 8200, 8400, 8600];
+var selected = "intro";
 var higlightItems = [];
 var i = 0;
 Array.prototype.forEach.call(document.getElementsByClassName("highlight"), (element) => {
@@ -60,11 +60,10 @@ const pres = document.getElementById("pres1");
 const pres2 = document.getElementById("pres2");
 const pres3 = document.getElementById("pres3");
 let scrollItems = [];
-const presScrolls = [1000, 4800, 7300];
-const presFades = [4500, 7000, 10000];
+const presScrolls = [1000, 4500, 7200];
+const presFades = [4100, 6800, 10000];
 i = 0;
 Array.prototype.forEach.call(document.getElementsByClassName("scrollItem"), (element) => {
-    console.log(i);
     let newScrollItem = new ScrollItem(element, presScrolls[i], innerHeight * 0.58, -200, true, presFades[i]);
     newScrollItem.show(scrollY);
     scrollItems.push(newScrollItem);
@@ -84,7 +83,10 @@ addEventListener("wheel", (event) => {
     targetScrollY = Math.max(0, targetScrollY);
 });
 function updateScroll() {
+    console.log(targetScrollY);
     scrollY = MathM.lerp(scrollY, targetScrollY, 0.06);
+    if (targetScrollY < presStart)
+        selected = "intro";
     if (targetScrollY >= presStart)
         selected = "pres";
     if (targetScrollY >= formStart)
@@ -97,14 +99,14 @@ function updateScroll() {
         selected = "cont";
     updateNav();
     Array.prototype.forEach.call(scrollItems, (element) => {
-        if (element.htmlElement.classList.contains(selected) || element.htmlElement.id == "intro") {
+        if (element.htmlElement.classList.contains(selected)) {
             element.update(scrollY, targetScrollY);
         }
         else {
             element.fakeUpdate();
         }
     });
-    if (intro != null) {
+    if (intro != null && selected == "intro") {
         intro.style.backgroundSize = "10% " + (scrollY * 0.05 + 40) + "%";
         intro.style.backgroundPositionY = (100 - (scrollY * 0.05)) + "%";
     }

@@ -29,7 +29,7 @@ addEventListener("load", (event) => {
     const otherStarPos = new Vector2(70000, 60700);
     createStarSystem(otherStarPos, otherStarVel);
     //createPageElement(100000000000000000, 10000, new Vector2(2.4, -2.4), new Vector2(-220000, 330000));
-    createPageElement(100000000000000000, 10000, new Vector2(1.6, -2.0), new Vector2(-220000, 330000));
+    createPageElement(100000000000000000, 10000, new Vector2(1.6, -2.8), new Vector2(-220000, 330000));
 });
 function createPageElement(mass, radius, velocity, position) {
     game.createPageElement(mass, radius, velocity, position);

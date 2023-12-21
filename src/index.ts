@@ -36,7 +36,7 @@ addEventListener("load", (event) => {
     createStarSystem(otherStarPos, otherStarVel);
     
     //createPageElement(100000000000000000, 10000, new Vector2(2.4, -2.4), new Vector2(-220000, 330000));
-    createPageElement(100000000000000000, 10000, new Vector2(1.6, -2.0), new Vector2(-220000, 330000));
+    createPageElement(100000000000000000, 10000, new Vector2(1.6, -2.8), new Vector2(-220000, 330000));
     
 });
 
