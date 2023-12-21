@@ -17,10 +17,10 @@ const contNav = document.getElementById("contNav");
 
 
 const presStart = 1000;
-const formStart = 10800;
-const compStart = 15000;
-const projStart = 12000;
-const contStart = 14000;
+const formStart = 10900;
+const compStart = 13000;
+const projStart = 16000;
+const contStart = 18000;
 
 const scrollStarts:number [] = [1600, 2100, 2500, 3500, 4000, 5300, 5800, 6500, 7600, 7800, 8400, 8600, 8800, 9000];
 
