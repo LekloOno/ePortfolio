@@ -37,7 +37,7 @@ if(intro != null){
 }
 
 if(pres != null){
-    presScroll = new ScrollItem(pres, 1000, innerHeight*0.4, -200, false);
+    presScroll = new ScrollItem(pres, 1000, innerHeight*0.58, -200, false);
     pres.hidden= true;
     presScroll.show(scrollY);
     scrollItems.push(presScroll);
