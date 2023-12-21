@@ -39,7 +39,8 @@ nav {
     font-weight: 300;
     color: rgb(165, 165, 165);
     background-image: linear-gradient(rgb(165, 165, 165), rgb(165, 165, 165));
-    background-size: 22px 1px;
+    background-size: 40% 1px;
+    background-position: center bottom;
 }
 
 .mainNav a::after {

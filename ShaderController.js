@@ -75,7 +75,6 @@ shaderWebBackground.shade({
     //realPos.x = lerp(realPos.x, pos.x, 0.1);
     //realPos.y = lerp(realPos.y, pos.y, 0.1);
 
-    console.log(pos.x);
     ctx.posX = ctx.toShaderX(realPos.x);
     ctx.posY = ctx.toShaderY(realPos.y);
 
