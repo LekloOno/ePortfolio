@@ -79,3 +79,21 @@ nav {
 #intro p {
   font-style: italic;
 }
+
+p {
+  font-family: 'Lexend', sans-serif;
+  font-weight: 200;
+  font-size: 35px;
+  color: white;
+}
+
+#pres {
+  overflow: hidden;
+  position: absolute;
+  width: 50%;
+  margin-left: 20%;
+}
+
+* {
+  overflow: hidden;
+}
