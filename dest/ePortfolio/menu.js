@@ -14,6 +14,21 @@ const formStart = 3500;
 const compStart = 5000;
 const projStart = 6500;
 const contStart = 7500;
+presNav === null || presNav === void 0 ? void 0 : presNav.addEventListener("click", (event) => {
+    targetScrollY = presStart + 600;
+});
+formNav === null || formNav === void 0 ? void 0 : formNav.addEventListener("click", (event) => {
+    targetScrollY = formStart;
+});
+compNav === null || compNav === void 0 ? void 0 : compNav.addEventListener("click", (event) => {
+    targetScrollY = compStart;
+});
+projNav === null || projNav === void 0 ? void 0 : projNav.addEventListener("click", (event) => {
+    targetScrollY = projStart;
+});
+contNav === null || contNav === void 0 ? void 0 : contNav.addEventListener("click", (event) => {
+    targetScrollY = contStart;
+});
 var presBgLeftSize = 0;
 var presBgBotSize = 0;
 function lerp(a, b, f) {
@@ -76,7 +91,7 @@ function updateNav() {
 }
 function navStyle(navElement, start, end) {
     if (navElement != null) {
-        if (scrollY > start && scrollY < end) {
+        if ((targetScrollY >= start && targetScrollY < end)) {
             navElement.style.backgroundPositionX = "10%";
             navElement.style.backgroundSize = "55px 1px";
             navElement.style.color = `${navCurrentColor}`;

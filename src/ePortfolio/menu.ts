@@ -13,11 +13,32 @@ const compNav = document.getElementById("compNav");
 const projNav = document.getElementById("projNav");
 const contNav = document.getElementById("contNav");
 
+
 const presStart = 1000;
 const formStart = 3500;
 const compStart = 5000;
 const projStart = 6500;
 const contStart = 7500;
+
+presNav?.addEventListener("click", (event) => {
+    targetScrollY = presStart+600;
+});
+
+formNav?.addEventListener("click", (event) => {
+    targetScrollY = formStart;
+});
+
+compNav?.addEventListener("click", (event) => {
+    targetScrollY = compStart;
+});
+
+projNav?.addEventListener("click", (event) => {
+    targetScrollY = projStart;
+});
+
+contNav?.addEventListener("click", (event) => {
+    targetScrollY = contStart;
+});
 
 var presBgLeftSize = 0;
 var presBgBotSize = 0;
@@ -97,7 +118,7 @@ function updateNav(){
 
 function navStyle(navElement: HTMLElement | null, start: number, end: number){
     if(navElement != null){
-        if(scrollY > start && scrollY < end){
+        if((targetScrollY >= start && targetScrollY < end)){
             navElement.style.backgroundPositionX = "10%";
             navElement.style.backgroundSize = "55px 1px";
             navElement.style.color = `${navCurrentColor}`;
