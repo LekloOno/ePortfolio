@@ -63,7 +63,7 @@
     content:"";
     margin-left: 0px;
     margin-right: 10%;
-    background: url("./res/C.png");
+    background: url("./res/illus/C.png");
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center left;
@@ -75,7 +75,7 @@
     content:"";
     margin-left: 0px;
     margin-right: 10%;
-    background: url("./res/POO.png");
+    background: url("./res/illus/POO.png");
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center left;
@@ -87,7 +87,7 @@
     content:"";
     margin-left: 0px;
     margin-right: 10%;
-    background: url("./res/Script.png");
+    background: url("./res/illus/Script.png");
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center left;
@@ -99,7 +99,7 @@
     content:"";
     margin-left: 0px;
     margin-right: 10%;
-    background: url("./res/Typescript.png");
+    background: url("./res/illus/Typescript.png");
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center left;
@@ -111,7 +111,7 @@
     content:"";
     margin-left: 0px;
     margin-right: 10%;
-    background: url("./res/BDD.png");
+    background: url("./res/illus/BDD.png");
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center left;

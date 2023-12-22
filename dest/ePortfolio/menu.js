@@ -1,3 +1,4 @@
+var _a, _b;
 import { ScrollItem } from "./ScrollItem.js";
 import { MathM } from "../MathM.js";
 import { HiglightItem } from "./HighlightItem.js";
@@ -7,6 +8,25 @@ let scrollY = 0;
 let targetScrollY = 0;
 let navCurrentColor = "rgb(100, 187, 178)";
 const comp = document.getElementById("comp");
+const proj = document.getElementById("proj");
+const ePortFol = (_a = document.getElementById("ePortFolio")) === null || _a === void 0 ? void 0 : _a.getElementsByClassName("projectIcon")[0];
+const ePortFolPopup = document.getElementById("ePortfolioPopup");
+ePortFol === null || ePortFol === void 0 ? void 0 : ePortFol.addEventListener("click", (event) => {
+    if (ePortFolPopup)
+        ePortFolPopup.hidden = false;
+});
+ePortFolPopup === null || ePortFolPopup === void 0 ? void 0 : ePortFolPopup.addEventListener("click", (event) => {
+    ePortFolPopup.hidden = true;
+});
+const dlfdc = (_b = document.getElementById("DLFDC")) === null || _b === void 0 ? void 0 : _b.getElementsByClassName("projectIcon")[0];
+const dlfdcPopup = document.getElementById("DLFDCPopup");
+dlfdc === null || dlfdc === void 0 ? void 0 : dlfdc.addEventListener("click", (event) => {
+    if (dlfdcPopup)
+        dlfdcPopup.hidden = false;
+});
+dlfdcPopup === null || dlfdcPopup === void 0 ? void 0 : dlfdcPopup.addEventListener("click", (event) => {
+    dlfdcPopup.hidden = true;
+});
 const presNav = document.getElementById("presNav");
 const formNav = document.getElementById("formNav");
 const compNav = document.getElementById("compNav");
@@ -194,6 +214,12 @@ function updateScroll() {
             }
             //comp.style.height = Math.max(0, 36000-scrollY-compStart)+"px";
             //comp.style.bottom = scrollY-18000+"px";
+        }
+    }
+    if (proj != null) {
+        if (scrollY < 25000) {
+            proj.style.height = Math.max(0, scrollY - projStart) + "px";
+            proj.style.bottom = Math.max(0, scrollY - 25000) + "px";
         }
     }
     Array.prototype.forEach.call(higlightItems, (item) => {

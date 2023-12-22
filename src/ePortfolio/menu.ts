@@ -10,6 +10,27 @@ let targetScrollY = 0;
 let navCurrentColor = "rgb(100, 187, 178)"
 
 const comp = document.getElementById("comp");
+const proj = document.getElementById("proj");
+
+const ePortFol = document.getElementById("ePortFolio")?.getElementsByClassName("projectIcon")[0];
+const ePortFolPopup = document.getElementById("ePortfolioPopup");
+ePortFol?.addEventListener("click", (event) => {
+    if(ePortFolPopup) ePortFolPopup.hidden = false;
+});
+
+ePortFolPopup?.addEventListener("click", (event) => {
+    ePortFolPopup.hidden = true;
+})
+
+const dlfdc = document.getElementById("DLFDC")?.getElementsByClassName("projectIcon")[0];
+const dlfdcPopup = document.getElementById("DLFDCPopup");
+dlfdc?.addEventListener("click", (event) => {
+    if(dlfdcPopup) dlfdcPopup.hidden = false;
+});
+
+dlfdcPopup?.addEventListener("click", (event) => {
+    dlfdcPopup.hidden = true;
+})
 
 const presNav = document.getElementById("presNav");
 const formNav = document.getElementById("formNav");
@@ -224,6 +245,13 @@ function updateScroll(){
             }
             //comp.style.height = Math.max(0, 36000-scrollY-compStart)+"px";
             //comp.style.bottom = scrollY-18000+"px";
+        }
+    }
+
+    if(proj != null) {
+        if(scrollY<25000){
+            proj.style.height = Math.max(0, scrollY-projStart)+"px";
+            proj.style.bottom = Math.max(0,scrollY-25000)+"px";
         }
     }
 

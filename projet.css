@@ -7,6 +7,7 @@
     height: 0px;
     bottom: 0px;
     background-color: rgb(94, 25, 25);
+    z-index: 2;
     
 }
 
@@ -14,8 +15,119 @@
     position: absolute;
     flex-wrap: wrap;
     top: 50%;
-    width: 100%;
+    width: 60%;
+    left: 20%;
     height: 48%;
     display: flex;
+    gap: 100px;
     justify-content: center;
+}
+
+#ePortFolio .projectIcon {
+    width: 500px;
+    height: 500px;
+    background-image: url("./res/projects/ePortFolio.png");
+    background-size: contain;
+    transition: 0.6s;
+    color: transparent;
+    vertical-align: bottom;
+}
+
+#ePortFolio .projectIcon:hover {
+    transition: 0.6s;
+    width: 600px;
+    height: 600px;
+    background-size: contain;
+    color: rgba(110, 159, 165, 0.692);
+}
+
+#DLFDC .projectIcon {
+    width: 400px;
+    height: 400px;
+    background-image: url("./res/projects/DansLeFroidDuCosmos.png");
+    background-size: contain;
+    transition: 0.6s;
+    color: transparent;
+    vertical-align: bottom;
+}
+
+#DLFDC .projectIcon:hover {
+    transition: 0.6s;
+    width: 500px;
+    height: 500px;
+    background-size: contain;
+    color: rgb(190, 190, 190);
+}
+
+.projectIcon:hover + .date {
+    color: white;
+}
+
+.proj img {
+    position: relative;
+    z-index: -10;
+}
+
+.date {
+    color: transparent;
+    transition: all 1s;
+    margin-top: 5px;
+    font-size: 40px;
+}
+
+.projectIcon h1 {
+    font-size: 50px;
+    margin-top: 85%;
+    margin-right: 5%;
+    direction:rtl;
+}
+
+#DLFDC h1 {
+    font-size: 30px;
+}
+
+.projectIcon {
+    box-shadow: 10px 5px 5px rgba(0, 0, 0, 0.418);
+}
+
+
+
+
+.projectPopup {
+    position: absolute;
+    width: 70%;
+    height: fit-content;
+    background-color: rgba(255, 255, 255, 0.466);
+    backdrop-filter: blur(10px);
+    z-index: 5;
+}
+
+.projectPopup p {
+    font-weight: 300;
+    color: black;
+    font-size: 2vh;
+    padding: 3% 5%;
+    overflow: auto;
+    text-align: justify;
+}
+
+.projectCompetences {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 3% 5%;
+    gap: 20px;
+}
+
+.projectCompetences span {
+    padding: 10px;
+    font-weight: lighter;
+    font-size: 2vh;
+    background-color: rgb(30, 28, 121);
+    color: rgb(201, 201, 201);
+    transition: all 1s;
+}
+
+.projectCompetences span:hover {
+    background-color: rgb(11, 10, 59);
+    color: rgb(223, 223, 223);
 }

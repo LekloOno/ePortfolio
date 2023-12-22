@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="portfolio.css">
     <link rel="stylesheet" href="formation.css">
     <link rel="stylesheet" href="competence.css">
+    <link rel="stylesheet" href="projet.css">
     <script src="https://xemantic.github.io/shader-web-background/dist/shader-web-background.min.js"></script>
   <script type="x-shader/x-fragment" id="image">
 
@@ -280,25 +281,25 @@ float map(vec3 p)
             Logiciels
           </h1>
           <div>
-            <img class="icons" src="./res/unity.png" alt="unity icon" height="60"/>
-            <img class="icons" src="./res/vscode.png" alt="vscode icon" height="60"/>
-            <img class="icons" src="./res/Intellij.png" alt="intellij icon" height="60"/>
-            <img class="icons" src="./res/nodejs.png" alt="nodejs icon" height="60"/>
-            <img class="icons" src="./res/git.png" alt="git icon" height="60"/>
-            <img class="icons" src="./res/tortoise.png" alt="tortoisegit icon" height="60"/>
-            <img class="icons" src="./res/Virtualbox_logo.png" alt="VirtualBox icon" height="60"/>
-            <img class="icons" src="./res/opengl.png" alt="opengl icon" height="60"/>
-            <img class="icons" src="./res/gns3.png" alt="gns3 icon" height="60"/>
-            <img class="icons" src="./res/debian.png" alt="debian icon" height="60"/>
-            <img class="icons" src="./res/desmos.png" alt="desmos icon" height="60"/>
-            <img class="icons" src="./res/sheet.png" alt="sheet icon" height="60"/>
-            <img class="icons" src="./res/blender.png" alt="blender icon" height="60"/>
-            <img class="icons" src="./res/resolve.png" alt="Resolve icon" height="60"/>
-            <img class="icons" src="./res/Photoshop.png" alt="Photoshop icon" height="60"/>
-            <img class="icons" src="./res/AfterEffect.png" alt="AfterEffect icon" height="60"/>
-            <img class="icons" src="./res/Figma.svg" alt="Figma icon" height="60"/>
-            <img class="icons" src="./res/miro.png" alt="Miro icon" height="60"/>
-            <img class="icons" src="./res/flstud.png" alt="Fl Studio icon" height="60"/>
+            <img class="icons" src="./res/icons/unity.png" alt="unity icon" height="60"/>
+            <img class="icons" src="./res/icons/vscode.png" alt="vscode icon" height="60"/>
+            <img class="icons" src="./res/icons/Intellij.png" alt="intellij icon" height="60"/>
+            <img class="icons" src="./res/icons/nodejs.png" alt="nodejs icon" height="60"/>
+            <img class="icons" src="./res/icons/git.png" alt="git icon" height="60"/>
+            <img class="icons" src="./res/icons/tortoise.png" alt="tortoisegit icon" height="60"/>
+            <img class="icons" src="./res/icons/Virtualbox_logo.png" alt="VirtualBox icon" height="60"/>
+            <img class="icons" src="./res/icons/opengl.png" alt="opengl icon" height="60"/>
+            <img class="icons" src="./res/icons/gns3.png" alt="gns3 icon" height="60"/>
+            <img class="icons" src="./res/icons/debian.png" alt="debian icon" height="60"/>
+            <img class="icons" src="./res/icons/desmos.png" alt="desmos icon" height="60"/>
+            <img class="icons" src="./res/icons/sheet.png" alt="sheet icon" height="60"/>
+            <img class="icons" src="./res/icons/blender.png" alt="blender icon" height="60"/>
+            <img class="icons" src="./res/icons/resolve.png" alt="Resolve icon" height="60"/>
+            <img class="icons" src="./res/icons/Photoshop.png" alt="Photoshop icon" height="60"/>
+            <img class="icons" src="./res/icons/AfterEffect.png" alt="AfterEffect icon" height="60"/>
+            <img class="icons" src="./res/icons/Figma.svg" alt="Figma icon" height="60"/>
+            <img class="icons" src="./res/icons/miro.png" alt="Miro icon" height="60"/>
+            <img class="icons" src="./res/icons/flstud.png" alt="Fl Studio icon" height="60"/>
           </div>
         </div>
         <div id="langues" class="compItem">
@@ -333,7 +334,55 @@ float map(vec3 p)
 
     <div class="portfolio proj" id="proj">
       <div id="projFlexContainer">
+        <div class="projectCell" id="ePortFolio">
+          <div class="projectIcon"><h1>Cet ePortfolio</h1></div>
+          <div class="date">Nov. - Dec. 2023</div>
+        </div>
 
+        <div class="projectCell" id="DLFDC">
+          <div class="projectIcon"><h1>Dans Le Froid Du Cosmos</h1></div>
+          <div class="date">Dec. 22 - Jan. 23</div>
+        </div>
+
+        <div class="projectPopup" id="ePortfolioPopup" hidden="">
+          <p>
+            Cet ePortfolio constitue en lui même un projet intéressant.<br><br>D'une part, vous découvrirez en appuyant
+            sur la touche "m" que tourne en fond de ce site une simulation de la loi universelle de gravitation de Newton.
+            Une fois fait, cliquez sur le bouton "Show Help", pour découvrir ce que vous offre cette petite sandbox.
+            Il s'agit de <a href="https://github.com/LekloOno/NewtonsLaw.TS">Newton.TS</a>, application entièrement développée from scratch en TypeScript que vous pouvez retrouver sur mon github.<br><br>
+            
+
+            D'autre part, le background mouvant du site n'est pas une vidéo préenregistrée, il réagit aux mouvements de votre souris,
+            et à vos mouvements dans l'univers de la simulation. Pour ce faire, il est généré via GLSL, (OpenGL Shading Language) un language de programmation de shader à la syntaxe très proche du C.
+          </p>
+
+          <div class="projectCompetences">
+            <span>TypeScript</span><span>JavaScript</span><span>GLSL</span><span>Node.JS</span><span>NPM</span><span>CSS</span><span>Web</span><span>Model View Controller</span><span>Physics</span>
+          </div>
+        </div>
+
+        <div class="projectPopup" id="DLFDCPopup" hidden="">
+          <p>
+            L’objectif de cette saé était de développer un logiciel ludo-pédagogique libre, c'est-à-dire d’une application prenant la forme d’un jeu et permettant d’aborder des notions éducatives, ici sur une ou des thématiques liées aux cours d’élèves de primaires.<br>
+            Notre projet a pris la forme d’un jeu d’exploration spatiale, dans lequel le joueur se familiarisera avec des concepts simples d’astronomie, mais aussi en manipulant consciencieusement les outils fondamentaux des mathématiques pour correctement gérer ses ressources, et ainsi survivre.
+            <br><br>
+            “Vous peinez à ouvrir les yeux, vous vous sentez si engourdis, comme si vous vous réveilliez d'un sommeil de 500 ans. En fait, ce n'est peut-être pas qu'une hyperbole…<br>
+            Après être sorti de votre capsule d'hibernation pour inspecter le vaisseau, vous découvrez avec effroi que vos équipiers n'ont pas eu cette chance de se réveiller à temps.<br>
+            Et il ne s'agit pas de l'unique mauvaise nouvelle.. En vous rendant dans la salle de pilotage, vous constatez que l'ordinateur de bord est incapable de reconnaître ces lieux.<br>
+            Il semblerait que le vaisseau ait longtemps erré à la dérive, vers de lointains espaces inconnus du cosmos.
+            <br><br>
+            Il faudra faire preuve de stratégie, et gérer vos ressources avec efficacité si vous espérez vous extirper des griffes du froid du cosmos…”
+            Scène d’introduction du jeu
+            <br><br>
+            Développé en ijava, une librairie entièrement orienté algorithmie, le manque de la POO était une contrainte intéressante.
+            Vous pouvez retrouver ici le dépôt <a href="https://github.com/LekloOno/DansLeFroidDuCosmos">github</a> du projet.
+          </p>
+
+          <div class="projectCompetences">
+            <span>Java</span><span>iJava</span><span>Algorithmie</span><span>Gestion de projet</span>
+          </div>
+        </div>
+        
       </div>
     </div>
   </body>
