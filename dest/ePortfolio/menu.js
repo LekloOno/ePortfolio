@@ -97,7 +97,7 @@ const presScrolls = [1000, 4500, 7200,
     11500, 11950, 12400];
 const presFades = [4100, 6800, 10000,
     11800, 12250, 12700];
-const presAnchor = [innerHeight * 0.58, innerHeight * 0.58, innerHeight * 0.58,
+const presAnchor = [innerHeight * 0.5, innerHeight * 0.5, innerHeight * 0.5,
     innerHeight * 0.95, innerHeight * 0.95, innerHeight * 0.95];
 i = 0;
 Array.prototype.forEach.call(document.getElementsByClassName("scrollItem"), (element) => {
@@ -161,7 +161,7 @@ function updateScroll() {
     if (pres != null) {
         presBgLeftSize = MathM.lerp(presBgLeftSize, Math.min(Math.max(((targetScrollY - 1500) * 0.05), 0), 45), 0.06);
         presBgBotSize = MathM.lerp(presBgBotSize, Math.min(Math.max(((scrollY - 2600) * 0.007), 0), 4), 0.06);
-        pres.style.backgroundSize = "2px " + presBgLeftSize + "%" + ", " + presBgBotSize + "% 2px";
+        pres.style.backgroundSize = "5px " + presBgLeftSize + "%" + ", " + presBgBotSize + "% 5px";
     }
     Array.prototype.forEach.call(higlightItems, (item) => {
         item.update(targetScrollY);

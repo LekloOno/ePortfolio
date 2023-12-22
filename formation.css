@@ -1,8 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@200;300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@200&family=Roboto:wght@100;300&family=Rubik:wght@300&display=swap');
 
 .form {
     display: grid;
-    grid-template-columns: 1fr 2fr;
+    grid-template-columns: 2fr 3fr;
     gap: 20px;
     grid-template-rows: repeat(2, 1fr);
     position: absolute;
@@ -14,7 +15,6 @@
     backdrop-filter: blur(50px);
     background-color: rgba(23, 27, 31, 0.18);
     box-shadow: 0px 0px 5px 5px rgba(23, 27, 31, 0.18);
-    border-radius: 10px;
     overflow: hidden;
 }
 
@@ -29,19 +29,34 @@
     font-weight: 300;
     padding: 0px;
     margin: 0px;
+    width: 98%;
+    
+
+    background-image: linear-gradient(rgb(37, 34, 189), rgb(37, 34, 189));
+    background-size: 10% 20%;
+    background-repeat: no-repeat;
+    background-position: right 54%;
 }
 
 .two > .title {
     font-size: 4vh;
     font-weight: 500;
+    background-image: linear-gradient(rgb(37, 34, 189), rgb(37, 34, 189));
+    background-size: 100% 30%;
+    background-repeat: no-repeat;
+    background-position: left 90%;
 }
 
 .two > .loc {
+    background-color: rgb(134, 247, 255);
+    color: rgb(82, 82, 90);
     font-style: italic;
-    font-weight: 200;
+    font-weight: 300;
+    font-family: 'Roboto', sans-serif;
 }
 
 .two {
+    width: fit-content;
     grid-column: 2;
     grid-row: 1;
 }
@@ -50,14 +65,17 @@
     padding-top: 10px;
     grid-column: 2;
     grid-row: 2;
+    text-align: justify;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.2em;
 }
 
 #form1, #form3 {
     left: 35%;
-    width: 700px;
+    width: 600px;
 }
 
 #form2 {
     left: 15%;
-    width: 750px;
+    width: 650px;
 }

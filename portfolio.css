@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@200;300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@200&family=Roboto:wght@100;300&family=Rubik:wght@300&display=swap');
 
 nav {
     font-family: 'Lexend', sans-serif;
@@ -96,8 +97,14 @@ p {
   bottom:-100%;
   width: 50vw;
   height: 50vh;
-  padding-left: 14px;
-  
+  padding-left: 30px;
+}
+
+.pres p {
+  height: fit-content;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 100;
+  padding: 30px;
 }
 
 #pres2 {
@@ -105,10 +112,15 @@ p {
   margin-left: 38%;
 }
 
+#pres3 {
+  margin-left: 10%;
+}
+
+
 #pres1 {
   margin-left: 15%;
-  background-image: linear-gradient(white, white), linear-gradient(white, white);
-  background-size: 2px 50%, 10% 2px;
+  background-image: linear-gradient(rgb(37, 34, 189), rgb(37, 34, 189)), linear-gradient(rgb(37, 34, 189), rgb(37, 34, 189));
+  background-size: 5px 50%, 10% 5px;
   background-repeat: no-repeat, no-repeat;
   background-position: left 85%, left 92%;
 }
@@ -128,6 +140,14 @@ p {
   background-position: bottom left;
 }
 
+.highlight2 {
+  background-image: linear-gradient(rgb(37, 34, 189), rgb(37, 34, 189));
+}
+
 * {
   overflow: hidden;
+}
+
+#pres2 > p {
+  width: 80%;
 }
