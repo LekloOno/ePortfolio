@@ -170,3 +170,16 @@
     margin-right: 10px;
     color: rgb(37, 34, 189);
 }
+
+#langues table {
+    padding-top: 18px;
+}
+
+#langues td {
+    font-size: 2vh;
+    padding: 6px;
+}
+
+#langues .flag {
+    font-size: 3vh;
+}
