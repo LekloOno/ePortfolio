@@ -242,7 +242,7 @@ function updateScroll(){
     if(comp != null){
         let redLayer = document.getElementById("navRedLayer");
         if(redLayer != null && !sandboxMode){
-            redLayer.hidden = scrollY < compStart+900;
+            redLayer.hidden = (scrollY < compStart+900) || (scrollY > 25000);
         }
         if(scrollY<18000){
             comp.style.height = Math.max(0, scrollY-compStart)+"px";
@@ -259,9 +259,14 @@ function updateScroll(){
     }
 
     if(proj != null) {
-        if(scrollY<25000){
+        if(scrollY<26000){
             proj.style.height = Math.max(0, scrollY-projStart)+"px";
-            proj.style.bottom = Math.max(0,scrollY-25000)+"px";
+            proj.style.bottom = Math.max(0,scrollY-26000)+"px";
+        } else {
+            if(comp != null){
+                comp.style.height = Math.max(0, 52000-scrollY-compStart)+"px";
+                comp.style.bottom = scrollY-26000+"px";
+            }
         }
     }
 
