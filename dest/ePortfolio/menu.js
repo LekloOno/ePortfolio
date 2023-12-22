@@ -15,8 +15,8 @@ const contNav = document.getElementById("contNav");
 const presStart = 1000;
 const formStart = 10900;
 const compStart = 14000;
-const projStart = 16000;
-const contStart = 18000;
+const projStart = 20000;
+const contStart = 24000;
 const realPresStart = presStart + 2000;
 const realFormStart = formStart + 1080;
 const realCompStart = compStart + 1500;
@@ -159,7 +159,6 @@ function updateScroll() {
         selected = "proj";
     if (targetScrollY >= contStart)
         selected = "cont";
-    console.log(selected);
     updateNav();
     Array.prototype.forEach.call(scrollItems, (element) => {
         if (element.htmlElement.classList.contains(selected)) {
@@ -179,7 +178,23 @@ function updateScroll() {
         pres.style.backgroundSize = "5px " + presBgLeftSize + "%" + ", " + presBgBotSize + "% 5px";
     }
     if (comp != null) {
-        comp.style.height = Math.max(0, scrollY - compStart) + "px";
+        let redLayer = document.getElementById("navRedLayer");
+        if (redLayer != null) {
+            redLayer.hidden = scrollY < compStart + 900;
+        }
+        if (scrollY < 18000) {
+            comp.style.height = Math.max(0, scrollY - compStart) + "px";
+            comp.style.bottom = Math.max(0, scrollY - 18000) + "px";
+        }
+        else {
+            let flex = document.getElementById("compFlexContainer");
+            if (flex) {
+                console.log("oué");
+                flex.style.height = Math.min(48, 48 + (18000 - scrollY) * 0.01) + "%";
+            }
+            //comp.style.height = Math.max(0, 36000-scrollY-compStart)+"px";
+            //comp.style.bottom = scrollY-18000+"px";
+        }
     }
     Array.prototype.forEach.call(higlightItems, (item) => {
         item.update(targetScrollY);

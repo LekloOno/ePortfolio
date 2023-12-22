@@ -119,7 +119,7 @@ p {
 
 #pres1 {
   margin-left: 15%;
-  background-image: linear-gradient(rgb(37, 34, 189), rgb(37, 34, 189)), linear-gradient(rgb(37, 34, 189), rgb(37, 34, 189));
+  background-image: linear-gradient(rgb(94, 25, 25), rgb(94, 25, 25)), linear-gradient(rgb(94, 25, 25), rgb(94, 25, 25));
   background-size: 5px 50%, 10% 5px;
   background-repeat: no-repeat, no-repeat;
   background-position: left 85%, left 92%;
