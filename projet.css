@@ -72,8 +72,8 @@
 
 #shePews .projectIcon:hover {
     transition: 0.6s;
-    width: 590px;
-    height: 590px;
+    width: 660px;
+    height: 660px;
     background-size: contain;
     color: rgb(151, 26, 33);
 }
@@ -155,4 +155,8 @@
 .projectCompetences span:hover {
     background-color: rgb(11, 10, 59);
     color: rgb(223, 223, 223);
+}
+
+.media a {
+    z-index: 10;
 }

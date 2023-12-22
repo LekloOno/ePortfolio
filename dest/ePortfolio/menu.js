@@ -45,7 +45,7 @@ const presStart = 1000;
 const formStart = 10900;
 const compStart = 14000;
 const projStart = 20000;
-const contStart = 24000;
+const contStart = 26500;
 const realPresStart = presStart + 2000;
 const realFormStart = formStart + 1080;
 const realCompStart = compStart + 1500;
@@ -133,22 +133,23 @@ const pres3 = document.getElementById("pres3");
 let scrollItems = [];
 const presScrolls = [1000, 4500, 7200,
     11500, 11950, 12400,
-    14000];
+    27000];
 const presFades = [4100, 6800, 10000,
     11800, 12250, 12700,
-    16000];
+    50000];
 const presAnchor = [innerHeight * 0.5, innerHeight * 0.5, innerHeight * 0.5,
     innerHeight * 0.95, innerHeight * 0.95, innerHeight * 0.95,
-    innerHeight];
+    innerHeight * 0.2];
 const initPosistions = [-200, -200, -200,
     -200, -200, -200,
-    500];
+    -200];
 i = 0;
 Array.prototype.forEach.call(document.getElementsByClassName("scrollItem"), (element) => {
     let newScrollItem = new ScrollItem(element, presScrolls[i], presAnchor[i], -200, true, presFades[i]);
     newScrollItem.show(scrollY);
     scrollItems.push(newScrollItem);
     i++;
+    console.log(i);
 });
 let introScroll;
 let presScroll;
@@ -218,11 +219,8 @@ function updateScroll() {
         else {
             let flex = document.getElementById("compFlexContainer");
             if (flex) {
-                console.log("oué");
                 flex.style.height = Math.min(48, 48 + (18000 - scrollY) * 0.01) + "%";
             }
-            //comp.style.height = Math.max(0, 36000-scrollY-compStart)+"px";
-            //comp.style.bottom = scrollY-18000+"px";
         }
     }
     if (proj != null) {
