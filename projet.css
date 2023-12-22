@@ -1,3 +1,5 @@
+@import url('https://fonts.cdnfonts.com/css/orkney');
+
 .proj {
     font-family: 'Orkney', sans-serif;
     color: white;
@@ -56,7 +58,25 @@
     width: 500px;
     height: 500px;
     background-size: contain;
-    color: rgb(190, 190, 190);
+    color: rgb(250, 250, 250);
+}
+
+#shePews .projectIcon {
+    width: 630px;
+    height: 630px;
+    background-image: url("./res/projects/shePew.png");
+    background-size: contain;
+    transition: 0.6s;
+    color: transparent;
+    vertical-align: bottom;
+}
+
+#shePews .projectIcon:hover {
+    transition: 0.6s;
+    width: 590px;
+    height: 590px;
+    background-size: contain;
+    color: rgb(151, 26, 33);
 }
 
 .projectIcon:hover + .date {
@@ -73,6 +93,7 @@
     transition: all 1s;
     margin-top: 5px;
     font-size: 40px;
+    font-family: 'Orkney', sans-serif;
 }
 
 .projectIcon h1 {
@@ -88,6 +109,7 @@
 
 .projectIcon {
     box-shadow: 10px 5px 5px rgba(0, 0, 0, 0.418);
+    font-family: 'Orkney', sans-serif;
 }
 
 
@@ -95,6 +117,8 @@
 
 .projectPopup {
     position: absolute;
+    overflow: visible;
+    bottom: 10%;
     width: 70%;
     height: fit-content;
     background-color: rgba(255, 255, 255, 0.466);
@@ -109,6 +133,7 @@
     padding: 3% 5%;
     overflow: auto;
     text-align: justify;
+    font-family: 'Orkney', sans-serif;
 }
 
 .projectCompetences {
@@ -125,6 +150,7 @@
     background-color: rgb(30, 28, 121);
     color: rgb(201, 201, 201);
     transition: all 1s;
+    font-family: 'Orkney', sans-serif;
 }
 
 .projectCompetences span:hover {

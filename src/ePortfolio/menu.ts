@@ -32,6 +32,16 @@ dlfdcPopup?.addEventListener("click", (event) => {
     dlfdcPopup.hidden = true;
 })
 
+const shePews = document.getElementById("shePews")?.getElementsByClassName("projectIcon")[0];
+const shePewsPopup = document.getElementById("shePewsPopup");
+shePews?.addEventListener("click", (event) => {
+    if(shePewsPopup) shePewsPopup.hidden = false;
+});
+
+shePewsPopup?.addEventListener("click", (event) => {
+    shePewsPopup.hidden = true;
+})
+
 const presNav = document.getElementById("presNav");
 const formNav = document.getElementById("formNav");
 const compNav = document.getElementById("compNav");

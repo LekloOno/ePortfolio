@@ -1,4 +1,4 @@
-var _a, _b;
+var _a, _b, _c;
 import { ScrollItem } from "./ScrollItem.js";
 import { MathM } from "../MathM.js";
 import { HiglightItem } from "./HighlightItem.js";
@@ -26,6 +26,15 @@ dlfdc === null || dlfdc === void 0 ? void 0 : dlfdc.addEventListener("click", (e
 });
 dlfdcPopup === null || dlfdcPopup === void 0 ? void 0 : dlfdcPopup.addEventListener("click", (event) => {
     dlfdcPopup.hidden = true;
+});
+const shePews = (_c = document.getElementById("shePews")) === null || _c === void 0 ? void 0 : _c.getElementsByClassName("projectIcon")[0];
+const shePewsPopup = document.getElementById("shePewsPopup");
+shePews === null || shePews === void 0 ? void 0 : shePews.addEventListener("click", (event) => {
+    if (shePewsPopup)
+        shePewsPopup.hidden = false;
+});
+shePewsPopup === null || shePewsPopup === void 0 ? void 0 : shePewsPopup.addEventListener("click", (event) => {
+    shePewsPopup.hidden = true;
 });
 const presNav = document.getElementById("presNav");
 const formNav = document.getElementById("formNav");
