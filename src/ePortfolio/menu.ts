@@ -9,6 +9,8 @@ let targetScrollY = 0;
 
 let navCurrentColor = "rgb(100, 187, 178)"
 
+const comp = document.getElementById("comp");
+
 const presNav = document.getElementById("presNav");
 const formNav = document.getElementById("formNav");
 const compNav = document.getElementById("compNav");
@@ -24,7 +26,7 @@ const contStart = 18000;
 
 const realPresStart = presStart + 2000;
 const realFormStart = formStart + 1080;
-const realCompStart = compStart + 1000;
+const realCompStart = compStart + 1500;
 const realProjStart = projStart + 1000;
 const realContStart = contStart + 1000;
 
@@ -33,7 +35,11 @@ var autoScroll = false;
 
 var autoScrollTarget = "none";
 
-const scrollStarts:number [] = [1600, 2100, 2500, 3100, 3600, 4900, 5400, 6100, 7200, 7400, 8000, 8200, 8400, 8600];
+const scrollStarts:number [] = [1600, 2100, 2500, 3100, 3600, 4900, 5400, 6100, 7200, 7400, 8000, 8200, 8400, 8600,
+                                15250, 15300, 15350,
+                                15250, 15300, 15350,
+                                15300, 15350, 15400,
+                            ];
 
 var selected = "intro";
 
@@ -42,6 +48,11 @@ var higlightItems: HiglightItem[] = [];
 var i = 0;
 Array.prototype.forEach.call(document.getElementsByClassName("highlight"), (element) => {
     higlightItems.push(new HiglightItem(element, scrollStarts[i], 0.6, 0.06));
+    i++;
+});
+
+Array.prototype.forEach.call(document.getElementsByClassName("highlight3"), (element) => {
+    higlightItems.push(new HiglightItem(element, scrollStarts[i], 0.6, 0.06, 30));
     i++;
 });
 
@@ -116,12 +127,19 @@ const pres3 = document.getElementById("pres3");
 let scrollItems: ScrollItem[] = [];
 
 const presScrolls: number[] = [1000, 4500, 7200,
-                                11500, 11950, 12400];
+                                11500, 11950, 12400,
+                                14000];
 const presFades: number[] = [4100, 6800, 10000,
-                                11800, 12250, 12700];
+                                11800, 12250, 12700,
+                                16000];
 
 const presAnchor: number[] = [innerHeight*0.5, innerHeight*0.5, innerHeight*0.5,
-                                innerHeight*0.95, innerHeight*0.95, innerHeight*0.95];
+                                innerHeight*0.95, innerHeight*0.95, innerHeight*0.95,
+                                innerHeight];
+
+const initPosistions: number[] = [-200,-200,-200,
+                                    -200,-200,-200,
+                                    500];
 i = 0;
 Array.prototype.forEach.call(document.getElementsByClassName("scrollItem"), (element) => {
     let newScrollItem = new ScrollItem(element, presScrolls[i], presAnchor[i], -200, true, presFades[i]);
@@ -142,7 +160,7 @@ if(intro != null){
 addEventListener('wheel', (event) => {
     if(sandboxMode) return;
     var speed = event.deltaY;
-    if(targetScrollY > formStart) speed *= 0.3;
+    //if(selected == "form" && targetScrollY > formStart && targetScrollY < compStart) speed *= 0.3;
 
     targetScrollY += speed;
     targetScrollY = Math.max(0, targetScrollY);
@@ -161,6 +179,7 @@ function updateScroll(){
     }
     scrollY = MathM.lerp(scrollY, targetScrollY, 0.06);
 
+    var prevSelected = selected;
     if(targetScrollY < presStart) selected = "intro";
     if(targetScrollY >= presStart) selected = "pres";
     if(targetScrollY >= formStart) selected = "form";
@@ -189,6 +208,10 @@ function updateScroll(){
         presBgLeftSize = MathM.lerp(presBgLeftSize, Math.min(Math.max(((targetScrollY-1500)*0.05),0), 45), 0.06);
         presBgBotSize = MathM.lerp(presBgBotSize, Math.min(Math.max(((scrollY-2600)*0.007),0), 4), 0.06);
         pres.style.backgroundSize =  "5px " + presBgLeftSize + "%" + ", " + presBgBotSize + "% 5px";
+    }
+
+    if(comp != null){
+        comp.style.height = Math.max(0, scrollY-compStart)+"px";
     }
 
     Array.prototype.forEach.call(higlightItems, (item) => {
@@ -235,5 +258,3 @@ function castWheelEvent(speed: number){
     // Pass event to element
     document.body.dispatchEvent(wheelEvent);
 }
-
-//Presentation Fo200rmations compétences expériences projets contacts

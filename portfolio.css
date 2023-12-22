@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@200;300;400;500;600;700;800&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@200&family=Roboto:wght@100;300&family=Rubik:wght@300&display=swap');
+@import url('https://fonts.cdnfonts.com/css/orkney');
 
 nav {
     font-family: 'Lexend', sans-serif;
@@ -91,7 +91,7 @@ p {
 }
 
 .pres {
-  font-size: 2.0vmax;
+  font-size: 1.7vmax;
   overflow: hidden;
   position: absolute;
   bottom:-100%;
@@ -102,8 +102,8 @@ p {
 
 .pres p {
   height: fit-content;
-  font-family: 'Roboto', sans-serif;
-  font-weight: 100;
+  font-family: 'Orkney', sans-serif;
+  font-weight: 300;
   padding: 30px;
 }
 
@@ -142,6 +142,13 @@ p {
 
 .highlight2 {
   background-image: linear-gradient(rgb(37, 34, 189), rgb(37, 34, 189));
+}
+
+.highlight3 {
+  background-image: linear-gradient(rgb(119, 206, 201), rgb(119, 206, 201));
+  background-size: 0% 30%;
+  background-repeat: no-repeat;
+  background-position: bottom left;
 }
 
 * {
