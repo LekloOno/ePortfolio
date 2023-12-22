@@ -25,8 +25,8 @@
 }
 
 #ePortFolio .projectIcon {
-    width: 500px;
-    height: 500px;
+    width: 26vw;
+    height: 26vw;
     background-image: url("./res/projects/ePortFolio.png");
     background-size: contain;
     transition: 0.6s;
@@ -36,15 +36,15 @@
 
 #ePortFolio .projectIcon:hover {
     transition: 0.6s;
-    width: 600px;
-    height: 600px;
+    width: 31vw;
+    height: 31vw;
     background-size: contain;
     color: rgba(110, 159, 165, 0.692);
 }
 
 #DLFDC .projectIcon {
-    width: 400px;
-    height: 400px;
+    width: 21vw;
+    height: 21vw;
     background-image: url("./res/projects/DansLeFroidDuCosmos.png");
     background-size: contain;
     transition: 0.6s;
@@ -54,15 +54,15 @@
 
 #DLFDC .projectIcon:hover {
     transition: 0.6s;
-    width: 500px;
-    height: 500px;
+    width: 26vw;
+    height: 26vw;
     background-size: contain;
     color: rgb(250, 250, 250);
 }
 
 #shePews .projectIcon {
-    width: 630px;
-    height: 630px;
+    width: 32vw;
+    height: 32vw;
     background-image: url("./res/projects/shePew.png");
     background-size: contain;
     transition: 0.6s;
@@ -72,8 +72,8 @@
 
 #shePews .projectIcon:hover {
     transition: 0.6s;
-    width: 660px;
-    height: 660px;
+    width: 33vw;
+    height: 33vw;
     background-size: contain;
     color: rgb(151, 26, 33);
 }
