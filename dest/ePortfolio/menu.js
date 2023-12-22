@@ -199,7 +199,7 @@ function updateScroll() {
     }
     if (comp != null) {
         let redLayer = document.getElementById("navRedLayer");
-        if (redLayer != null) {
+        if (redLayer != null && !sandboxMode) {
             redLayer.hidden = scrollY < compStart + 900;
         }
         if (scrollY < 18000) {
