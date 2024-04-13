@@ -12,35 +12,55 @@ let navCurrentColor = "rgb(100, 187, 178)"
 const comp = document.getElementById("comp");
 const proj = document.getElementById("proj");
 
+let currentPopup : HTMLElement;
 const ePortFol = document.getElementById("ePortFolio")?.getElementsByClassName("projectIcon")[0];
 const ePortFolPopup = document.getElementById("ePortfolioPopup");
-ePortFol?.addEventListener("click", (event) => {
-    if(ePortFolPopup) ePortFolPopup.hidden = false;
-});
 
-ePortFolPopup?.addEventListener("click", (event) => {
-    ePortFolPopup.hidden = true;
-})
+const showPopUp = (popUp: HTMLElement | null) => {
+    if(currentPopup) {
+        currentPopup.hidden = true;
+        document.body.removeEventListener("click", removePopPup);
+    }
+    if(popUp) {
+        popUp.hidden = false;
+        currentPopup = popUp;
+        document.body.addEventListener("click", removePopPup);
+        removeReady = false;
+    }
+}
+
+const removePopPup = (event: Event) => {
+    console.log("you to");
+    if(!removeReady){
+        removeReady = true;
+        return;
+    }    
+    document.body.removeEventListener("click", removePopPup);
+    if(currentPopup) currentPopup.hidden = true;
+};
+
+ePortFol?.addEventListener("click", (event) => {
+    showPopUp(ePortFolPopup);
+});
 
 const dlfdc = document.getElementById("DLFDC")?.getElementsByClassName("projectIcon")[0];
 const dlfdcPopup = document.getElementById("DLFDCPopup");
 dlfdc?.addEventListener("click", (event) => {
-    if(dlfdcPopup) dlfdcPopup.hidden = false;
+    showPopUp(dlfdcPopup);
 });
-
-dlfdcPopup?.addEventListener("click", (event) => {
-    dlfdcPopup.hidden = true;
-})
 
 const shePews = document.getElementById("shePews")?.getElementsByClassName("projectIcon")[0];
 const shePewsPopup = document.getElementById("shePewsPopup");
 shePews?.addEventListener("click", (event) => {
-    if(shePewsPopup) shePewsPopup.hidden = false;
+    showPopUp(shePewsPopup);
 });
 
-shePewsPopup?.addEventListener("click", (event) => {
-    shePewsPopup.hidden = true;
-})
+let removeReady = false;
+const CAM = document.getElementById("CaM")?.getElementsByClassName("projectIcon")[0];
+const CAMPopup = document.getElementById("CaMPopup");
+CAM?.addEventListener("click", (event) => {
+    showPopUp(CAMPopup);
+});
 
 const presNav = document.getElementById("presNav");
 const formNav = document.getElementById("formNav");

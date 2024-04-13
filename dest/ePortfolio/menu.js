@@ -1,4 +1,4 @@
-var _a, _b, _c;
+var _a, _b, _c, _d;
 import { ScrollItem } from "./ScrollItem.js";
 import { MathM } from "../MathM.js";
 import { HiglightItem } from "./HighlightItem.js";
@@ -9,32 +9,49 @@ let targetScrollY = 0;
 let navCurrentColor = "rgb(100, 187, 178)";
 const comp = document.getElementById("comp");
 const proj = document.getElementById("proj");
+let currentPopup;
 const ePortFol = (_a = document.getElementById("ePortFolio")) === null || _a === void 0 ? void 0 : _a.getElementsByClassName("projectIcon")[0];
 const ePortFolPopup = document.getElementById("ePortfolioPopup");
+const showPopUp = (popUp) => {
+    if (currentPopup) {
+        currentPopup.hidden = true;
+        document.body.removeEventListener("click", removePopPup);
+    }
+    if (popUp) {
+        popUp.hidden = false;
+        currentPopup = popUp;
+        document.body.addEventListener("click", removePopPup);
+        removeReady = false;
+    }
+};
+const removePopPup = (event) => {
+    console.log("you to");
+    if (!removeReady) {
+        removeReady = true;
+        return;
+    }
+    document.body.removeEventListener("click", removePopPup);
+    if (currentPopup)
+        currentPopup.hidden = true;
+};
 ePortFol === null || ePortFol === void 0 ? void 0 : ePortFol.addEventListener("click", (event) => {
-    if (ePortFolPopup)
-        ePortFolPopup.hidden = false;
-});
-ePortFolPopup === null || ePortFolPopup === void 0 ? void 0 : ePortFolPopup.addEventListener("click", (event) => {
-    ePortFolPopup.hidden = true;
+    showPopUp(ePortFolPopup);
 });
 const dlfdc = (_b = document.getElementById("DLFDC")) === null || _b === void 0 ? void 0 : _b.getElementsByClassName("projectIcon")[0];
 const dlfdcPopup = document.getElementById("DLFDCPopup");
 dlfdc === null || dlfdc === void 0 ? void 0 : dlfdc.addEventListener("click", (event) => {
-    if (dlfdcPopup)
-        dlfdcPopup.hidden = false;
-});
-dlfdcPopup === null || dlfdcPopup === void 0 ? void 0 : dlfdcPopup.addEventListener("click", (event) => {
-    dlfdcPopup.hidden = true;
+    showPopUp(dlfdcPopup);
 });
 const shePews = (_c = document.getElementById("shePews")) === null || _c === void 0 ? void 0 : _c.getElementsByClassName("projectIcon")[0];
 const shePewsPopup = document.getElementById("shePewsPopup");
 shePews === null || shePews === void 0 ? void 0 : shePews.addEventListener("click", (event) => {
-    if (shePewsPopup)
-        shePewsPopup.hidden = false;
+    showPopUp(shePewsPopup);
 });
-shePewsPopup === null || shePewsPopup === void 0 ? void 0 : shePewsPopup.addEventListener("click", (event) => {
-    shePewsPopup.hidden = true;
+let removeReady = false;
+const CAM = (_d = document.getElementById("CaM")) === null || _d === void 0 ? void 0 : _d.getElementsByClassName("projectIcon")[0];
+const CAMPopup = document.getElementById("CaMPopup");
+CAM === null || CAM === void 0 ? void 0 : CAM.addEventListener("click", (event) => {
+    showPopUp(CAMPopup);
 });
 const presNav = document.getElementById("presNav");
 const formNav = document.getElementById("formNav");
