@@ -1,4 +1,4 @@
-var _a, _b, _c, _d;
+var _a, _b, _c, _d, _e, _f;
 import { ScrollItem } from "./ScrollItem.js";
 import { MathM } from "../MathM.js";
 import { HiglightItem } from "./HighlightItem.js";
@@ -12,6 +12,7 @@ const proj = document.getElementById("proj");
 let currentPopup;
 const ePortFol = (_a = document.getElementById("ePortFolio")) === null || _a === void 0 ? void 0 : _a.getElementsByClassName("projectIcon")[0];
 const ePortFolPopup = document.getElementById("ePortfolioPopup");
+let removeReady = false;
 const showPopUp = (popUp) => {
     if (currentPopup) {
         currentPopup.hidden = true;
@@ -47,11 +48,20 @@ const shePewsPopup = document.getElementById("shePewsPopup");
 shePews === null || shePews === void 0 ? void 0 : shePews.addEventListener("click", (event) => {
     showPopUp(shePewsPopup);
 });
-let removeReady = false;
 const CAM = (_d = document.getElementById("CaM")) === null || _d === void 0 ? void 0 : _d.getElementsByClassName("projectIcon")[0];
 const CAMPopup = document.getElementById("CaMPopup");
 CAM === null || CAM === void 0 ? void 0 : CAM.addEventListener("click", (event) => {
     showPopUp(CAMPopup);
+});
+const whispersBelow = (_e = document.getElementById("whispersBelow")) === null || _e === void 0 ? void 0 : _e.getElementsByClassName("projectIcon")[0];
+const whispersBelowPopup = document.getElementById("whispersBelowPopup");
+whispersBelow === null || whispersBelow === void 0 ? void 0 : whispersBelow.addEventListener("click", (event) => {
+    showPopUp(whispersBelowPopup);
+});
+const pizzaREST = (_f = document.getElementById("pizzaREST")) === null || _f === void 0 ? void 0 : _f.getElementsByClassName("projectIcon")[0];
+const pizzaRESTPopup = document.getElementById("pizzaRESTPopup");
+pizzaREST === null || pizzaREST === void 0 ? void 0 : pizzaREST.addEventListener("click", (event) => {
+    showPopUp(pizzaRESTPopup);
 });
 const presNav = document.getElementById("presNav");
 const formNav = document.getElementById("formNav");
@@ -240,15 +250,16 @@ function updateScroll() {
             }
         }
     }
+    const refPos = 40000;
     if (proj != null) {
-        if (scrollY < 26000) {
+        if (scrollY < refPos) {
             proj.style.height = Math.max(0, scrollY - projStart) + "px";
             proj.style.bottom = Math.max(0, scrollY - 26000) + "px";
         }
         else {
             if (comp != null) {
                 comp.style.height = Math.max(0, 52000 - scrollY - compStart) + "px";
-                comp.style.bottom = scrollY - 26000 + "px";
+                comp.style.bottom = scrollY - refPos + "px";
             }
         }
     }

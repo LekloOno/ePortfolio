@@ -16,6 +16,8 @@ let currentPopup : HTMLElement;
 const ePortFol = document.getElementById("ePortFolio")?.getElementsByClassName("projectIcon")[0];
 const ePortFolPopup = document.getElementById("ePortfolioPopup");
 
+let removeReady = false;
+
 const showPopUp = (popUp: HTMLElement | null) => {
     if(currentPopup) {
         currentPopup.hidden = true;
@@ -55,12 +57,25 @@ shePews?.addEventListener("click", (event) => {
     showPopUp(shePewsPopup);
 });
 
-let removeReady = false;
+
 const CAM = document.getElementById("CaM")?.getElementsByClassName("projectIcon")[0];
 const CAMPopup = document.getElementById("CaMPopup");
 CAM?.addEventListener("click", (event) => {
     showPopUp(CAMPopup);
 });
+
+const whispersBelow = document.getElementById("whispersBelow")?.getElementsByClassName("projectIcon")[0];
+const whispersBelowPopup = document.getElementById("whispersBelowPopup");
+whispersBelow?.addEventListener("click", (event) => {
+    showPopUp(whispersBelowPopup);
+});
+
+const pizzaREST = document.getElementById("pizzaREST")?.getElementsByClassName("projectIcon")[0];
+const pizzaRESTPopup = document.getElementById("pizzaRESTPopup");
+pizzaREST?.addEventListener("click", (event) => {
+    showPopUp(pizzaRESTPopup);
+});
+
 
 const presNav = document.getElementById("presNav");
 const formNav = document.getElementById("formNav");
@@ -276,14 +291,15 @@ function updateScroll(){
         }
     }
 
+    const refPos = 40000;
     if(proj != null) {
-        if(scrollY<26000){
+        if(scrollY<refPos){
             proj.style.height = Math.max(0, scrollY-projStart)+"px";
             proj.style.bottom = Math.max(0,scrollY-26000)+"px";
         } else {
             if(comp != null){
                 comp.style.height = Math.max(0, 52000-scrollY-compStart)+"px";
-                comp.style.bottom = scrollY-26000+"px";
+                comp.style.bottom = scrollY-refPos+"px";
             }
         }
     }
