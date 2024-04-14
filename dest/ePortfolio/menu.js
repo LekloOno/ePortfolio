@@ -157,6 +157,7 @@ const intro = document.getElementById("intro");
 const pres = document.getElementById("pres1");
 const pres2 = document.getElementById("pres2");
 const pres3 = document.getElementById("pres3");
+const pres4 = document.getElementById("pres4");
 let scrollItems = [];
 const presScrolls = [1000, 4500, 7200,
     11500, 11950, 12400,
