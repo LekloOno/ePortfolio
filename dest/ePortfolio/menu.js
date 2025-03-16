@@ -189,8 +189,9 @@ if (intro != null) {
 addEventListener('wheel', (event) => {
     if (sandboxMode)
         return;
-    var speed = event.deltaY;
-    //if(selected == "form" && targetScrollY > formStart && targetScrollY < compStart) speed *= 0.3;
+    var speed = event.deltaY * 2;
+    if (selected == "form" && targetScrollY > formStart && targetScrollY < compStart)
+        speed *= 0.3;
     targetScrollY += speed;
     targetScrollY = Math.max(0, targetScrollY);
 });
@@ -290,9 +291,11 @@ function navStyle(navElement, start, end) {
 }
 const id = setInterval(updateScroll, 10);
 function castWheelEvent(speed) {
+    if (selected == "form" && targetScrollY > formStart && targetScrollY < compStart)
+        speed /= 0.3;
     const wheelEvent = new WheelEvent('wheel', {
         deltaX: 0, // Horizontal scroll amount
-        deltaY: speed, // Vertical scroll amount
+        deltaY: speed / 2, // Vertical scroll amount
         deltaZ: 0, // Deprecated, set to 0
         deltaMode: WheelEvent.DOM_DELTA_PIXEL, // Use pixels for delta values
         bubbles: true, // Allow event to bubble

@@ -12,8 +12,15 @@ nav {
     
 }
 
+.hint {
+  position: fixed;
+  bottom: 5px;
+  font-style: italic;
+}
+
 .mainNav ol {
     display: flex;
+    font-size: smaller;
     justify-content: space-evenly;
     list-style-type: none;
     padding: 2vh 0px;
