@@ -346,6 +346,27 @@ float map(vec3 p)
 
     <div class="portfolio proj" id="proj">
       <div id="projFlexContainer">
+        
+        <div class="projectCell" id="shePews">
+          <div class="projectIcon"><h1>Get Deaded</h1></div>
+          <div class="date">Fev. 2025 - ajd.</div>
+        </div>
+        
+        <div class="projectCell" id="CaM">
+          <div class="projectIcon"><h1>RISCV.rs</h1></div>
+          <div class="date">Jan. 2025 - ajd.</div>
+        </div>
+        
+        <div class="projectCell" id="pizzaREST">
+          <div class="projectIcon"><h1>Pip-rust-MPU</h1></div>
+          <div class="date">Avr. - Juin 2024</div>
+        </div>   
+
+        <div class="projectCell" id="whispersBelow">
+          <div class="projectIcon"><h1>Whispers Below</h1></div>
+          <div class="date">Fev. - Avr. 2024</div>
+        </div>
+
         <div class="projectCell" id="ePortFolio">
           <div class="projectIcon"><h1>Cet ePortfolio</h1></div>
           <div class="date">Nov. - Dec. 2023</div>
@@ -355,26 +376,7 @@ float map(vec3 p)
           <div class="projectIcon"><h1>Dans Le Froid Du Cosmos</h1></div>
           <div class="date">Dec. 22 - Jan. 23</div>
         </div>
-
-        <div class="projectCell" id="shePews">
-          <div class="projectIcon"><h1>Get Deaded</h1></div>
-          <div class="date">Feb. 2025 - ajd.</div>
-        </div>
-
-        <div class="projectCell" id="whispersBelow">
-          <div class="projectIcon"><h1>Whispers Below</h1></div>
-          <div class="date">Feb. - Apr. 2024</div>
-        </div>
-
-        <div class="projectCell" id="CaM">
-          <div class="projectIcon"><h1>Chasse aux Monstres|RISCV.rs</h1></div>
-          <div class="date">Oct. 23 - Jan. 24</div>
-        </div>
-
-        <div class="projectCell" id="pizzaREST">
-          <div class="projectIcon"><h1>Pizza REST API|Pip-rust-MPU</h1></div>
-          <div class="date">Feb. - Mar. 2024</div>
-        </div>   
+        
 
         <div class="projectPopup" id="ePortfolioPopup" hidden="">
           <p>
@@ -419,13 +421,14 @@ float map(vec3 p)
           <p>
             <a href="https://github.com/LekloOno/Get-Deaded">Get Deaded</a> est un projet de fps développé sur le moteur open-source Godot.<br>
             Il s'agit de la reprise d'un ancien projet développé initialement sur Unity en 2022.
-            Le but du projet : concevoir un fast-fps dans lequel les mécaniques du joueurs, que ce soit la maîtrise de ses mouvements ou de sa visée, sont éléments centraux.
-            Ce dans un environnement qui pousse à la compétition, au dépassement de soi, bien que baigné dans un univers décalé entre la vision utopiste et colorée du futur des années 70, le trash d'une esthétique plus punk et une juste touche d'industriel.
+            Le but du projet : concevoir un fast-fps dans lequel les mécaniques du joueur, que ce soit la maîtrise de ses mouvements ou de sa visée, sont éléments centraux.
+            Ce dans un environnement qui pousse à la compétition, bien que baigné dans un univers décalé entre la vision utopiste et colorée du futur des années 70, le trash d'une esthétique plus punk et une juste touche industrielle.
             <br><br>
-            Ce projet est parmis ceux qui m'ont le plus enseigné. Il m'a permis d'arriver en BUT avec une très grande aise sur des concepts avancés, comme le component based development, la POO aux complexes niveaux d'abstraction et de généricité,
-            à la programmation évènementielle, mais aussi d'expérimenter du point de vue algorithmique, architecture logicielle, physique et mathématique, puisque visant des comportements bien précis, la majorité du projet a du être construite from scratch.
+            Ce projet se trouve parmis ceux qui m'ont le plus enseigné. Il m'a permis d'arriver en BUT avec une très grande aise sur des concepts avancés, comme le component based development, la POO aux complexes niveaux d'abstraction et de généricité,
+            à la programmation évènementielle, mais aussi d'expérimenter du point de vue algorithmique, architecture logicielle, physique et mathématique. En effet, puisque visant des comportements bien précis, la majorité du projet a du être construite from scratch.
+            <br><br>
             Aujourd'hui, je suis plus motivé que jamais à le poursuivre. L'environnement open-source est particulièrement motivant, notamment la possibilité d'y contribuer par mon travail.
-            Qui plus est, les compétences que j'ai acquérit pendant mes années de BUT me permettent d'être plus efficace, d'envisager des solutions plus créatives et flexibles, ainsi que de mieux m'organiser.
+            Qui plus est, les compétences que j'ai acquises pendant mes années de BUT me permettent d'être plus efficace, d'envisager des solutions plus créatives et flexibles, ainsi que de mieux m'organiser.
           </p>
 
           <div class="projectCompetences">
@@ -435,29 +438,27 @@ float map(vec3 p)
         
         <div class="projectPopup" id="CaMPopup" hidden="">
           <p>
-            <a href="https://gitlab.univ-lille.fr/sae302/2023/I2_SAE3A">Chasse au monstre</a> est un projet de jeu vidéo réalisé en Java/JavaFX, dans le but de mettre en
-            pratique les notions abordées lors des cours de qualité dev. et dév ecace durant ce premier
-            semestre de BUT-2.
+            <a href="https://gitlab.univ-lille.fr/sae302/2023/I2_SAE3A">RISCV.rs</a> est un projet d'émulateur modulaire de l'architecture risc-v développée en rust.
+            L'objectif était de rendre l'émulateur aussi modulaire que l'architecture elle-même. C'est en effet un point clef de risc-v, et il était alors pour moi
+            essentiel du suivre cette philosophie.
             <br><br>
-            Dans ce jeu, plusieurs équipes s’affrontent pour la victoire. Elles sont composées de chasseurs et de monstres, qui peuvent être des joueurs humains ou IA et faire partie de la même équipe, ce qui est une spécificité propre à notre projet.  
-            <br><br>
-            Les monstres sont placés dans un labyrinthe, généré procéduralement, ce qui lui permet d’être
-diérent à chaque nouvelle partie, la rendant unique. Les monstres voient plus ou moins loin
-autour d’eux, alors que les chasseurs doivent découvrir la grille, tir après tir.
-Les chasseurs font gagner leur équipe en éliminant tous les monstres adverses, et les monstres
-en trouvant la sortie
-<br><br>
-Mais l’expérience de jeu pourra largement varier autour des nombreux paramètres configurables.
-La taille de la grille, sa densité de mur, la distance de vue des monstres, le nombre d’équipes, si
-les membres d’une équipe partagent leur vision ou non, la diculté des IA, l’ajout de spectateurs,
-et chaque équipe peut contenir autant de joueurs que souhaités, de n’importe quels types
-monstres ou chasseurs. Vous pouvez même mélanger les deux au sein d’une même équipe 
-<br><br>
-Bonne chance dans le labyrinthe !
+            Ainsi, l'architecture de l'émulateur est conçue de sorte à permettre une extensibilité très forte et explicite au travers du système de Trait de rust.
+            Un utilisateur peut très simplement programmer de nouvelles extensions du set d'instructions et les faire fonctionner avec l'émulateur en implémentant ces Traits.
+            Il peut également définir sa propre implémentation de l'architecture base : processeurs, mémoire, registres.
+            <ul class="oui projectPupup" id="oui">
+              Le projet est également fournit avec :
+              <li>Une implémentation de base d'architecture comprenant un Memory dispatcher sur une ROM, une RWM (read-write memory) ainsi qu'une MMIO.</li>
+              <li>Une implémentation du set d'instruction de base RV32I.</li>
+              <li>Une implémentation de l'extension standard M.</li>
+              <li>Un extracteur ELF minimaliste std-only et rust-safe.</li>
+              <li>Le support du semihosting et une implémentation de base de quelques opérations de semihosting.</li>
+              <li>L'implémentation de nombreuses fonctionnalités du debugger GDB au sein de l'émulateur.</li>
+              <li>Une librairie de macro procédurales facilitant l'implémentation de nouvelles extensions.</li>
+            </ul>
           </p>
 
           <div class="projectCompetences">
-            <span>MVC</span><span>OOP</span><span>Event Driven Prog.</span><span>Software Architecture</span><span>JAVA</span><span>JavaFX</span><span>IHM</span><span>Maven</span><span>AI</span>
+            <span>Rust</span><span>ASM</span><span>RISCV</span><span>Software Architecture</span><span>Bas niveau</span>
           </div>
         </div>
 
@@ -488,14 +489,17 @@ Bonne chance dans le labyrinthe !
 
         <div class="projectPopup" id="pizzaRESTPopup" hidden="">
           <p>
-            Le premier projet de quatrième semestre consistait en la conception d'une <a href="https://gitlab.univ-lille.fr/shems.petremand.etu/sae_rest_h_petremand">API REST</a>. Le but : proposer une API de gestion d'une pizzaria, lister des ingrédients, des pizzas, en composer, en modifier, supprimer ou ajouter, gérer des commandes, etc.
+            Lors de mon stage de 2e année au sein de l'équipe 2XS du laboratoire CRIStAL, j'ai travaillé sur le proto-noyau Pip-MPU.
+            Il s'agit d'un noyau de système minimaliste, dont le but est d'assurer l'isolation mémoire de manière formellement prouvée - une propriété de sécurité critique dans les systèmes informatiques.
+            Ma mission initiale était d'implémenter des partitions rust, c'est à dire des petits logiciels preuve de concept pilotés par le noyau Pip.
             <br>
             <br>
-            Du SQL au Java, au travers d'un schéma DAO-DTO-Vues, le tout accompagné d'une documentation complète des requêtes, et d'un jeu de test Bruno.
+            Néanmoins, ce faisant et en explorant le fonctionnement interne de Pip, j'ai constaté que beaucoup de redondance et de complexité du noyau pouvait être abstrait.
+            Ainsi, de mon initiative et après validation du directeur de l'équipe, j'ai pu transformer ma mission en la réalisation d'un prototype de librairie-interface rust user-friendly du noyau.
           </p>
 
           <div class="projectCompetences">
-            <span>API REST</span><span>SQL</span><span>Psql</span><span>Java</span><span>Bruno</span>
+            <span>Rust</span><span>Système</span><span>Sécurité</span><span>Formalisation</span>
           </div>
         </div>
 

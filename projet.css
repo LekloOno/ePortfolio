@@ -12,6 +12,21 @@
     
 }
 
+ul#oui li::before {
+    content: "- ";
+}
+
+ul#oui {
+    list-style: square;
+    font-weight: 300;
+    color: black;
+    font-size: 2vh;
+    padding: 3% 5%;
+    overflow: auto;
+    text-align: justify;
+    font-family: 'Orkney', sans-serif;
+}
+
 #projFlexContainer {
     position: absolute;
     flex-wrap: wrap;
@@ -25,8 +40,8 @@
 }
 
 #ePortFolio .projectIcon {
-    width: 26vw;
-    height: 26vw;
+    width: 22vw;
+    height: 22vw;
     background-image: url("./res/projects/ePortFolio.png");
     background-size: contain;
     transition: 0.6s;
@@ -36,8 +51,8 @@
 
 #ePortFolio .projectIcon:hover {
     transition: 0.6s;
-    width: 29vw;
-    height: 29vw;
+    width: 23vw;
+    height: 23vw;
     background-size: contain;
     color: rgba(110, 159, 165, 0.692);
 }
@@ -79,9 +94,9 @@
 }
 
 #CaM .projectIcon {
-    width: 22vw;
-    height: 22vw;
-    background-image: url("./res/projects/ChasseAuMonstre.png");
+    width: 24vw;
+    height: 24vw;
+    background-image: url("./res/projects/riscv.jpg");
     background-size: contain;
     transition: 0.6s;
     color: transparent;
@@ -96,16 +111,16 @@
 
 #CaM .projectIcon:hover {
     transition: 0.6s;
-    width: 23vw;
-    height: 23vw;
+    width: 25vw;
+    height: 25vw;
     background-size: contain;
     color: rgb(255, 255, 255);
 }
 
 #pizzaREST .projectIcon {
-    width: 20vw;
-    height: 20vw;
-    background-image: url("./res/projects/pizza.png");
+    width: 22vw;
+    height: 22vw;
+    background-image: url("./res/projects/2xs.png");
     background-size: contain;
     transition: 0.6s;
     color: transparent;
@@ -114,15 +129,15 @@
 
 #pizzaREST .projectIcon:hover {
     transition: 0.6s;
-    width: 22vw;
-    height: 22vw;
+    width: 23vw;
+    height: 23vw;
     background-size: contain;
     color: rgb(255, 255, 255);
 }
 
 #whispersBelow .projectIcon {
-    width: 28vw;
-    height: 28vw;
+    width: 21vw;
+    height: 21vw;
     background-image: url("./res/projects/whispersBelow.png");
     background-size: contain;
     transition: 0.6s;
@@ -132,8 +147,8 @@
 
 #whispersBelow .projectIcon:hover {
     transition: 0.6s;
-    width: 30vw;
-    height: 30vw;
+    width: 22vw;
+    height: 22vw;
     background-size: contain;
     color: rgb(255, 255, 255);
 }
